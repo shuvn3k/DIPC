@@ -32,11 +32,11 @@ PowerShell.exe -ExecutionPolicy UnRestricted -File 'C:\Program Files\Winlogbeat\
 
 # Descargar certificados
 $WebClient = New-Object System.Net.WebClient
-$WebClient.DownloadFile("https://raw.githubusercontent.com/ivanathletic/Practicas_DIPC/master/sync/logstash-forwarder.crt","C:\ProgramData\winlogbeat\logstash-forwarder.crt")
+$WebClient.DownloadFile("https://raw.githubusercontent.com/shuvn3k/DIPC/master/sync/logstash-forwarder.crt","C:\ProgramData\winlogbeat\logstash-forwarder.crt")
 #$WebClient = New-Object System.Net.WebClient
-#$WebClient.DownloadFile("https://raw.githubusercontent.com/ivanathletic/Practicas_DIPC/master/sync/logstash-forwarder.key","C:\ProgramData\winlogbeat\logstash-forwarder.key")
+#$WebClient.DownloadFile("https://raw.githubusercontent.com/shuvn3k/DIPC/master/sync/logstash-forwarder.key","C:\ProgramData\winlogbeat\logstash-forwarder.key")
 $WebClient = New-Object System.Net.WebClient
-$WebClient.DownloadFile("https://raw.githubusercontent.com/ivanathletic/Practicas_DIPC/clienteWindows/winlogbeat_copy.yml","C:\instalaciones\winlogbeat_copy.yml")
+$WebClient.DownloadFile("https://raw.githubusercontent.com/shuvn3k/DIPC/master/tmp/winlogbeat_copy.yml","C:\instalaciones\winlogbeat_copy.yml")
 
 #Modificamos el fichero de configuraciones
 (Get-Content "C:\instalaciones\winlogbeat_copy.yml") | Set-Content "C:\Program Files\Winlogbeat\winlogbeat.yml"

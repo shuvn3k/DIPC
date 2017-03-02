@@ -3,7 +3,7 @@
 
 # Obtenemos el certificado SSL desde git al cliente
 mkdir -p /etc/pki/tls/certs
-curl -O https://raw.githubusercontent.com/ivanathletic/Practicas_DIPC/master/sync/logstash-forwarder.crt
+curl -O https://raw.githubusercontent.com/shuvn3k/DIPC/master/sync/logstash-forwarder.crt
 
 mv logstash-forwarder.crt /etc/pki/tls/certs/logstash-forwarder.crt
 

@@ -78,8 +78,8 @@ sed -i 's/\[ v3_ca \]/\[ v3_ca \]\nsubjectAltName = IP: 192.168.34.150/' /etc/ss
 
 # obtenemos el certificado y key desde git
 apt-get install git
-curl -O https://raw.githubusercontent.com/ivanathletic/Practicas_DIPC/master/sync/logstash-forwarder.crt
-curl -O https://raw.githubusercontent.com/ivanathletic/Practicas_DIPC/master/sync/logstash-forwarder.key
+curl -O https://raw.githubusercontent.com/shuvn3k/DIPC/master/sync/logstash-forwarder.crt
+curl -O https://raw.githubusercontent.com/shuvn3k/DIPC/master/sync/logstash-forwarder.key
 
 mv logstash-forwarder.crt /etc/pki/tls/certs/logstash-forwarder.crt
 mv logstash-forwarder.key /etc/pki/tls/private/logstash-forwarder.key
