@@ -1,0 +1,11 @@
+filter {
+        if [type] == 'wineventlog' {
+	                grok {
+			                      match => [ 'TimeCreated', "Date\(%{NUMBER:timestamp}\)" ]
+					                      }
+							                      date {
+									                            match => [ 'timestamp', 'UNIX_MS' ]
+												                    }
+														            }
+															    }
+															    
