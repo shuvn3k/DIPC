@@ -1,0 +1,14 @@
+        if [level] == "ERROR" {
+	                email {
+			                        address => "smtp.gmail.com"
+						                        port => "587"
+									                        use_tls => true
+												                        username => "enamoya2@gmail.com"
+															                        password => "uyaidpvborlpfybr"
+																		                        from => "enamoya2@gmail.com"
+																					                        to => "ikermoyi@gmail.com"
+																								                        subject => "%{[appid]}: ERROR"
+																											                        body => "An ERROR event has been detected on %{[appid]}:\n- Timestamp: %{[timestamp]}\n- Source: %{[class]}\n- Message: %{[message]}\n- Stacktrace: %{[stacktrace]}"
+																														                }
+																																        }
+																																	
