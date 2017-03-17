@@ -21,7 +21,11 @@
       server.vm.provision "file", source: "./tmp/02-beats-input.conf", destination: "/tmp/02-beats-input.conf"
       server.vm.provision "file", source: "./tmp/10-syslog-filter.conf", destination: "/tmp/10-syslog-filter.conf"
       server.vm.provision "file", source: "./tmp/30-elasticsearch-output.conf", destination: "/tmp/30-elasticsearch-output.conf"
-      server.vm.provision "shell", path: "server-provision.sh"
+      server.vm.provision "file", source: "./tmp/nagios.service", destination: "/tmp/nagios.service"
+      server.vm.provision "file", source: "./tmp/.msmtprc", destination: "/tmp/.msmtprc"
+    server.vm.provision "file", source: "./tmp/.mailrc", destination: "/tmp/.mailrc"
+      #server.vm.provision "shell", path: "server-provision.sh"
+      #server.vm.provision "shell", path: "configuracion_nagios.sh"
       server.vm.provider "virtualbox" do |vb|
         vb.customize ["modifyvm", :id, "--memory", "2048"]
         vb.customize ["modifyvm", :id, "--cpus", "4"]
@@ -31,7 +35,7 @@
     config.vm.define "cliente" do |cliente|
       cliente.vm.box = "boxcutter/ubuntu1604"
       cliente.vm.network  "private_network", ip: "192.168.34.151"
-      cliente.vm.provision "shell", path: "cliente-linux-provision.sh"
+      #cliente.vm.provision "shell", path: "cliente-linux-provision.sh"
       cliente.vm.provider "virtualbox" do |vb|
         vb.customize ["modifyvm", :id, "--memory", "512"]
         vb.customize ["modifyvm", :id, "--cpus", "2"]
