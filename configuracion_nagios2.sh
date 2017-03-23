@@ -79,3 +79,134 @@ cp /tmp/.mailrc ~/.mailrc
 sudo apt-get install ssmtp
 sudo nano /etc/ssmtp/ssmtp.conf # Modificar
 usermod -a -G mail nagios
+
+
+# Configurar cliente linux
+
+sudo apt-get update
+sudo apt-get install build-essential libssl-dev
+
+cd /opt
+sudo wget https://github.com/NagiosEnterprises/nrpe/archive/3.0.1.tar.gz
+sudo tar xvfz 3.0.1.tar.gz
+cd nrpe-3.0.1
+sudo ./configure --enable-command-args
+sudo make all
+sudo make install-plugin
+
+sudo apt-get update
+sudo apt-get install nagios-nrpe-plugin
+
+sudo ln -s /usr/lib/nagios/plugins/check_nrpe /usr/bin/check_nrpe
+
+
+
+sudo apt-get update
+sudo useradd nagios
+sudo groupadd nagcmd
+
+sudo add-apt-repository ppa:nagiosinc/ppa
+sudo apt-get -y install software-properties-common
+sudo apt-get -y install python-software-properties
+sudo add-apt-repository ppa:nagiosinc/ppa
+sudo apt-get update
+
+wget http://nagios-plugins.org/download/nagios-plugins-2.0.3.tar.gz
+tar xzf nagios-plugins-2.0.3.tar.gz
+cd nagios-plugins-2.0.3/
+sudo apt-get -y install build-essential libssl-dev xinetd
+./configure
+make
+sudo make install
+
+sudo chown nagios.nagios /usr/local/nagios/
+sudo chown -R nagios.nagios /usr/local/nagios/libexec/
+
+wget http://sourceforge.net/projects/nagios/files/nrpe-2.x/nrpe-2.15/nrpe-2.15.tar.gz
+tar xzf nrpe-2.15.tar.gz
+
+cd nrpe-2.15/
+./configure --with-ssl=/usr/bin/openssl --with-ssl-lib=/usr/lib/x86_64-linux-gnu
+
+sudo make all
+sudo make install-plugin
+sudo make install-daemon
+make install-daemon-config
+sudo make install-daemon-config
+sudo make install-xinetd
+sudo nano /etc/xinetd.d/nrpe
+#Añadir
+# default: on
+# description: NRPE (Nagios Remote Plugin Executor)
+service nrpe
+{
+    flags           = REUSE
+    socket_type     = stream
+    port            = 5666
+    wait            = no
+    user            = nagios
+    group           = nagios
+    server          = /usr/local/nagios/bin/nrpe
+    server_args     = -c /usr/local/nagios/etc/nrpe.cfg --inetd
+    log_on_failure  += USERID
+    disable         = no
+    only_from       = 127.0.0.1 10.0.2.15 192.168.34.151 192.168.34.1
+    }
+
+sudo nano /etc/services
+#Añadir
+nrpe            5666/tcp                        # nrpe
+
+sudo service xinetd restart
+sudo service networking restart
+netstat -at | grep nrpe
+
+sudo nano /etc/sudoers
+#Añadir
+nagios    ALL=(ALL)   NOPASSWD:/usr/local/nagios/libexec/
+
+sudo nano /usr/local/nagios/etc/nrpe.cfg
+#Añadir
+command[check_mem]=/usr/local/nagios/libexec/check_mem -w 70 -c 90 -W 70 -C 90
+command[check_cpu]=/usr/local/nagios/libexec/check_cpu -w 70 -c 90
+command[check_uptime]=/usr/local/nagios/libexec/check_uptime
+command[check_disk]=/usr/local/nagios/libexec/check_disk -w $ARG1$ -c $ARG2$ -p /
+
+
+sudo wget https://raw.githubusercontent.com/taha-bindas/openstack_nagios/master/check_cpu
+sudo chmod +x check_cpu
+sudo chown nagios. check_cpu
+
+sudo curl -O https://raw.githubusercontent.com/shuvn3k/DIPC/master/nagios_plugins/check_mem
+sudo chmod +x check_mem
+sudo chown nagios. check_mem
+
+
+#Otra manera mas sencilla
+
+sudo apt-get update
+
+wget http://assets.nagios.com/downloads/nagiosxi/agents/linux-nrpe-agent.tar.gz
+tar xzf linux-nrpe-agent.tar.gz
+cd linux-nrpe-agent
+sudo ./fullinstall
+
+cd /usr/local/nagios/libexec/
+sudo wget https://raw.githubusercontent.com/taha-bindas/openstack_nagios/master/check_cpu
+sudo chmod +x check_cpu
+sudo chown nagios. check_cpu
+
+sudo curl -O https://raw.githubusercontent.com/shuvn3k/DIPC/master/nagios_plugins/check_mem
+sudo chmod +x check_mem
+sudo chown nagios. check_mem
+
+sudo nano /etc/sudoers
+#Añadir
+nagios    ALL=(ALL)   NOPASSWD:/usr/local/nagios/libexec/
+
+sudo nano /usr/local/nagios/etc/nrpe.cfg
+#Añadir
+command[check_mem]=/usr/local/nagios/libexec/check_mem -w 70 -c 90 -W 70 -C 90
+command[check_cpu]=/usr/local/nagios/libexec/check_cpu -w 70 -c 90
+command[check_uptime]=/usr/local/nagios/libexec/check_uptime
+command[check_disk]=/usr/local/nagios/libexec/check_disk -w $ARG1$ -c $ARG2$ -p /
