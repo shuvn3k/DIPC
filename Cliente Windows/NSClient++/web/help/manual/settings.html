@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Settings &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../index.html" />
+    <link rel="up" title="NSClient++ Manual" href="index.html" />
+    <link rel="next" title="Installing NSClient++" href="installing.html" />
+    <link rel="prev" title="Getting-Started with NSClient++" href="theory.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <script type="text/javascript" src="../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="installing.html" title="Installing NSClient++"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="theory.html" title="Getting-Started with NSClient++"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">NSClient++ Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="settings">
+<span id="manual-settings-index"></span><h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<p>The NSClient++ settings store is a hierarchical tree structure with key value pairs.
+Traditionally this is stored in a flat ini-style file where the &#8220;paths&#8221; are defined as sections.
+But there are other options as well and for instance the registry is another common place to store settings.
+With the new configuration UI in 0.4.3 it is simpler to manipulate the settings if they are store in the registry and thus probably a better place to keep them.</p>
+<p>Which keys are available and what they mean are describe by the modules which use the various keys.
+Thus it the place to find the documentation for the various configuration options are in the reference section of the documentation.
+Where it is split by module.</p>
+<div class="section" id="include">
+<h2>Include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h2>
+<p>Another really useful feature of the settings in NSClient++ is the ability to include various other settings.
+This is very flexible and you can include ini file from the registry and vice versa.</p>
+<p>The way to include a file (if you are using in ifles) is to add a key under the /include section.</p>
+<p>including file:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/include]
+foo=foo.ini
+</pre></div>
+</div>
+<p>You can include any number of files registry or other stores. and they will be instantiated in a tree structure with a parent child relationship.
+Important to note here is that the first found key will be used. So parents will override children.</p>
+<p>And example of this:</p>
+<p>nsclient.ini:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/include]
+client=client.ini
+
+[/test]
+key1=This values comes from nsclient.ini
+</pre></div>
+</div>
+<p>client.ini:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/include]
+baseline=baseline.ini
+
+[/test]
+key1=This values comes from client.ini
+key2=This values comes from client.ini
+</pre></div>
+</div>
+<p>baseline.ini:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/test]
+key1=This values comes from baseline.ini
+key2=This values comes from baseline.ini
+key3=This values comes from baseline.ini
+</pre></div>
+</div>
+<p>in the above example the values of /test keyx will be:</p>
+<blockquote>
+<div><ul class="simple">
+<li>key1=This values comes from nsclient.ini</li>
+<li>key2=This values comes from client.ini</li>
+<li>key3=This values comes from baseline.ini</li>
+</ul>
+<p>This can be very useful to distribute a baseline configuration for a company or monitoring product.
+Then all &#8220;machine specific customization&#8221; would go into the nsclient.ini config where as client.ini would be reserved for the clients global config. And finally baseline.ini would be monitoring tool specific configuration.</p>
+</div></blockquote>
+</div>
+<div class="section" id="settings-stores">
+<h2>Settings stores<a class="headerlink" href="#settings-stores" title="Permalink to this headline">¶</a></h2>
+<p>Settings are historically stored in an ini file but you can store settings in many other locations as well.
+While the most obvious one to use is the registry there are other olptions as well.</p>
+<ul class="simple">
+<li>ini files</li>
+<li>old ini files</li>
+<li>registry</li>
+<li>dummy</li>
+<li>http (ini files over http)</li>
+</ul>
+<div class="section" id="ini-settings">
+<h3>Ini settings<a class="headerlink" href="#ini-settings" title="Permalink to this headline">¶</a></h3>
+<p>Ini file are the simplest form of configuration and also the default though on windows registry is probably a better option.
+The files are textfiles following the ini file format where yu have sections in brackets [] and key key = values.</p>
+<p>sample.ini:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/section/child/section]
+key=value
+</pre></div>
+</div>
+<p>To use an ini file you prefix the settings url with ini:// then you can use various folder strings or specify a relative or absolut path to the file.</p>
+<p>examples:</p>
+<div class="highlight-python"><div class="highlight"><pre># Use the relative file foo.ini
+nscp settings --migrate-to ini://foo.ini
+
+# Use the relative file foo.ini in a subfolder called conf
+nscp settings --migrate-to ini://conf/foo.ini
+
+# Use a file stored in the profile folder (on windows): C:\Documents and Settings\All Users\Application Data\NSClient++
+nscp settings --migrate-to ini://%(common-appdata)/NSClient++/nsclient.ini
+</pre></div>
+</div>
+</div>
+<div class="section" id="registry-settings">
+<h3>registry settings<a class="headerlink" href="#registry-settings" title="Permalink to this headline">¶</a></h3>
+<p>Registry is only avalible on windows and using them on windows is recomended as it integrates better with windows and windows managament tools where you can push configuration changes and similar things.
+As the registry is naturally a tree structure we use folders as section and keys and values for keys and values.</p>
+<img alt="../_images/registry.png" src="../_images/registry.png" />
+<p>To use an ini file you prefix the settings url with ini:// then you can use various folder strings or specify a relative or absolut path to the file.</p>
+<p>examples:</p>
+<div class="highlight-python"><div class="highlight"><pre># Use the default registry location
+nscp settings --migrate-to registry
+
+# Use HKEY_LOCAL_MACHINE/software/NSClient++ to store configuration
+nscp settings --migrate-to registry://HKEY_LOCAL_MACHINE/software/NSClient++
+</pre></div>
+</div>
+</div>
+<div class="section" id="http-settings">
+<h3>http settings<a class="headerlink" href="#http-settings" title="Permalink to this headline">¶</a></h3>
+<p>Registry is a &#8220;new&#8221; feature this means both that I am interested in how to evolve the feature but also that it does &#8220;something&#8221; not nesscerily something usefull.
+The registry is a regular ini file (see above) ex cept that it is loaded remotely and refreshed periodically.
+The refresh period is configurable and if the file has changed NSCLient++ will reload and re-read the new configuration.
+If it is not possible to fetch the latest configuration NSClient++ will keep using the last one it recieved.</p>
+<p>examples:</p>
+<div class="highlight-python"><div class="highlight"><pre># Use remote configuration.
+nscp settings --switch http://www.myserver.com/nsclient.ini
+</pre></div>
+</div>
+<p>In the nsclient.ini file you can specify a series of attachments which will be downloaded (for instance scripts).</p>
+<p>Adding a script:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/attachments]
+scripts/myscript.bat = http://www.myserver.com/myscript.bat
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-settings-stores">
+<h2>Using settings stores<a class="headerlink" href="#using-settings-stores" title="Permalink to this headline">¶</a></h2>
+<p>NSClient++ has some fesature to help work with settings stores.
+All of this is performed via the settings sub command:</p>
+<div class="highlight-python"><div class="highlight"><pre>nscp settings --help
+</pre></div>
+</div>
+<p>Migrating settings from a ini file to the regstry can be done with the migrate-to command:</p>
+<div class="highlight-python"><div class="highlight"><pre>nscp settings --migrate-to registry
+</pre></div>
+</div>
+<p>This will move all data from the settings file and store it in in the registry and then sertup NSClient++ to use the registry instead of the ini file.</p>
+<p>You can also switch settings store (without migrating data):</p>
+<div class="highlight-python"><div class="highlight"><pre>nscp settings --switch registry
+</pre></div>
+</div>
+<p>The effect is similar in that NSClient++ will start using the registry but you have to add the keys to the registry manually.</p>
+<p>To show the current settings store view can run:</p>
+<blockquote>
+<div>$ nscp settings &#8211;show
+INI settings: (ini://${shared-path}/nsclient.ini, C:sourcebuildx64dev/nsclient.ini)</div></blockquote>
+</div>
+<div class="section" id="overriding-settings-store">
+<h2>Overriding settings store<a class="headerlink" href="#overriding-settings-store" title="Permalink to this headline">¶</a></h2>
+<p>The default way for NSClient++ to find your settings files is via the boot.ini file.
+If you want to override this, for instance you want to use multiple NSClient++ from the same folder, you can do this via the &#8211;settings option:</p>
+<div class="highlight-python"><div class="highlight"><pre>nscp test --settings nsclient2.ini
+</pre></div>
+</div>
+<p>You can do this for the service as well by editing the service start command.</p>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Settings</a><ul>
+<li><a class="reference internal" href="#include">Include</a></li>
+<li><a class="reference internal" href="#settings-stores">Settings stores</a><ul>
+<li><a class="reference internal" href="#ini-settings">Ini settings</a></li>
+<li><a class="reference internal" href="#registry-settings">registry settings</a></li>
+<li><a class="reference internal" href="#http-settings">http settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-settings-stores">Using settings stores</a></li>
+<li><a class="reference internal" href="#overriding-settings-store">Overriding settings store</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="theory.html"
+                        title="previous chapter">Getting-Started with NSClient++</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installing.html"
+                        title="next chapter">Installing NSClient++</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../bugs.html">Report a Bug</a></li>
+  <li><a href="../_sources/manual/settings.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="installing.html" title="Installing NSClient++"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="theory.html" title="Getting-Started with NSClient++"
+             >previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >NSClient++ Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using NSClient++ from nagios &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="NSClient++ Tutorial" href="../index.html" />
+    <link rel="next" title="Using NSClient++ from nagios with check_nt" href="check_nt.html" />
+    <link rel="prev" title="TODO" href="../impatient.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="check_nt.html" title="Using NSClient++ from nagios with check_nt"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../impatient.html" title="TODO"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">NSClient++ Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-nsclient-from-nagios">
+<span id="tutorial-nagios-index"></span><h1>Using NSClient++ from nagios<a class="headerlink" href="#using-nsclient-from-nagios" title="Permalink to this headline">¶</a></h1>
+<p>This is a quick guide over how to use NSClient++ with Nagios. It is divided into four sections (so don&#8217;t miss the three other pages but this one).</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="check_nt.html">Using NSClient++ from nagios with check_nt</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="check_nt.html#nagios-command-line">1. Nagios command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_nt.html#nsclient-configuration">2. NSClient++ configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_nt.html#solving-problems">3. Solving problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_nt.html#nagios-configuration">4. Nagios configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_nt.html#final-words">5. Final words</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nrpe.html">Using NSClient++ from nagios with check_nrpe</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nrpe.html#overview-of-nrpe">1. Overview of NRPE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrpe.html#nagios-command-line">2. Nagios command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrpe.html#nsclient-configuration">3. NSClient++ configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrpe.html#finding-and-solving-problems">4. Finding and solving problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrpe.html#nsclient-configuration-revisited">5. NSClient++ configuration (revisited)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrpe.html#nagios-command-line-revisited">6. Nagios command line (revisited)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrpe.html#nagios-configuration">7. Nagios configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nrpe.html#where-to-go-next">8. Where to go next</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nsca.html">Using NSClient++ from nagios with NSCA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nsca.html#overview-of-nsca">1. Overview of NSCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsca.html#overview-of-nsclient">1. Overview of NSClient++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsca.html#nsclient-configuration">2. NSClient++ configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsca.html#nsca-server">3. NSCA Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsca.html#testing-and-debugging">4. Testing and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsca.html#configure-nagios">5. Configure Nagios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsca.html#advanced-scenarios">6. Advanced scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nsca.html#where-to-go-next">7. Where to go next</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="choosing-a-transport-protocol">
+<h2>Choosing a transport/protocol<a class="headerlink" href="#choosing-a-transport-protocol" title="Permalink to this headline">¶</a></h2>
+<p>NSClient++ supports several transports and you can use either one or several of these or you can create your own cusom transport.
+Transports are methods which facilitates communication between Nagios and your server. You can look at this much like for instance HTTP (which you are using now) and FTP. They both support transferring files but they have slightly different approaches so things work differently but the end result is the same. A file gets transfered. In our case the end result is that a monitoring result gets submitted to Nagios.</p>
+<ol class="arabic simple">
+<li><strong>NSClient (check_nt)</strong>
+Only has some basic checks and is intended for backwards compatibility.</li>
+<li><strong>NRPE (check_nrpe)</strong>
+This is what I would think of as the &#8220;normal&#8221; or preferred way to use NSClient++. Most examples are intended to be used in this mode.</li>
+<li><strong>NRPE (check_nrpe) and NSClient (check_nt)</strong>
+This is what I would think of as the &#8220;legacy&#8221; way to use NSClient++ in addition to all advanced features you have support for older legacy checks. (in other words ability to migrate without to much change).</li>
+<li><strong>NSCA (nsca server)</strong>
+If you are an &#8220;advanced&#8221; Nagios user you might want to do passive checking (which is supported from NSClient++). If you don&#8217;t know what NSCA is you probably don&#8217;t want to do this.</li>
+<li><strong>Make your own</strong>
+The spirit of NSClient++ is to allow you do decide what you want to do so you can make any combination of the above and even use some other third party protocols or what not...</li>
+</ol>
+<p>I would recommend nagios-beginners to starting out with NSClient++ to go with NSClient (since it is simplest to setup) and everyone else (NSClient++ beginner but nagios intermediates) go with NRPE (unless you have specific needs in which case you most likely know enough to choose for you self). And advanced users feel free pick and choose.</p>
+<p><strong>NSClient (check_nt):</strong></p>
+<img alt="../../_images/nagios-active-nsclient.png" src="../../_images/nagios-active-nsclient.png" />
+<p>This is the simplest and most locked in way to use NSClient++ you are limited to a handful of checks and there is no way to exploit the power of NSClient++ from here. The good though is that it is very simple to use and setup and the configuration is included with nagios so it might be a good way to start.
+It is also the &#8220;only&#8221; way to have password protection. But note that since there is no encryption the password is sent as clear text so if you are compromised it will be easy to find.
+Another option in favor of this is since check_nt is distributed in the &#8220;normal plugin kit&#8221; you undoubtedly already have everything you need on the Nagios side.</p>
+<p>For details on configuring this go to the <a class="reference internal" href="check_nt.html"><em>NSClient setup guide</em></a>.</p>
+<p><strong>NRPE (check_nrpe):</strong></p>
+<img alt="../../_images/nagios-active-nrpe.png" src="../../_images/nagios-active-nrpe.png" />
+<p>NRPE is the preferred way and, if you ask me, you get the most out of NSClient++ choosing this mode.
+NRPE works much like NRPE for unix (if you are familiar with it) and in short you can say it relays a plugin request to a remote server. NRPE acts like a simple transport layer allowing remote execution. The difference between regular NRPE and NSClient++ is that NSClient++ has several built-in checks and thus does not require scripts for basic checks.
+So with NSClient++ you get a lot of ready-to-use checks that wont require you to have scripts. But if you choose you can disable all &#8220;modules&#8221; and stick with a pure NRPE installation and only external scripts or just use the external script to extend NSClient++ when you need.</p>
+<p>For details on configuring this go to the <a class="reference internal" href="nrpe.html"><em>NRPE setup guide</em></a>.</p>
+<p><strong>NRPE and NSClient Server:</strong></p>
+<img alt="../../_images/nagios-active-nsclient-and-nrpe.png" src="../../_images/nagios-active-nsclient-and-nrpe.png" />
+<p>NSClient++ is built around choice this you can naturally use both NRPE (check_nrpe) and NSClient (check_nt) if you wish and this is the preferred way to migrate from old legacy setup to a more modern one.</p>
+<p>For details on configuring this go to both the <a class="reference internal" href="nrpe.html"><em>NRPE setup guide</em></a> and the <a class="reference internal" href="check_nt.html"><em>NSClient setup guide</em></a>.</p>
+<p><strong>NSCA (nsca-client):</strong></p>
+<img alt="../../_images/nagios-passive-nsca.png" src="../../_images/nagios-passive-nsca.png" />
+<p>Passive checking is the &#8220;reversed&#8221; of active checking this means that instead of Nagios &#8220;calling out&#8221; to your (windows) server the (windows) server will phone home to the Nagios server instead. The best way to illustrate this is to compare the NRPE and the NSCA pictures above.</p>
+<p>For details on configuring this go to the <a class="reference internal" href="nsca.html"><em>NSCA setup guide</em></a>.</p>
+<p><strong>Make Your Own:</strong></p>
+<img alt="../../_images/nagios-active-passive-roll-your-own.png" src="../../_images/nagios-active-passive-roll-your-own.png" />
+<p>There are several other monitoring protocols out there and you can quite easily with for instance Lua make your own how to do this is outside the scope of this guide but you should know that the &#8220;sky is the limit&#8221;.</p>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using NSClient++ from nagios</a><ul>
+<li><a class="reference internal" href="#choosing-a-transport-protocol">Choosing a transport/protocol</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../impatient.html"
+                        title="previous chapter">TODO</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="check_nt.html"
+                        title="next chapter">Using NSClient++ from nagios with check_nt</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/tutorial/nagios/index.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="check_nt.html" title="Using NSClient++ from nagios with check_nt"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../impatient.html" title="TODO"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >NSClient++ Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,3075 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CheckDisk — CheckDisk &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Reference Manual" href="../index.html" />
+    <link rel="next" title="CheckEventLog — CheckEventLog" href="CheckEventLog.html" />
+    <link rel="prev" title="CheckNSCP — CheckNSCP" href="../check/CheckNSCP.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="CheckEventLog.html" title="CheckEventLog — CheckEventLog"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../check/CheckNSCP.html" title="CheckNSCP — CheckNSCP"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <dl class="module">
+<dt id="CheckDisk">
+<code class="descname">CheckDisk</code><dd></dd>CheckDisk can check various file and disk related things.<a class="headerlink" href="#CheckDisk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="checkdisk-checkdisk">
+<h1><code class="xref nscp nscp-module docutils literal"><span class="pre">CheckDisk</span></code> &#8212; CheckDisk<a class="headerlink" href="#checkdisk-checkdisk" title="Permalink to this headline">¶</a></h1>
+<p>CheckDisk can check various file and disk related things.</p>
+<p><strong>Queries (Overview)</strong>:</p>
+<p>A list of all available queries (check commands)</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize" title="CheckDisk.check_drivesize"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_drivesize</span></code></a></td>
+<td>Check the size (free-space) of a drive or volume.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files" title="CheckDisk.check_files"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_files</span></code></a></td>
+<td>Check various aspects of a file and/or folder.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize" title="CheckDisk.checkdrivesize"><code class="xref nscp nscp-query docutils literal"><span class="pre">checkdrivesize</span></code></a></td>
+<td>Legacy version of check_drivesize</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles" title="CheckDisk.checkfiles"><code class="xref nscp nscp-query docutils literal"><span class="pre">checkfiles</span></code></a></td>
+<td>Legacy version of check_drivesize</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Commands (Overview)</strong>:</p>
+<p><strong>TODO:</strong> Add a list of all external commands (this is not check commands)</p>
+<div class="section" id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h2>
+<p>A quick reference for all available queries (check commands) in the CheckDisk module.</p>
+<div class="section" id="check-drivesize">
+<h3><a class="reference internal" href="#CheckDisk.check_drivesize" title="CheckDisk.check_drivesize"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_drivesize</span></code></a><a class="headerlink" href="#check-drivesize" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="CheckDisk.check_drivesize">
+<code class="descclassname">CheckDisk</code><code class="descname">check_drivesize</code><dd></dd>Check the size (free-space) of a drive or volume.<a class="headerlink" href="#CheckDisk.check_drivesize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.filter" title="CheckDisk.check_drivesize.filter"><code class="xref nscp nscp-option docutils literal"><span class="pre">filter</span></code></a></td>
+<td>mounted = 1</td>
+<td>Filter which marks interesting items.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.warning" title="CheckDisk.check_drivesize.warning"><code class="xref nscp nscp-option docutils literal"><span class="pre">warning</span></code></a></td>
+<td>used &gt; 80%</td>
+<td>Filter which marks items which generates a warning state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.warn" title="CheckDisk.check_drivesize.warn"><code class="xref nscp nscp-option docutils literal"><span class="pre">warn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Short alias for warning</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.critical" title="CheckDisk.check_drivesize.critical"><code class="xref nscp nscp-option docutils literal"><span class="pre">critical</span></code></a></td>
+<td>used &gt; 90%</td>
+<td>Filter which marks items which generates a critical state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.crit" title="CheckDisk.check_drivesize.crit"><code class="xref nscp nscp-option docutils literal"><span class="pre">crit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Short alias for critical.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.ok" title="CheckDisk.check_drivesize.ok"><code class="xref nscp nscp-option docutils literal"><span class="pre">ok</span></code></a></td>
+<td>&nbsp;</td>
+<td>Filter which marks items which generates an ok state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.debug" title="CheckDisk.check_drivesize.debug"><code class="xref nscp nscp-option docutils literal"><span class="pre">debug</span></code></a></td>
+<td>N/A</td>
+<td>Show debugging information in the log</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.show-all" title="CheckDisk.check_drivesize.show-all"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-all</span></code></a></td>
+<td>N/A</td>
+<td>Show details for all matches regardless of status (normally details are only showed for warnings and criticals).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.empty-state" title="CheckDisk.check_drivesize.empty-state"><code class="xref nscp nscp-option docutils literal"><span class="pre">empty-state</span></code></a></td>
+<td>unknown</td>
+<td>Return status to use when nothing matched filter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.perf-config" title="CheckDisk.check_drivesize.perf-config"><code class="xref nscp nscp-option docutils literal"><span class="pre">perf-config</span></code></a></td>
+<td>&nbsp;</td>
+<td>Performance data generation configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.escape-html" title="CheckDisk.check_drivesize.escape-html"><code class="xref nscp nscp-option docutils literal"><span class="pre">escape-html</span></code></a></td>
+<td>N/A</td>
+<td>Escape any &lt; and &gt; characters to prevent HTML encoding</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.help" title="CheckDisk.check_drivesize.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.help-pb" title="CheckDisk.check_drivesize.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.show-default" title="CheckDisk.check_drivesize.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.help-short" title="CheckDisk.check_drivesize.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.top-syntax" title="CheckDisk.check_drivesize.top-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">top-syntax</span></code></a></td>
+<td>${status} ${problem_list}</td>
+<td>Top level syntax.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.ok-syntax" title="CheckDisk.check_drivesize.ok-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">ok-syntax</span></code></a></td>
+<td>%(status) All %(count) drive(s) are ok</td>
+<td>ok syntax.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.empty-syntax" title="CheckDisk.check_drivesize.empty-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">empty-syntax</span></code></a></td>
+<td>%(status): No drives found</td>
+<td>Empty syntax.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.detail-syntax" title="CheckDisk.check_drivesize.detail-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">detail-syntax</span></code></a></td>
+<td>${drive_or_name}: ${used}/${size} used</td>
+<td>Detail level syntax.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.perf-syntax" title="CheckDisk.check_drivesize.perf-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">perf-syntax</span></code></a></td>
+<td>${drive_or_id}</td>
+<td>Performance alias syntax.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.drive" title="CheckDisk.check_drivesize.drive"><code class="xref nscp nscp-option docutils literal"><span class="pre">drive</span></code></a></td>
+<td>&nbsp;</td>
+<td>The drives to check.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.ignore-unreadable" title="CheckDisk.check_drivesize.ignore-unreadable"><code class="xref nscp nscp-option docutils literal"><span class="pre">ignore-unreadable</span></code></a></td>
+<td>N/A</td>
+<td>DEPRECATED (manually set filter instead) Ignore drives which are not reachable by the current user.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.mounted" title="CheckDisk.check_drivesize.mounted"><code class="xref nscp nscp-option docutils literal"><span class="pre">mounted</span></code></a></td>
+<td>N/A</td>
+<td>DEPRECATED (this is now default) Show only mounted rives i.e. drives which have a mount point.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.magic" title="CheckDisk.check_drivesize.magic"><code class="xref nscp nscp-option docutils literal"><span class="pre">magic</span></code></a></td>
+<td>&nbsp;</td>
+<td>Magic number for use with scaling drive sizes.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_drivesize.exclude" title="CheckDisk.check_drivesize.exclude"><code class="xref nscp nscp-option docutils literal"><span class="pre">exclude</span></code></a></td>
+<td>&nbsp;</td>
+<td>A list of drives not to check</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_drivesize.total" title="CheckDisk.check_drivesize.total"><code class="xref nscp nscp-option docutils literal"><span class="pre">total</span></code></a></td>
+<td>N/A</td>
+<td>Include the total of all matching drives</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="samples">
+<h4>Samples<a class="headerlink" href="#samples" title="Permalink to this headline">¶</a></h4>
+<p>To check the size of <strong>the C:drive</strong> and <strong>make sure it has atleast 10% free</strong> space:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize &quot;crit=free&lt;10%&quot; drive=c:
+L     client CRITICAL: c:: 205GB/223GB used
+L     client  Performance data: &#39;c: free&#39;=18GB;0;22;0;223 &#39;c: free %&#39;=8%;0;9;0;100
+</pre></div>
+</div>
+<p>To check the size of <strong>all the drives</strong> and make sure it has atleast 10% free space:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize &quot;crit=free&lt;10%&quot; drive=*
+L     client OK: All drives ok
+L     client  Performance data: &#39;C:\ free&#39;=18GB;0;2;0;223 &#39;C:\ free %&#39;=8%;0;0;0;100 &#39;D:\ free&#39;=18GB;0;4;0;465 &#39;D:\ free %&#39;=3%;0;0;0;100 &#39;M:\ free&#39;=83GB;0;27;0;2746 &#39;M:\ free %&#39;=3%;0;0;0;100
+</pre></div>
+</div>
+<p>To check the size of all the drives and <strong>display all values, not just problems</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize drive=* --show-all
+L     client CRITICAL: c:: 205GB/223GB used
+L     client  Performance data: &#39;c: free&#39;=18GB;0;22;0;223 &#39;c: free %&#39;=8%;0;9;0;100
+</pre></div>
+</div>
+<p>To check the size of all the drives and <strong>return the value in gigabytes</strong>. By default units on performance data will be scaled to &#8220;something apropriate&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize &quot;perf-config=*(unit:g)&quot;
+L        cli CRITICAL: CRITICAL C:\: 208.147GB/223.471GB used, D:\: 399.607GB/465.759GB used
+L        cli  Performance data: &#39;C:\ used&#39;=0.00019g;0.00017;0.00019;0;0.00021 &#39;C:\ used %&#39;=93%;79;89;0;100 &#39;D:\ used&#39;=0.00038g;0.00035;0.00039;0;0.00044 &#39;D:\ used %&#39;=85%;79;89;0;100 &#39;E:\ used&#39;=0g;0;0;0;0 &#39;\\?\Volume{d458535f-27c7-11e4-be66-806e6f6e6963}\ used&#39;=0g;0;0;0;0 &#39;\\?\Volume{d458535f-27c7-11e4-be66-806e6f6e6963}\ used %&#39;=33%;79;89;0;100
+</pre></div>
+</div>
+<p>To check the size of <strong>a mounted volume</strong> (c:volumne_test) and <strong>make sure it has 1M free</strong> space <strong>warn if free space is less then 10M</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize &quot;crit=free&lt;1M&quot; &quot;warn=free&lt;10M&quot; drive=c:\\volumne_test
+C:: Total: 74.5G - Used: 71.2G (95%) - Free: 3.28G (5%) &lt; critical,C:;5%;10;5;
+</pre></div>
+</div>
+<p>To check the size of <strong>all volumes</strong> and <strong>make sure they have 1M space free</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize &quot;crit=free&lt;1M&quot; drive=all-volumes
+L     client OK: All drives ok
+L     client  Performance data: &#39;C:\ free&#39;=18GB;0;2;0;223 &#39;C:\ free %&#39;=8%;0;0;0;100 &#39;D:\ free&#39;=18GB;0;4;0;465 &#39;D:\ free %&#39;=3%;0;0;0;100 &#39;E:\ free&#39;=0B;0;0;0;0 &#39;F:\ free&#39;=0B;0;0;0;0
+</pre></div>
+</div>
+<p>To check the size of <strong>all fixed and network drives</strong> and make sure they have at least 1gig free space:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize &quot;crit=free&lt;1g&quot; drive=* &quot;filter=type in (&#39;fixed&#39;, &#39;remote&#39;)&quot;
+L     client OK: All drives ok
+L     client  Performance data: &#39;C:\ free&#39;=18GB;0;2;0;223 &#39;C:\ free %&#39;=8%;0;0;0;100 &#39;D:\ free&#39;=18GB;0;4;0;465 &#39;D:\ free %&#39;=3%;0;0;0;100 &#39;M:\ free&#39;=83GB;0;27;0;2746 &#39;M:\ free %&#39;=3%;0;0;0;100
+</pre></div>
+</div>
+<p>To check <strong>all fixed and network drives but ignore C and F</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize &quot;crit=free&lt;1g&quot; drive=* &quot;filter=type in (&#39;fixed&#39;, &#39;remote&#39;)&quot; exclude=C:\\ exclude=D:\\
+L     client OK: All drives ok
+L     client  Performance data: &#39;M:\ free&#39;=83GB;0;27;0;2746 &#39;M:\ free %&#39;=3%;0;0;0;100
+</pre></div>
+</div>
+<p>To checking <strong>UNC Paths</strong>. Please note that I need to use \ to escape the back-slashes from check_nrpe you can escape using &#8216; instead which is simpler:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize drive=\\\\medin-ds\\data\\ &quot;crit=free&lt;10%&quot;
+L     client CRITICAL: \\medin-ds\data\: 2.6TB/2.68TB used
+L     client  Performance data: &#39;\\medin-ds\data\ free&#39;=83GB;0;274;0;2746 &#39;\\medin-ds\data\ free %&#39;=3%;0;9;0;100
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>Please note that UNC paths are only avalible in each session meaning a user mounted share will not be visible to NSClient++ (since services run in their own session).
+But as long as NSClient++ can access the share it still works as long as you specify the UNC path.
+In other words the following will <strong>NOT</strong> work:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_drivesize drive=m:
+</pre></div>
+</div>
+<p>But the following will:</p>
+<div class="last highlight-python"><div class="highlight"><pre>check_drivesize drive=\\myserver\\mydrive
+</pre></div>
+</div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Do not forget the trailing .</p>
+</div>
+<p>Default via NRPE:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_nrpe --host 192.168.56.103 --command check_drivesize
+C:\: 205GB/223GB used, D:\: 448GB/466GB used, M:\: 2.6TB/2.68TB used|&#39;C:\ used&#39;=204GB;44;22;0;223 &#39;C:\ used %&#39;=91%;19;9;0;100 &#39;D:\ used&#39;=447GB;93;46;0;465...
+</pre></div>
+</div>
+</div>
+<div class="section" id="arguments">
+<h4>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.filter">
+<code class="descname">filter</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.filter" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks interesting items.</div>
+<div class="line">Interesting items are items which will be included in the check.</div>
+<div class="line">They do not denote warning or critical state instead it defines which items are relevant and you can remove unwanted items.</div>
+<div class="line">Available options :</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>drive</td>
+<td>Technical name of drive</td>
+</tr>
+<tr class="row-even"><td>drive_or_id</td>
+<td>Drive letter if present if not use id</td>
+</tr>
+<tr class="row-odd"><td>drive_or_name</td>
+<td>Drive letter if present if not use name</td>
+</tr>
+<tr class="row-even"><td>erasable</td>
+<td>1 (true) if drive is erasable</td>
+</tr>
+<tr class="row-odd"><td>flags</td>
+<td>String representation of flags</td>
+</tr>
+<tr class="row-even"><td>free</td>
+<td>Shorthand for total_free (Number of free bytes)</td>
+</tr>
+<tr class="row-odd"><td>free_pct</td>
+<td>Shorthand for total_free_pct (% free space)</td>
+</tr>
+<tr class="row-even"><td>hotplug</td>
+<td>1 (true) if drive is hotplugable</td>
+</tr>
+<tr class="row-odd"><td>id</td>
+<td>Drive or id of drive</td>
+</tr>
+<tr class="row-even"><td>mounted</td>
+<td>Check if a drive is mounted</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>Descriptive name of drive</td>
+</tr>
+<tr class="row-even"><td>readable</td>
+<td>1 (true) if drive is readable</td>
+</tr>
+<tr class="row-odd"><td>removable</td>
+<td>1 (true) if drive is removable</td>
+</tr>
+<tr class="row-even"><td>size</td>
+<td>Total size of drive</td>
+</tr>
+<tr class="row-odd"><td>total_free</td>
+<td>Number of free bytes</td>
+</tr>
+<tr class="row-even"><td>total_free_pct</td>
+<td>% free space</td>
+</tr>
+<tr class="row-odd"><td>total_used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-even"><td>total_used_pct</td>
+<td>% used space</td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>Type of drive</td>
+</tr>
+<tr class="row-even"><td>used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-odd"><td>used_pct</td>
+<td>Shorthand for total_used_pct (% used space)</td>
+</tr>
+<tr class="row-even"><td>user_free</td>
+<td>Free space available to user (which runs NSClient++)</td>
+</tr>
+<tr class="row-odd"><td>user_free_pct</td>
+<td>% free space available to user</td>
+</tr>
+<tr class="row-even"><td>user_used</td>
+<td>Number of used bytes (related to user)</td>
+</tr>
+<tr class="row-odd"><td>user_used_pct</td>
+<td>% used space available to user</td>
+</tr>
+<tr class="row-even"><td>writable</td>
+<td>1 (true) if drive is writable</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.warning">
+<code class="descname">warning</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.warning" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks items which generates a warning state.</div>
+<div class="line">If anything matches this filter the return status will be escalated to warning.</div>
+<div class="line">Available options :</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>drive</td>
+<td>Technical name of drive</td>
+</tr>
+<tr class="row-even"><td>drive_or_id</td>
+<td>Drive letter if present if not use id</td>
+</tr>
+<tr class="row-odd"><td>drive_or_name</td>
+<td>Drive letter if present if not use name</td>
+</tr>
+<tr class="row-even"><td>erasable</td>
+<td>1 (true) if drive is erasable</td>
+</tr>
+<tr class="row-odd"><td>flags</td>
+<td>String representation of flags</td>
+</tr>
+<tr class="row-even"><td>free</td>
+<td>Shorthand for total_free (Number of free bytes)</td>
+</tr>
+<tr class="row-odd"><td>free_pct</td>
+<td>Shorthand for total_free_pct (% free space)</td>
+</tr>
+<tr class="row-even"><td>hotplug</td>
+<td>1 (true) if drive is hotplugable</td>
+</tr>
+<tr class="row-odd"><td>id</td>
+<td>Drive or id of drive</td>
+</tr>
+<tr class="row-even"><td>mounted</td>
+<td>Check if a drive is mounted</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>Descriptive name of drive</td>
+</tr>
+<tr class="row-even"><td>readable</td>
+<td>1 (true) if drive is readable</td>
+</tr>
+<tr class="row-odd"><td>removable</td>
+<td>1 (true) if drive is removable</td>
+</tr>
+<tr class="row-even"><td>size</td>
+<td>Total size of drive</td>
+</tr>
+<tr class="row-odd"><td>total_free</td>
+<td>Number of free bytes</td>
+</tr>
+<tr class="row-even"><td>total_free_pct</td>
+<td>% free space</td>
+</tr>
+<tr class="row-odd"><td>total_used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-even"><td>total_used_pct</td>
+<td>% used space</td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>Type of drive</td>
+</tr>
+<tr class="row-even"><td>used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-odd"><td>used_pct</td>
+<td>Shorthand for total_used_pct (% used space)</td>
+</tr>
+<tr class="row-even"><td>user_free</td>
+<td>Free space available to user (which runs NSClient++)</td>
+</tr>
+<tr class="row-odd"><td>user_free_pct</td>
+<td>% free space available to user</td>
+</tr>
+<tr class="row-even"><td>user_used</td>
+<td>Number of used bytes (related to user)</td>
+</tr>
+<tr class="row-odd"><td>user_used_pct</td>
+<td>% used space available to user</td>
+</tr>
+<tr class="row-even"><td>writable</td>
+<td>1 (true) if drive is writable</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.warn">
+<code class="descname">warn</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.warn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Short alias for warning</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.critical">
+<code class="descname">critical</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.critical" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks items which generates a critical state.</div>
+<div class="line">If anything matches this filter the return status will be escalated to critical.</div>
+<div class="line">Available options :</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>drive</td>
+<td>Technical name of drive</td>
+</tr>
+<tr class="row-even"><td>drive_or_id</td>
+<td>Drive letter if present if not use id</td>
+</tr>
+<tr class="row-odd"><td>drive_or_name</td>
+<td>Drive letter if present if not use name</td>
+</tr>
+<tr class="row-even"><td>erasable</td>
+<td>1 (true) if drive is erasable</td>
+</tr>
+<tr class="row-odd"><td>flags</td>
+<td>String representation of flags</td>
+</tr>
+<tr class="row-even"><td>free</td>
+<td>Shorthand for total_free (Number of free bytes)</td>
+</tr>
+<tr class="row-odd"><td>free_pct</td>
+<td>Shorthand for total_free_pct (% free space)</td>
+</tr>
+<tr class="row-even"><td>hotplug</td>
+<td>1 (true) if drive is hotplugable</td>
+</tr>
+<tr class="row-odd"><td>id</td>
+<td>Drive or id of drive</td>
+</tr>
+<tr class="row-even"><td>mounted</td>
+<td>Check if a drive is mounted</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>Descriptive name of drive</td>
+</tr>
+<tr class="row-even"><td>readable</td>
+<td>1 (true) if drive is readable</td>
+</tr>
+<tr class="row-odd"><td>removable</td>
+<td>1 (true) if drive is removable</td>
+</tr>
+<tr class="row-even"><td>size</td>
+<td>Total size of drive</td>
+</tr>
+<tr class="row-odd"><td>total_free</td>
+<td>Number of free bytes</td>
+</tr>
+<tr class="row-even"><td>total_free_pct</td>
+<td>% free space</td>
+</tr>
+<tr class="row-odd"><td>total_used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-even"><td>total_used_pct</td>
+<td>% used space</td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>Type of drive</td>
+</tr>
+<tr class="row-even"><td>used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-odd"><td>used_pct</td>
+<td>Shorthand for total_used_pct (% used space)</td>
+</tr>
+<tr class="row-even"><td>user_free</td>
+<td>Free space available to user (which runs NSClient++)</td>
+</tr>
+<tr class="row-odd"><td>user_free_pct</td>
+<td>% free space available to user</td>
+</tr>
+<tr class="row-even"><td>user_used</td>
+<td>Number of used bytes (related to user)</td>
+</tr>
+<tr class="row-odd"><td>user_used_pct</td>
+<td>% used space available to user</td>
+</tr>
+<tr class="row-even"><td>writable</td>
+<td>1 (true) if drive is writable</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.crit">
+<code class="descname">crit</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.crit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Short alias for critical.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.ok">
+<code class="descname">ok</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.ok" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks items which generates an ok state.</div>
+<div class="line">If anything matches this any previous state for this item will be reset to ok.</div>
+<div class="line">Available options :</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>drive</td>
+<td>Technical name of drive</td>
+</tr>
+<tr class="row-even"><td>drive_or_id</td>
+<td>Drive letter if present if not use id</td>
+</tr>
+<tr class="row-odd"><td>drive_or_name</td>
+<td>Drive letter if present if not use name</td>
+</tr>
+<tr class="row-even"><td>erasable</td>
+<td>1 (true) if drive is erasable</td>
+</tr>
+<tr class="row-odd"><td>flags</td>
+<td>String representation of flags</td>
+</tr>
+<tr class="row-even"><td>free</td>
+<td>Shorthand for total_free (Number of free bytes)</td>
+</tr>
+<tr class="row-odd"><td>free_pct</td>
+<td>Shorthand for total_free_pct (% free space)</td>
+</tr>
+<tr class="row-even"><td>hotplug</td>
+<td>1 (true) if drive is hotplugable</td>
+</tr>
+<tr class="row-odd"><td>id</td>
+<td>Drive or id of drive</td>
+</tr>
+<tr class="row-even"><td>mounted</td>
+<td>Check if a drive is mounted</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>Descriptive name of drive</td>
+</tr>
+<tr class="row-even"><td>readable</td>
+<td>1 (true) if drive is readable</td>
+</tr>
+<tr class="row-odd"><td>removable</td>
+<td>1 (true) if drive is removable</td>
+</tr>
+<tr class="row-even"><td>size</td>
+<td>Total size of drive</td>
+</tr>
+<tr class="row-odd"><td>total_free</td>
+<td>Number of free bytes</td>
+</tr>
+<tr class="row-even"><td>total_free_pct</td>
+<td>% free space</td>
+</tr>
+<tr class="row-odd"><td>total_used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-even"><td>total_used_pct</td>
+<td>% used space</td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>Type of drive</td>
+</tr>
+<tr class="row-even"><td>used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-odd"><td>used_pct</td>
+<td>Shorthand for total_used_pct (% used space)</td>
+</tr>
+<tr class="row-even"><td>user_free</td>
+<td>Free space available to user (which runs NSClient++)</td>
+</tr>
+<tr class="row-odd"><td>user_free_pct</td>
+<td>% free space available to user</td>
+</tr>
+<tr class="row-even"><td>user_used</td>
+<td>Number of used bytes (related to user)</td>
+</tr>
+<tr class="row-odd"><td>user_used_pct</td>
+<td>% used space available to user</td>
+</tr>
+<tr class="row-even"><td>writable</td>
+<td>1 (true) if drive is writable</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.debug">
+<code class="descname">debug</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.debug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show debugging information in the log</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.show-all">
+<code class="descname">show-all</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.show-all" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show details for all matches regardless of status (normally details are only showed for warnings and criticals).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.empty-state">
+<code class="descname">empty-state</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.empty-state" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Return status to use when nothing matched filter.</div>
+<div class="line">If no filter is specified this will never happen unless the file is empty.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.perf-config">
+<code class="descname">perf-config</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.perf-config" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Performance data generation configuration</div>
+<div class="line">TODO: obj ( key: value; key: value) obj (key:valuer;key:value)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.escape-html">
+<code class="descname">escape-html</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.escape-html" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Escape any &lt; and &gt; characters to prevent HTML encoding</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.help">
+<code class="descname">help</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.help-pb">
+<code class="descname">help-pb</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.show-default">
+<code class="descname">show-default</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.help-short">
+<code class="descname">help-short</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.top-syntax">
+<code class="descname">top-syntax</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.top-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Top level syntax.</div>
+<div class="line">Used to format the message to return can include text as well as special keywords which will include information from the checks.</div>
+<div class="line">To add a keyword to the message you can use two syntaxes either ${keyword} or %(keyword) (there is no difference between them apart from ${} can be difficult to excpae on linux).</div>
+<div class="line">The available keywords are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.ok-syntax">
+<code class="descname">ok-syntax</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.ok-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">ok syntax.</div>
+<div class="line">DEPRECATED! This is the syntax for when an ok result is returned.</div>
+<div class="line">This value will not be used if your syntax contains %(list) or %(count).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.empty-syntax">
+<code class="descname">empty-syntax</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.empty-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Empty syntax.</div>
+<div class="line">DEPRECATED! This is the syntax for when nothing matches the filter.</div>
+<div class="line">Possible values are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.detail-syntax">
+<code class="descname">detail-syntax</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.detail-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Detail level syntax.</div>
+<div class="line">Used to format each resulting item in the message.</div>
+<div class="line">%(list) will be replaced with all the items formated by this syntax string in the top-syntax.</div>
+<div class="line">To add a keyword to the message you can use two syntaxes either ${keyword} or %(keyword) (there is no difference between them apart from ${} can be difficult to excpae on linux).</div>
+<div class="line">The available keywords are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>drive</td>
+<td>Technical name of drive</td>
+</tr>
+<tr class="row-odd"><td>drive_or_id</td>
+<td>Drive letter if present if not use id</td>
+</tr>
+<tr class="row-even"><td>drive_or_name</td>
+<td>Drive letter if present if not use name</td>
+</tr>
+<tr class="row-odd"><td>erasable</td>
+<td>1 (true) if drive is erasable</td>
+</tr>
+<tr class="row-even"><td>flags</td>
+<td>String representation of flags</td>
+</tr>
+<tr class="row-odd"><td>free</td>
+<td>Shorthand for total_free (Number of free bytes)</td>
+</tr>
+<tr class="row-even"><td>free_pct</td>
+<td>Shorthand for total_free_pct (% free space)</td>
+</tr>
+<tr class="row-odd"><td>hotplug</td>
+<td>1 (true) if drive is hotplugable</td>
+</tr>
+<tr class="row-even"><td>id</td>
+<td>Drive or id of drive</td>
+</tr>
+<tr class="row-odd"><td>mounted</td>
+<td>Check if a drive is mounted</td>
+</tr>
+<tr class="row-even"><td>name</td>
+<td>Descriptive name of drive</td>
+</tr>
+<tr class="row-odd"><td>readable</td>
+<td>1 (true) if drive is readable</td>
+</tr>
+<tr class="row-even"><td>removable</td>
+<td>1 (true) if drive is removable</td>
+</tr>
+<tr class="row-odd"><td>size</td>
+<td>Total size of drive</td>
+</tr>
+<tr class="row-even"><td>total_free</td>
+<td>Number of free bytes</td>
+</tr>
+<tr class="row-odd"><td>total_free_pct</td>
+<td>% free space</td>
+</tr>
+<tr class="row-even"><td>total_used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-odd"><td>total_used_pct</td>
+<td>% used space</td>
+</tr>
+<tr class="row-even"><td>type</td>
+<td>Type of drive</td>
+</tr>
+<tr class="row-odd"><td>used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-even"><td>used_pct</td>
+<td>Shorthand for total_used_pct (% used space)</td>
+</tr>
+<tr class="row-odd"><td>user_free</td>
+<td>Free space available to user (which runs NSClient++)</td>
+</tr>
+<tr class="row-even"><td>user_free_pct</td>
+<td>% free space available to user</td>
+</tr>
+<tr class="row-odd"><td>user_used</td>
+<td>Number of used bytes (related to user)</td>
+</tr>
+<tr class="row-even"><td>user_used_pct</td>
+<td>% used space available to user</td>
+</tr>
+<tr class="row-odd"><td>writable</td>
+<td>1 (true) if drive is writable</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.perf-syntax">
+<code class="descname">perf-syntax</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.perf-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Performance alias syntax.</div>
+<div class="line">This is the syntax for the base names of the performance data.</div>
+<div class="line">Possible values are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>drive</td>
+<td>Technical name of drive</td>
+</tr>
+<tr class="row-odd"><td>drive_or_id</td>
+<td>Drive letter if present if not use id</td>
+</tr>
+<tr class="row-even"><td>drive_or_name</td>
+<td>Drive letter if present if not use name</td>
+</tr>
+<tr class="row-odd"><td>erasable</td>
+<td>1 (true) if drive is erasable</td>
+</tr>
+<tr class="row-even"><td>flags</td>
+<td>String representation of flags</td>
+</tr>
+<tr class="row-odd"><td>free</td>
+<td>Shorthand for total_free (Number of free bytes)</td>
+</tr>
+<tr class="row-even"><td>free_pct</td>
+<td>Shorthand for total_free_pct (% free space)</td>
+</tr>
+<tr class="row-odd"><td>hotplug</td>
+<td>1 (true) if drive is hotplugable</td>
+</tr>
+<tr class="row-even"><td>id</td>
+<td>Drive or id of drive</td>
+</tr>
+<tr class="row-odd"><td>mounted</td>
+<td>Check if a drive is mounted</td>
+</tr>
+<tr class="row-even"><td>name</td>
+<td>Descriptive name of drive</td>
+</tr>
+<tr class="row-odd"><td>readable</td>
+<td>1 (true) if drive is readable</td>
+</tr>
+<tr class="row-even"><td>removable</td>
+<td>1 (true) if drive is removable</td>
+</tr>
+<tr class="row-odd"><td>size</td>
+<td>Total size of drive</td>
+</tr>
+<tr class="row-even"><td>total_free</td>
+<td>Number of free bytes</td>
+</tr>
+<tr class="row-odd"><td>total_free_pct</td>
+<td>% free space</td>
+</tr>
+<tr class="row-even"><td>total_used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-odd"><td>total_used_pct</td>
+<td>% used space</td>
+</tr>
+<tr class="row-even"><td>type</td>
+<td>Type of drive</td>
+</tr>
+<tr class="row-odd"><td>used</td>
+<td>Number of used bytes</td>
+</tr>
+<tr class="row-even"><td>used_pct</td>
+<td>Shorthand for total_used_pct (% used space)</td>
+</tr>
+<tr class="row-odd"><td>user_free</td>
+<td>Free space available to user (which runs NSClient++)</td>
+</tr>
+<tr class="row-even"><td>user_free_pct</td>
+<td>% free space available to user</td>
+</tr>
+<tr class="row-odd"><td>user_used</td>
+<td>Number of used bytes (related to user)</td>
+</tr>
+<tr class="row-even"><td>user_used_pct</td>
+<td>% used space available to user</td>
+</tr>
+<tr class="row-odd"><td>writable</td>
+<td>1 (true) if drive is writable</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.drive">
+<code class="descname">drive</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.drive" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The drives to check.</div>
+<div class="line">Multiple options can be used to check more then one drive or wildcards can be used to indicate multiple drives to check. Examples: drive=c, drive=d:, drive=*, drive=all-volumes, drive=all-drives</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.ignore-unreadable">
+<code class="descname">ignore-unreadable</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.ignore-unreadable" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">DEPRECATED (manually set filter instead) Ignore drives which are not reachable by the current user.</div>
+<div class="line">For instance Microsoft Office creates a drive which cannot be read by normal users.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.mounted">
+<code class="descname">mounted</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.mounted" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">DEPRECATED (this is now default) Show only mounted rives i.e. drives which have a mount point.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.magic">
+<code class="descname">magic</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.magic" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Magic number for use with scaling drive sizes.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.exclude">
+<code class="descname">exclude</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.exclude" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">A list of drives not to check</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_drivesize.total">
+<code class="descname">total</code><em class="property"> (CheckDisk, check_drivesize)</em><a class="headerlink" href="#CheckDisk.check_drivesize.total" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Include the total of all matching drives</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="check-files">
+<h3><a class="reference internal" href="#CheckDisk.check_files" title="CheckDisk.check_files"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_files</span></code></a><a class="headerlink" href="#check-files" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="CheckDisk.check_files">
+<code class="descclassname">CheckDisk</code><code class="descname">check_files</code><dd></dd>Check various aspects of a file and/or folder.<a class="headerlink" href="#CheckDisk.check_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.filter" title="CheckDisk.check_files.filter"><code class="xref nscp nscp-option docutils literal"><span class="pre">filter</span></code></a></td>
+<td>&nbsp;</td>
+<td>Filter which marks interesting items.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.warning" title="CheckDisk.check_files.warning"><code class="xref nscp nscp-option docutils literal"><span class="pre">warning</span></code></a></td>
+<td>&nbsp;</td>
+<td>Filter which marks items which generates a warning state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.warn" title="CheckDisk.check_files.warn"><code class="xref nscp nscp-option docutils literal"><span class="pre">warn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Short alias for warning</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.critical" title="CheckDisk.check_files.critical"><code class="xref nscp nscp-option docutils literal"><span class="pre">critical</span></code></a></td>
+<td>&nbsp;</td>
+<td>Filter which marks items which generates a critical state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.crit" title="CheckDisk.check_files.crit"><code class="xref nscp nscp-option docutils literal"><span class="pre">crit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Short alias for critical.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.ok" title="CheckDisk.check_files.ok"><code class="xref nscp nscp-option docutils literal"><span class="pre">ok</span></code></a></td>
+<td>&nbsp;</td>
+<td>Filter which marks items which generates an ok state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.debug" title="CheckDisk.check_files.debug"><code class="xref nscp nscp-option docutils literal"><span class="pre">debug</span></code></a></td>
+<td>N/A</td>
+<td>Show debugging information in the log</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.show-all" title="CheckDisk.check_files.show-all"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-all</span></code></a></td>
+<td>N/A</td>
+<td>Show details for all matches regardless of status (normally details are only showed for warnings and criticals).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.empty-state" title="CheckDisk.check_files.empty-state"><code class="xref nscp nscp-option docutils literal"><span class="pre">empty-state</span></code></a></td>
+<td>unknown</td>
+<td>Return status to use when nothing matched filter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.perf-config" title="CheckDisk.check_files.perf-config"><code class="xref nscp nscp-option docutils literal"><span class="pre">perf-config</span></code></a></td>
+<td>&nbsp;</td>
+<td>Performance data generation configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.escape-html" title="CheckDisk.check_files.escape-html"><code class="xref nscp nscp-option docutils literal"><span class="pre">escape-html</span></code></a></td>
+<td>N/A</td>
+<td>Escape any &lt; and &gt; characters to prevent HTML encoding</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.help" title="CheckDisk.check_files.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.help-pb" title="CheckDisk.check_files.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.show-default" title="CheckDisk.check_files.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.help-short" title="CheckDisk.check_files.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.top-syntax" title="CheckDisk.check_files.top-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">top-syntax</span></code></a></td>
+<td>${status}: ${problem_count}/${count} files (${problem_list})</td>
+<td>Top level syntax.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.ok-syntax" title="CheckDisk.check_files.ok-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">ok-syntax</span></code></a></td>
+<td>%(status): All %(count) files are ok</td>
+<td>ok syntax.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.empty-syntax" title="CheckDisk.check_files.empty-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">empty-syntax</span></code></a></td>
+<td>No files found</td>
+<td>Empty syntax.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.detail-syntax" title="CheckDisk.check_files.detail-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">detail-syntax</span></code></a></td>
+<td>${name}</td>
+<td>Detail level syntax.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.perf-syntax" title="CheckDisk.check_files.perf-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">perf-syntax</span></code></a></td>
+<td>${name}</td>
+<td>Performance alias syntax.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.path" title="CheckDisk.check_files.path"><code class="xref nscp nscp-option docutils literal"><span class="pre">path</span></code></a></td>
+<td>&nbsp;</td>
+<td>The path to search for files under.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.file" title="CheckDisk.check_files.file"><code class="xref nscp nscp-option docutils literal"><span class="pre">file</span></code></a></td>
+<td>&nbsp;</td>
+<td>Alias for path.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.paths" title="CheckDisk.check_files.paths"><code class="xref nscp nscp-option docutils literal"><span class="pre">paths</span></code></a></td>
+<td>&nbsp;</td>
+<td>A comma separated list of paths to scan</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.pattern" title="CheckDisk.check_files.pattern"><code class="xref nscp nscp-option docutils literal"><span class="pre">pattern</span></code></a></td>
+<td><em>.</em></td>
+<td>The pattern of files to search for (works like a filter but is faster and can be combined with a filter).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.check_files.max-depth" title="CheckDisk.check_files.max-depth"><code class="xref nscp nscp-option docutils literal"><span class="pre">max-depth</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum depth to recurse</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.check_files.total" title="CheckDisk.check_files.total"><code class="xref nscp nscp-option docutils literal"><span class="pre">total</span></code></a></td>
+<td>filter</td>
+<td>Include the total of either (filter) all files matching the filter or (all) all files regardless of the filter</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id1">
+<h4>Samples<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>Order is somewhat important but mainly in the fact that some operations are more costly then others.
+For instance line_count requires us to read and count the lines in each file so choosing between the following:
+Fast version:</p>
+<div class="highlight-python"><div class="highlight"><pre>filter=creation &lt; -2d and line_count &gt; 100
+</pre></div>
+</div>
+<p>Show version:</p>
+<div class="highlight-python"><div class="highlight"><pre>filter=line_count &gt; 100 and creation &lt; -2d
+</pre></div>
+</div>
+<p>The first one will be significantly faster if you have a thousand old files and 3 new ones.
+But looking at the following:</p>
+<div class="highlight-python"><div class="highlight"><pre>filter=creation &lt; -2d and size &gt; 100k
+</pre></div>
+</div>
+<p>Swapping them would not be noticeable.</p>
+<p>Checking file versions:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_files path=c:/foo/ pattern=*.exe &quot;filter=version != &#39;1.0&#39;&quot; &quot;detail-syntax=%(filename): %(version)&quot; &quot;warn=count &gt; 1&quot; show-all
+L        cli WARNING: WARNING: 0/11 files (check_nrpe.exe: , nscp.exe: 0.5.0.16, reporter.exe: 0.5.0.16)
+L        cli  Performance data: &#39;count&#39;=11;1;0
+</pre></div>
+</div>
+<p>Using the line count with limited recursion:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_files path=c:/windows pattern=*.txt max-depth=1 &quot;filter=line_count gt 100&quot; &quot;detail-syntax=%(filename): %(line_count)&quot; &quot;warn=count&gt;0&quot; show-all
+L        cli WARNING: WARNING: 0/1 files (AsChkDev.txt: 328)
+L        cli  Performance data: &#39;count&#39;=1;0;0
+</pre></div>
+</div>
+<p>Check file sizes:</p>
+<div class="highlight-python"><div class="highlight"><pre>check_files path=c:/windows pattern=*.txt &quot;detail-syntax=%(filename): %(size)&quot; &quot;warn=size&gt;20k&quot; max-depth=1
+L        cli WARNING: WARNING: 1/6 files (AsChkDev.txt: 29738)
+L        cli  Performance data: &#39;AsChkDev.txt size&#39;=29.04101KB;20;0 &#39;AsDCDVer.txt size&#39;=0.02246KB;20;0 &#39;AsHDIVer.txt size&#39;=0.02734KB;20;0 &#39;AsPEToolVer.txt size&#39;=0.08789KB;20;0 &#39;AsToolCDVer.txt size&#39;=0.05273KB;20;0 &#39;csup.txt size&#39;=0.00976KB;20;0
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Arguments<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="CheckDisk.check_files.filter">
+<code class="descname">filter</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.filter" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks interesting items.</div>
+<div class="line">Interesting items are items which will be included in the check.</div>
+<div class="line">They do not denote warning or critical state instead it defines which items are relevant and you can remove unwanted items.</div>
+<div class="line">Available options :</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>access</td>
+<td>Last access time</td>
+</tr>
+<tr class="row-even"><td>access_l</td>
+<td>Last access time (local time)</td>
+</tr>
+<tr class="row-odd"><td>access_u</td>
+<td>Last access time (UTC)</td>
+</tr>
+<tr class="row-even"><td>age</td>
+<td>Seconds since file was last written</td>
+</tr>
+<tr class="row-odd"><td>creation</td>
+<td>When file was created</td>
+</tr>
+<tr class="row-even"><td>creation_l</td>
+<td>When file was created (local time)</td>
+</tr>
+<tr class="row-odd"><td>creation_u</td>
+<td>When file was created (UTC)</td>
+</tr>
+<tr class="row-even"><td>file</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-odd"><td>filename</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>line_count</td>
+<td>Number of lines in the file (text files)</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>path</td>
+<td>Path of file</td>
+</tr>
+<tr class="row-odd"><td>size</td>
+<td>File size</td>
+</tr>
+<tr class="row-even"><td>total</td>
+<td>True if this is the total object</td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>Type of item (file or dir)</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>Windows exe/dll file version</td>
+</tr>
+<tr class="row-odd"><td>write</td>
+<td>Alias for written</td>
+</tr>
+<tr class="row-even"><td>written</td>
+<td>When file was last written to</td>
+</tr>
+<tr class="row-odd"><td>written_l</td>
+<td>When file was last written  to (local time)</td>
+</tr>
+<tr class="row-even"><td>written_u</td>
+<td>When file was last written  to (UTC)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.warning">
+<code class="descname">warning</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.warning" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks items which generates a warning state.</div>
+<div class="line">If anything matches this filter the return status will be escalated to warning.</div>
+<div class="line">Available options :</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>access</td>
+<td>Last access time</td>
+</tr>
+<tr class="row-even"><td>access_l</td>
+<td>Last access time (local time)</td>
+</tr>
+<tr class="row-odd"><td>access_u</td>
+<td>Last access time (UTC)</td>
+</tr>
+<tr class="row-even"><td>age</td>
+<td>Seconds since file was last written</td>
+</tr>
+<tr class="row-odd"><td>creation</td>
+<td>When file was created</td>
+</tr>
+<tr class="row-even"><td>creation_l</td>
+<td>When file was created (local time)</td>
+</tr>
+<tr class="row-odd"><td>creation_u</td>
+<td>When file was created (UTC)</td>
+</tr>
+<tr class="row-even"><td>file</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-odd"><td>filename</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>line_count</td>
+<td>Number of lines in the file (text files)</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>path</td>
+<td>Path of file</td>
+</tr>
+<tr class="row-odd"><td>size</td>
+<td>File size</td>
+</tr>
+<tr class="row-even"><td>total</td>
+<td>True if this is the total object</td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>Type of item (file or dir)</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>Windows exe/dll file version</td>
+</tr>
+<tr class="row-odd"><td>write</td>
+<td>Alias for written</td>
+</tr>
+<tr class="row-even"><td>written</td>
+<td>When file was last written to</td>
+</tr>
+<tr class="row-odd"><td>written_l</td>
+<td>When file was last written  to (local time)</td>
+</tr>
+<tr class="row-even"><td>written_u</td>
+<td>When file was last written  to (UTC)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.warn">
+<code class="descname">warn</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.warn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Short alias for warning</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.critical">
+<code class="descname">critical</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.critical" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks items which generates a critical state.</div>
+<div class="line">If anything matches this filter the return status will be escalated to critical.</div>
+<div class="line">Available options :</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>access</td>
+<td>Last access time</td>
+</tr>
+<tr class="row-even"><td>access_l</td>
+<td>Last access time (local time)</td>
+</tr>
+<tr class="row-odd"><td>access_u</td>
+<td>Last access time (UTC)</td>
+</tr>
+<tr class="row-even"><td>age</td>
+<td>Seconds since file was last written</td>
+</tr>
+<tr class="row-odd"><td>creation</td>
+<td>When file was created</td>
+</tr>
+<tr class="row-even"><td>creation_l</td>
+<td>When file was created (local time)</td>
+</tr>
+<tr class="row-odd"><td>creation_u</td>
+<td>When file was created (UTC)</td>
+</tr>
+<tr class="row-even"><td>file</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-odd"><td>filename</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>line_count</td>
+<td>Number of lines in the file (text files)</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>path</td>
+<td>Path of file</td>
+</tr>
+<tr class="row-odd"><td>size</td>
+<td>File size</td>
+</tr>
+<tr class="row-even"><td>total</td>
+<td>True if this is the total object</td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>Type of item (file or dir)</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>Windows exe/dll file version</td>
+</tr>
+<tr class="row-odd"><td>write</td>
+<td>Alias for written</td>
+</tr>
+<tr class="row-even"><td>written</td>
+<td>When file was last written to</td>
+</tr>
+<tr class="row-odd"><td>written_l</td>
+<td>When file was last written  to (local time)</td>
+</tr>
+<tr class="row-even"><td>written_u</td>
+<td>When file was last written  to (UTC)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.crit">
+<code class="descname">crit</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.crit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Short alias for critical.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.ok">
+<code class="descname">ok</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.ok" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks items which generates an ok state.</div>
+<div class="line">If anything matches this any previous state for this item will be reset to ok.</div>
+<div class="line">Available options :</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>access</td>
+<td>Last access time</td>
+</tr>
+<tr class="row-even"><td>access_l</td>
+<td>Last access time (local time)</td>
+</tr>
+<tr class="row-odd"><td>access_u</td>
+<td>Last access time (UTC)</td>
+</tr>
+<tr class="row-even"><td>age</td>
+<td>Seconds since file was last written</td>
+</tr>
+<tr class="row-odd"><td>creation</td>
+<td>When file was created</td>
+</tr>
+<tr class="row-even"><td>creation_l</td>
+<td>When file was created (local time)</td>
+</tr>
+<tr class="row-odd"><td>creation_u</td>
+<td>When file was created (UTC)</td>
+</tr>
+<tr class="row-even"><td>file</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-odd"><td>filename</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>line_count</td>
+<td>Number of lines in the file (text files)</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>path</td>
+<td>Path of file</td>
+</tr>
+<tr class="row-odd"><td>size</td>
+<td>File size</td>
+</tr>
+<tr class="row-even"><td>total</td>
+<td>True if this is the total object</td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>Type of item (file or dir)</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>Windows exe/dll file version</td>
+</tr>
+<tr class="row-odd"><td>write</td>
+<td>Alias for written</td>
+</tr>
+<tr class="row-even"><td>written</td>
+<td>When file was last written to</td>
+</tr>
+<tr class="row-odd"><td>written_l</td>
+<td>When file was last written  to (local time)</td>
+</tr>
+<tr class="row-even"><td>written_u</td>
+<td>When file was last written  to (UTC)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.debug">
+<code class="descname">debug</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.debug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show debugging information in the log</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.show-all">
+<code class="descname">show-all</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.show-all" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show details for all matches regardless of status (normally details are only showed for warnings and criticals).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.empty-state">
+<code class="descname">empty-state</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.empty-state" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Return status to use when nothing matched filter.</div>
+<div class="line">If no filter is specified this will never happen unless the file is empty.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.perf-config">
+<code class="descname">perf-config</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.perf-config" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Performance data generation configuration</div>
+<div class="line">TODO: obj ( key: value; key: value) obj (key:valuer;key:value)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.escape-html">
+<code class="descname">escape-html</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.escape-html" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Escape any &lt; and &gt; characters to prevent HTML encoding</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.help">
+<code class="descname">help</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.help-pb">
+<code class="descname">help-pb</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.show-default">
+<code class="descname">show-default</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.help-short">
+<code class="descname">help-short</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.top-syntax">
+<code class="descname">top-syntax</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.top-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Top level syntax.</div>
+<div class="line">Used to format the message to return can include text as well as special keywords which will include information from the checks.</div>
+<div class="line">To add a keyword to the message you can use two syntaxes either ${keyword} or %(keyword) (there is no difference between them apart from ${} can be difficult to excpae on linux).</div>
+<div class="line">The available keywords are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.ok-syntax">
+<code class="descname">ok-syntax</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.ok-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">ok syntax.</div>
+<div class="line">DEPRECATED! This is the syntax for when an ok result is returned.</div>
+<div class="line">This value will not be used if your syntax contains %(list) or %(count).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.empty-syntax">
+<code class="descname">empty-syntax</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.empty-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Empty syntax.</div>
+<div class="line">DEPRECATED! This is the syntax for when nothing matches the filter.</div>
+<div class="line">Possible values are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.detail-syntax">
+<code class="descname">detail-syntax</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.detail-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Detail level syntax.</div>
+<div class="line">Used to format each resulting item in the message.</div>
+<div class="line">%(list) will be replaced with all the items formated by this syntax string in the top-syntax.</div>
+<div class="line">To add a keyword to the message you can use two syntaxes either ${keyword} or %(keyword) (there is no difference between them apart from ${} can be difficult to excpae on linux).</div>
+<div class="line">The available keywords are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>access</td>
+<td>Last access time</td>
+</tr>
+<tr class="row-odd"><td>access_l</td>
+<td>Last access time (local time)</td>
+</tr>
+<tr class="row-even"><td>access_u</td>
+<td>Last access time (UTC)</td>
+</tr>
+<tr class="row-odd"><td>age</td>
+<td>Seconds since file was last written</td>
+</tr>
+<tr class="row-even"><td>creation</td>
+<td>When file was created</td>
+</tr>
+<tr class="row-odd"><td>creation_l</td>
+<td>When file was created (local time)</td>
+</tr>
+<tr class="row-even"><td>creation_u</td>
+<td>When file was created (UTC)</td>
+</tr>
+<tr class="row-odd"><td>file</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>filename</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-odd"><td>line_count</td>
+<td>Number of lines in the file (text files)</td>
+</tr>
+<tr class="row-even"><td>name</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-odd"><td>path</td>
+<td>Path of file</td>
+</tr>
+<tr class="row-even"><td>size</td>
+<td>File size</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>True if this is the total object</td>
+</tr>
+<tr class="row-even"><td>type</td>
+<td>Type of item (file or dir)</td>
+</tr>
+<tr class="row-odd"><td>version</td>
+<td>Windows exe/dll file version</td>
+</tr>
+<tr class="row-even"><td>write</td>
+<td>Alias for written</td>
+</tr>
+<tr class="row-odd"><td>written</td>
+<td>When file was last written to</td>
+</tr>
+<tr class="row-even"><td>written_l</td>
+<td>When file was last written  to (local time)</td>
+</tr>
+<tr class="row-odd"><td>written_u</td>
+<td>When file was last written  to (UTC)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.perf-syntax">
+<code class="descname">perf-syntax</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.perf-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Performance alias syntax.</div>
+<div class="line">This is the syntax for the base names of the performance data.</div>
+<div class="line">Possible values are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>access</td>
+<td>Last access time</td>
+</tr>
+<tr class="row-odd"><td>access_l</td>
+<td>Last access time (local time)</td>
+</tr>
+<tr class="row-even"><td>access_u</td>
+<td>Last access time (UTC)</td>
+</tr>
+<tr class="row-odd"><td>age</td>
+<td>Seconds since file was last written</td>
+</tr>
+<tr class="row-even"><td>creation</td>
+<td>When file was created</td>
+</tr>
+<tr class="row-odd"><td>creation_l</td>
+<td>When file was created (local time)</td>
+</tr>
+<tr class="row-even"><td>creation_u</td>
+<td>When file was created (UTC)</td>
+</tr>
+<tr class="row-odd"><td>file</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-even"><td>filename</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-odd"><td>line_count</td>
+<td>Number of lines in the file (text files)</td>
+</tr>
+<tr class="row-even"><td>name</td>
+<td>The name of the file</td>
+</tr>
+<tr class="row-odd"><td>path</td>
+<td>Path of file</td>
+</tr>
+<tr class="row-even"><td>size</td>
+<td>File size</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>True if this is the total object</td>
+</tr>
+<tr class="row-even"><td>type</td>
+<td>Type of item (file or dir)</td>
+</tr>
+<tr class="row-odd"><td>version</td>
+<td>Windows exe/dll file version</td>
+</tr>
+<tr class="row-even"><td>write</td>
+<td>Alias for written</td>
+</tr>
+<tr class="row-odd"><td>written</td>
+<td>When file was last written to</td>
+</tr>
+<tr class="row-even"><td>written_l</td>
+<td>When file was last written  to (local time)</td>
+</tr>
+<tr class="row-odd"><td>written_u</td>
+<td>When file was last written  to (UTC)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.path">
+<code class="descname">path</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.path" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The path to search for files under.</div>
+<div class="line">Notice that specifying multiple path will create an aggregate set you will not check each path individually.In other words if one path contains an error the entire check will result in error.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.file">
+<code class="descname">file</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.file" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Alias for path.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.paths">
+<code class="descname">paths</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.paths" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">A comma separated list of paths to scan</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.pattern">
+<code class="descname">pattern</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.pattern" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The pattern of files to search for (works like a filter but is faster and can be combined with a filter).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.max-depth">
+<code class="descname">max-depth</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.max-depth" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum depth to recurse</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.check_files.total">
+<code class="descname">total</code><em class="property"> (CheckDisk, check_files)</em><a class="headerlink" href="#CheckDisk.check_files.total" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Include the total of either (filter) all files matching the filter or (all) all files regardless of the filter</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="checkdrivesize">
+<h3><a class="reference internal" href="#CheckDisk.checkdrivesize" title="CheckDisk.checkdrivesize"><code class="xref nscp nscp-query docutils literal"><span class="pre">checkdrivesize</span></code></a><a class="headerlink" href="#checkdrivesize" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="CheckDisk.checkdrivesize">
+<code class="descclassname">CheckDisk</code><code class="descname">checkdrivesize</code><dd></dd>Legacy version of check_drivesize<a class="headerlink" href="#CheckDisk.checkdrivesize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.help" title="CheckDisk.checkdrivesize.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.help-pb" title="CheckDisk.checkdrivesize.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.show-default" title="CheckDisk.checkdrivesize.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.help-short" title="CheckDisk.checkdrivesize.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.CheckAll" title="CheckDisk.checkdrivesize.CheckAll"><code class="xref nscp nscp-option docutils literal"><span class="pre">CheckAll</span></code></a></td>
+<td>true</td>
+<td>Checks all drives.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.CheckAllOthers" title="CheckDisk.checkdrivesize.CheckAllOthers"><code class="xref nscp nscp-option docutils literal"><span class="pre">CheckAllOthers</span></code></a></td>
+<td>true</td>
+<td>Checks all drives turns the drive option into an exclude option.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.Drive" title="CheckDisk.checkdrivesize.Drive"><code class="xref nscp nscp-option docutils literal"><span class="pre">Drive</span></code></a></td>
+<td>&nbsp;</td>
+<td>The drives to check</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.FilterType" title="CheckDisk.checkdrivesize.FilterType"><code class="xref nscp nscp-option docutils literal"><span class="pre">FilterType</span></code></a></td>
+<td>&nbsp;</td>
+<td>The type of drives to check fixed, remote, cdrom, ramdisk, removable</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.perf-unit" title="CheckDisk.checkdrivesize.perf-unit"><code class="xref nscp nscp-option docutils literal"><span class="pre">perf-unit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Force performance data to use a given unit prevents scaling which can cause problems over time in some graphing solutions.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.ShowAll" title="CheckDisk.checkdrivesize.ShowAll"><code class="xref nscp nscp-option docutils literal"><span class="pre">ShowAll</span></code></a></td>
+<td>short</td>
+<td>Configures display format (if set shows all items not only failures, if set to long shows all cores).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MaxWarn" title="CheckDisk.checkdrivesize.MaxWarn"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxWarn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MaxCrit" title="CheckDisk.checkdrivesize.MaxCrit"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxCrit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a critical is returned.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MinWarn" title="CheckDisk.checkdrivesize.MinWarn"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinWarn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MinCrit" title="CheckDisk.checkdrivesize.MinCrit"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinCrit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a critical is returned.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MaxWarnFree" title="CheckDisk.checkdrivesize.MaxWarnFree"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxWarnFree</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MaxCritFree" title="CheckDisk.checkdrivesize.MaxCritFree"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxCritFree</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a critical is returned.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MinWarnFree" title="CheckDisk.checkdrivesize.MinWarnFree"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinWarnFree</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MinCritFree" title="CheckDisk.checkdrivesize.MinCritFree"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinCritFree</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a critical is returned.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MaxWarnUsed" title="CheckDisk.checkdrivesize.MaxWarnUsed"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxWarnUsed</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MaxCritUsed" title="CheckDisk.checkdrivesize.MaxCritUsed"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxCritUsed</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a critical is returned.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MinWarnUsed" title="CheckDisk.checkdrivesize.MinWarnUsed"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinWarnUsed</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkdrivesize.MinCritUsed" title="CheckDisk.checkdrivesize.MinCritUsed"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinCritUsed</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a critical is returned.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id3">
+<h4>Arguments<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.help">
+<code class="descname">help</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.help-pb">
+<code class="descname">help-pb</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.show-default">
+<code class="descname">show-default</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.help-short">
+<code class="descname">help-short</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.CheckAll">
+<code class="descname">CheckAll</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.CheckAll" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Checks all drives.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.CheckAllOthers">
+<code class="descname">CheckAllOthers</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.CheckAllOthers" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Checks all drives turns the drive option into an exclude option.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.Drive">
+<code class="descname">Drive</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.Drive" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The drives to check</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.FilterType">
+<code class="descname">FilterType</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.FilterType" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The type of drives to check fixed, remote, cdrom, ramdisk, removable</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.perf-unit">
+<code class="descname">perf-unit</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.perf-unit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Force performance data to use a given unit prevents scaling which can cause problems over time in some graphing solutions.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.ShowAll">
+<code class="descname">ShowAll</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.ShowAll" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Configures display format (if set shows all items not only failures, if set to long shows all cores).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MaxWarn">
+<code class="descname">MaxWarn</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MaxWarn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MaxCrit">
+<code class="descname">MaxCrit</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MaxCrit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MinWarn">
+<code class="descname">MinWarn</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MinWarn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MinCrit">
+<code class="descname">MinCrit</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MinCrit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MaxWarnFree">
+<code class="descname">MaxWarnFree</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MaxWarnFree" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MaxCritFree">
+<code class="descname">MaxCritFree</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MaxCritFree" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MinWarnFree">
+<code class="descname">MinWarnFree</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MinWarnFree" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MinCritFree">
+<code class="descname">MinCritFree</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MinCritFree" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MaxWarnUsed">
+<code class="descname">MaxWarnUsed</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MaxWarnUsed" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MaxCritUsed">
+<code class="descname">MaxCritUsed</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MaxCritUsed" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MinWarnUsed">
+<code class="descname">MinWarnUsed</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MinWarnUsed" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkdrivesize.MinCritUsed">
+<code class="descname">MinCritUsed</code><em class="property"> (CheckDisk, checkdrivesize)</em><a class="headerlink" href="#CheckDisk.checkdrivesize.MinCritUsed" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="checkfiles">
+<h3><a class="reference internal" href="#CheckDisk.checkfiles" title="CheckDisk.checkfiles"><code class="xref nscp nscp-query docutils literal"><span class="pre">checkfiles</span></code></a><a class="headerlink" href="#checkfiles" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="CheckDisk.checkfiles">
+<code class="descclassname">CheckDisk</code><code class="descname">checkfiles</code><dd></dd>Legacy version of check_drivesize<a class="headerlink" href="#CheckDisk.checkfiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkfiles.help" title="CheckDisk.checkfiles.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles.help-pb" title="CheckDisk.checkfiles.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkfiles.show-default" title="CheckDisk.checkfiles.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles.help-short" title="CheckDisk.checkfiles.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkfiles.syntax" title="CheckDisk.checkfiles.syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>Syntax for individual items (detail-syntax).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles.master-syntax" title="CheckDisk.checkfiles.master-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">master-syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>Syntax for top syntax (top-syntax).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkfiles.path" title="CheckDisk.checkfiles.path"><code class="xref nscp nscp-option docutils literal"><span class="pre">path</span></code></a></td>
+<td>&nbsp;</td>
+<td>The file or path to check</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles.pattern" title="CheckDisk.checkfiles.pattern"><code class="xref nscp nscp-option docutils literal"><span class="pre">pattern</span></code></a></td>
+<td>&nbsp;</td>
+<td>Deprecated and ignored</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkfiles.alias" title="CheckDisk.checkfiles.alias"><code class="xref nscp nscp-option docutils literal"><span class="pre">alias</span></code></a></td>
+<td>&nbsp;</td>
+<td>Deprecated and ignored</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles.debug" title="CheckDisk.checkfiles.debug"><code class="xref nscp nscp-option docutils literal"><span class="pre">debug</span></code></a></td>
+<td>N/A</td>
+<td>Debug</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkfiles.max-dir-depth" title="CheckDisk.checkfiles.max-dir-depth"><code class="xref nscp nscp-option docutils literal"><span class="pre">max-dir-depth</span></code></a></td>
+<td>&nbsp;</td>
+<td>The maximum level to recurse</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles.filter" title="CheckDisk.checkfiles.filter"><code class="xref nscp nscp-option docutils literal"><span class="pre">filter</span></code></a></td>
+<td>&nbsp;</td>
+<td>The filter to use when including files in the check</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkfiles.warn" title="CheckDisk.checkfiles.warn"><code class="xref nscp nscp-option docutils literal"><span class="pre">warn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Deprecated and ignored</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles.crit" title="CheckDisk.checkfiles.crit"><code class="xref nscp nscp-option docutils literal"><span class="pre">crit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Deprecated and ignored</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkfiles.MaxWarn" title="CheckDisk.checkfiles.MaxWarn"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxWarn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles.MaxCrit" title="CheckDisk.checkfiles.MaxCrit"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxCrit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a critical is returned.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckDisk.checkfiles.MinWarn" title="CheckDisk.checkfiles.MinWarn"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinWarn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckDisk.checkfiles.MinCrit" title="CheckDisk.checkfiles.MinCrit"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinCrit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a critical is returned.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id4">
+<h4>Arguments<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="CheckDisk.checkfiles.help">
+<code class="descname">help</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.help-pb">
+<code class="descname">help-pb</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.show-default">
+<code class="descname">show-default</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.help-short">
+<code class="descname">help-short</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.syntax">
+<code class="descname">syntax</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Syntax for individual items (detail-syntax).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.master-syntax">
+<code class="descname">master-syntax</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.master-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Syntax for top syntax (top-syntax).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.path">
+<code class="descname">path</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.path" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The file or path to check</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.pattern">
+<code class="descname">pattern</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.pattern" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Deprecated and ignored</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.alias">
+<code class="descname">alias</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.alias" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Deprecated and ignored</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.debug">
+<code class="descname">debug</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.debug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Debug</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.max-dir-depth">
+<code class="descname">max-dir-depth</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.max-dir-depth" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The maximum level to recurse</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.filter">
+<code class="descname">filter</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.filter" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The filter to use when including files in the check</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.warn">
+<code class="descname">warn</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.warn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Deprecated and ignored</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.crit">
+<code class="descname">crit</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.crit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Deprecated and ignored</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.MaxWarn">
+<code class="descname">MaxWarn</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.MaxWarn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.MaxCrit">
+<code class="descname">MaxCrit</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.MaxCrit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.MinWarn">
+<code class="descname">MinWarn</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.MinWarn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckDisk.checkfiles.MinCrit">
+<code class="descname">MinCrit</code><em class="property"> (CheckDisk, checkfiles)</em><a class="headerlink" href="#CheckDisk.checkfiles.MinCrit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">CheckDisk</span></code> &#8212; CheckDisk</a><ul>
+<li><a class="reference internal" href="#queries">Queries</a><ul>
+<li><a class="reference internal" href="#check-drivesize"><code class="docutils literal"><span class="pre">check_drivesize</span></code></a><ul>
+<li><a class="reference internal" href="#samples">Samples</a></li>
+<li><a class="reference internal" href="#arguments">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#check-files"><code class="docutils literal"><span class="pre">check_files</span></code></a><ul>
+<li><a class="reference internal" href="#id1">Samples</a></li>
+<li><a class="reference internal" href="#id2">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkdrivesize"><code class="docutils literal"><span class="pre">checkdrivesize</span></code></a><ul>
+<li><a class="reference internal" href="#id3">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkfiles"><code class="docutils literal"><span class="pre">checkfiles</span></code></a><ul>
+<li><a class="reference internal" href="#id4">Arguments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../check/CheckNSCP.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">CheckNSCP</span></code> &#8212; CheckNSCP</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="CheckEventLog.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">CheckEventLog</span></code> &#8212; CheckEventLog</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/reference/windows/CheckDisk.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="CheckEventLog.html" title="CheckEventLog — CheckEventLog"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../check/CheckNSCP.html" title="CheckNSCP — CheckNSCP"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

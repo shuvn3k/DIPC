@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using NSClient++ from nagios with check_nrpe &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Using NSClient++ from nagios" href="index.html" />
+    <link rel="next" title="Using NSClient++ from nagios with NSCA" href="nsca.html" />
+    <link rel="prev" title="Using NSClient++ from nagios with check_nt" href="check_nt.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nsca.html" title="Using NSClient++ from nagios with NSCA"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="check_nt.html" title="Using NSClient++ from nagios with check_nt"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >NSClient++ Tutorial</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Using NSClient++ from nagios</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-nsclient-from-nagios-with-check-nrpe">
+<span id="tutorial-nagios-nrpe"></span><h1>Using NSClient++ from nagios with check_nrpe<a class="headerlink" href="#using-nsclient-from-nagios-with-check-nrpe" title="Permalink to this headline">¶</a></h1>
+<img alt="../../_images/nagios-active-nrpe.png" src="../../_images/nagios-active-nrpe.png" />
+<p>NRPE is the preferred way over NSClient (check_nt) and you get the most out of NSClient++ choosing this mode (NSCA and what not will support the same commands but are more complex to setup).
+NRPE works much like NRPE for unix (if you are familiar with it) and in short you can say it relays a plugin request to a remote server. NRPE acts like a simple transport layer allowing remote execution. The difference between regular NRPE and NSClient++ is that NSClient++ has built-in checks.
+So with NSClient++ you get a lot of ready-to-use checks that wont require you to have scripts. But if you choose you can disable all &#8220;modules&#8221; and stick with a pure NRPE installation and only external scripts.</p>
+<div class="section" id="overview-of-nrpe">
+<h2>1. Overview of NRPE<a class="headerlink" href="#overview-of-nrpe" title="Permalink to this headline">¶</a></h2>
+<p>For those not familiar with NRPE (Nagios Remote Plugin Execution) here is a quick introduction.</p>
+<img alt="../../_images/nrpe-overview.png" src="../../_images/nrpe-overview.png" />
+<p>NRPE works much like SSH or telnet etc. It relays a command and awaits the result. In the above diagram what happens is:</p>
+<ol class="arabic simple">
+<li>Nagios executes check_nrpe with the proper arguments.</li>
+<li>NSClient++ receives the command to be executed</li>
+<li>NSClient++ will execute the command and get a result on the form of &lt;status&gt;, &lt;message&gt; and optionally &lt;performance data&gt;</li>
+<li>NSClient++ sends the result back to Nagios</li>
+<li>Nagios gets the result from check_nrpe (and uses it much like any other plugin)</li>
+</ol>
+<p>So in essence NRPE is merely a transport mechanism to send the result of a check command over the network.</p>
+</div>
+<div class="section" id="nagios-command-line">
+<h2>2. Nagios command line<a class="headerlink" href="#nagios-command-line" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nrpe-002.png" src="../../_images/nagios-active-nrpe-002.png" />
+<p>NRPE require you to install a special plug-in on your nagios server called NRPE. The unix-side of NRPE consists of a server and a client on nagios you only need the client so you can skip any &#8220;servers&#8221; or what not that it want to start when you install it.</p>
+<p>The client is (generally) called check_nrpe and works like so:</p>
+<div class="highlight-bat"><div class="highlight"><pre>.<span class="n">/check_nrpe</span> -H <span class="p">&lt;</span><span class="n">nsclient</span>++ server ip&gt; -c <span class="p">&lt;</span><span class="n">command</span>&gt; [-a <span class="p">&lt;</span><span class="n">a</span>&gt; <span class="p">&lt;</span><span class="n">list</span>&gt; <span class="p">&lt;</span><span class="n">of</span>&gt; <span class="p">&lt;</span><span class="n">arguments</span>&gt;]
+</pre></div>
+</div>
+<ul class="simple">
+<li>&lt;command&gt; = The command (script) you want to run (often this is a pre-built command from within NSClient++)</li>
+<li>&lt;a&gt; &lt;list&gt; &lt;of&gt; &lt;arguments&gt; = a list of arguments for the command.</li>
+</ul>
+<p>So the simplest way to see if things are a-working just run it without a command and you should get a response specifying the version of &#8220;NRPE&#8221; (in this case NSClient++) like so:</p>
+<div class="highlight-text"><div class="highlight"><pre>./check_nrpe -H &lt;nsclient++ server ip&gt;
+I (0.3.3.19 2008-07-02) seem to be doing fine...
+</pre></div>
+</div>
+<p>And again like in the NSClient example don&#8217;t worry if you get a timeout here since we have to configure NSClient++ before it actually works so this is expected.</p>
+</div>
+<div class="section" id="nsclient-configuration">
+<h2>3. NSClient++ configuration<a class="headerlink" href="#nsclient-configuration" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nrpe-001.png" src="../../_images/nagios-active-nrpe-001.png" />
+<p>Configuring NRPE is a bit more involved but not overly so.
+The first thing you need to do to get things working is add the NRPEServer module.</p>
+<div class="highlight-ini"><div class="highlight"><pre>[/modules]
+...
+NRPEServer = enabled
+...
+</pre></div>
+</div>
+<p>If you have not already done so (above) you also need to set which computers are allowed to query the agent.
+This is set either under the <a class="reference external" href="/settings/default">/settings/default</a> section (globally) or under the <a class="reference external" href="/settings/NRPE/server">/settings/NRPE/server</a> section (locally). If you when you configured NSClient above set this globally you are already set to go. If not the key you need to change is the allowed_hosts. There is no password for NRPE.</p>
+<ul class="simple">
+<li>allowed hosts = A list of addresses that is allowed to ask questions (i.e. your nagios ip).
+The result should look like this (assuming your nagios server ip address is 10.0.0.2):</li>
+</ul>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[/settings/default]</span>
+<span class="na">allowed hosts</span><span class="o">=</span><span class="s">10.0.0.2</span>
+</pre></div>
+</div>
+<p>&#8216;&#8217;&#8216;After this restart the service.&#8217;&#8216;&#8217;</p>
+<div class="highlight-bat"><div class="highlight"><pre>nscp service --stop
+nscp service --start
+... or ...
+net stop nscp
+net start nscp
+</pre></div>
+</div>
+<p>Now feel free to try the command line agent again and hopefully things should work out perfectly.
+Run the following command from your nagios server.</p>
+<div class="highlight-text"><div class="highlight"><pre>./check_nrpe -H 10.0.0.1
+I (0.3.3.19 2008-07-02) seem to be doing fine...
+</pre></div>
+</div>
+</div>
+<div class="section" id="finding-and-solving-problems">
+<h2>4. Finding and solving problems<a class="headerlink" href="#finding-and-solving-problems" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nrpe-003.png" src="../../_images/nagios-active-nrpe-003.png" />
+<p>A good way to find and solve problems is to run nsclient++ in &#8220;test&#8221; mode this is done by stopping the service and starting it in &#8220;test&#8221; mode.</p>
+<div class="highlight-text"><div class="highlight"><pre>nscp service --stop
+nscp test
+... test mode ... (quit with: exit)
+nscp service --start
+</pre></div>
+</div>
+<p>When in test mode you will get a lot of interesting log messages when things are happening so it is fairly simple to figure out what is wrong. So lets try this now:
+Start NSClient++ in test mode like so:</p>
+<div class="highlight-bat"><div class="highlight"><pre>nscp service --stop
+nscp test
+</pre></div>
+</div>
+<p>And you should see something along the following lines (it will look different depending on your setup):</p>
+<div class="highlight-text"><div class="highlight"><pre>Launching test mode - client mode
+d NSClient++.cpp(1106) Enabling debug mode...
+d NSClient++.cpp(494) Attempting to start NSCLient++ - 0.3.7.7 2009-07-05
+d NSClient++.cpp(897) Loading plugin: NRPE server (w/ SSL)...
+d \NRPEServer.cpp(121) Starting NRPE socket...
+l NSClient++.cpp(600) NSCLient++ - 0.3.7.7 2009-07-05 Started!
+d \Socket.h(675) Bound to: 0.0.0.0:5666
+l NSClient++.cpp(402) Using settings from: INI-file
+l NSClient++.cpp(403) Enter command to inject or exit to terminate...
+</pre></div>
+</div>
+<p>Now you can run the the command again from Nagios like so:</p>
+<div class="highlight-text"><div class="highlight"><pre>./check_nrpe -H 10.0.0.1
+I (0.3.7.7 2009-07-05) seem to be doing fine...
+</pre></div>
+</div>
+<p>And if you check the log of NSClient++ /test you will this time not see anything and this is because the &#8220;check version&#8221; is an internal command so lets try with something slightly more interesting:</p>
+<div class="highlight-text"><div class="highlight"><pre>./check_nrpe -H 10.0.0.1 -c foobar
+UNKNOWN: No handler for that command
+</pre></div>
+</div>
+<p>And don&#8217;t worry there is no foobar command but we will see how this looks in NSClient++</p>
+<div class="highlight-text"><div class="highlight"><pre>d NSClient++.cpp(1034) Injecting: foobar:
+l NSClient++.cpp(1085) No handler for command: &#39;foobar&#39;
+l \NSCHelper.cpp(238) No handler for command &#39;foobar&#39;.
+</pre></div>
+</div>
+<p>We shall get back a bit to this later on when we have configure NSClient++ more so lets leave this for now.</p>
+</div>
+<div class="section" id="nsclient-configuration-revisited">
+<h2>5. NSClient++ configuration (revisited)<a class="headerlink" href="#nsclient-configuration-revisited" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nrpe-001.png" src="../../_images/nagios-active-nrpe-001.png" />
+<p>As we said before it is a bit more involved to configure NRPE and yet thus far it has actually been simpler?
+This is because we have not configured anything yet all we can do now is talk to NSClient++ but not actually use it. So in this section we shall cover the basics and first off are some of the configuration options available for NRPE</p>
+<div class="section" id="nrpe-specific-setting-in-nsclient">
+<h3>5.1 NRPE specific setting in NSClient++<a class="headerlink" href="#nrpe-specific-setting-in-nsclient" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul>
+<li><p class="first">use ssl
+If this is true we will use SSL encryption on the transport. <strong>Notice</strong> this flag has to be the same on both ends or you will end up with strange errors. The flag is set on check_nrpe with the -n option (if you use -n no SSL will be used).</p>
+</li>
+<li><p class="first">allow arguments
+Since arguments can be potentially dangerous (it allows your users to control the execution) there is a flag (which defaults to off) to enable arguments. So if you plan on configure NSClient++ from the Nagios end you need to enable this. <strong>But be warned this is a security issue you need to think about</strong>. If you do not want to allow arguments you can instead configure all checks in the nsclient.ini file and just execute the aliases from nagios.</p>
+<p>One important issue with the <strong>allow_arguments</strong> is that there are more then one! &#8216;&#8217;&#8216;Yes, more then one! &#8216;&#8217;&#8217; The reason for this is that you can allow arguments from NRPE and you can allow arguments for external scripts (it is not the same option) which might seem a bit confusing at first. But actually quite nice. Using arguments for external scripts can potentially be more dangerous than allowing them from NRPE (internal commands).</p>
+</li>
+<li><p class="first">allow nasty characters</p>
+<p>This flag allows arguments to contain &#8220;dangerous&#8221; characters such as redirection and pipe (&lt;&gt;|) and makes things a tad more dangerous. But if you decide to use arguments you most likely want to use this flag as well. <strong>But again this is a security risk</strong>. Please also note this is also available for both NRPE and external scripts.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>So this if you enable this in the INI file you will end up with something like this (extract):</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[/settings/NRPE/server]</span>
+
+<span class="c1">; COMMAND ARGUMENT PROCESSING - This option determines whether or not the we will allow clients to specify arguments to commands that are executed.</span>
+<span class="na">allow arguments</span> <span class="o">=</span> <span class="s">true</span>
+
+<span class="c1">; COMMAND ALLOW NASTY META CHARS - This option determines whether or not the we will allow clients to specify nasty (as in |`&amp;&gt;&lt;&#39;&quot;\[]{}) characters in arguments.</span>
+<span class="na">allow nasty characters</span> <span class="o">=</span> <span class="s">false</span>
+
+<span class="c1">; ALLOWED HOSTS - A comaseparated list of allowed hosts. You can use netmasks (/ syntax) or * to create ranges. parent for this key is found under: /settings/default this is marked as advanced in favour of the parent.</span>
+<span class="na">allowed hosts</span> <span class="o">=</span> <span class="s">192.168.0.1/24</span>
+
+<span class="c1">; PORT NUMBER - Port to use for NRPE.</span>
+<span class="na">port</span> <span class="o">=</span> <span class="s">5666</span>
+</pre></div>
+</div>
+<p>There are a lot of other options as well but these are the most used ones.</p>
+</div>
+<div class="section" id="modules">
+<h3>5.2 Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h3>
+<p>The other thing which you should configure is which modules to use. There is (at time of writing) 16 modules to choose from of which 9 will give you more &#8220;checks to run&#8221; so choosing which you need can be a bit of work. Here we shall start out with the basic ones and for details on the rest check out the <a class="reference external" href="CheckCommands">Modules section</a> in the wiki.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="60%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Module</th>
+<th class="head">Description</th>
+<th class="head">Commands</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>CheckSystem</td>
+<td>Handles many system checks</td>
+<td>CheckCPU, CheckMEM etc</td>
+</tr>
+<tr class="row-odd"><td>CheckDisk</td>
+<td>Handles Disk related checks</td>
+<td>CheckDisk</td>
+</tr>
+<tr class="row-even"><td>CheckExternalScripts</td>
+<td>Handles aliases (which is what we will use) and external scripts.</td>
+<td>N/A</td>
+</tr>
+<tr class="row-odd"><td>NRPEServer</td>
+<td>Listens and responds to incoming requests from Nagios via NRPE</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p>The finished modules section from the INI file will look like so:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[/modules]</span>
+<span class="na">CheckSystem</span><span class="o">=</span><span class="s">enabled</span>
+<span class="na">CheckDisk</span><span class="o">=</span><span class="s">enabled</span>
+<span class="na">CheckExternalScripts</span><span class="o">=</span><span class="s">enabled</span>
+<span class="na">NRPEServer</span><span class="o">=</span><span class="s">enabled</span>
+</pre></div>
+</div>
+<p>Now we have done some basic setup of NSClient++ and we can continue to try using it a bit more before we continue with configuring Nagios.</p>
+</div>
+</div>
+<div class="section" id="nagios-command-line-revisited">
+<h2>6. Nagios command line (revisited)<a class="headerlink" href="#nagios-command-line-revisited" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nrpe-002.png" src="../../_images/nagios-active-nrpe-002.png" />
+<p>Now that we have the agent up and running (if not probably want to go back over the previous sections to get it up and running before reading on) what can we do with it?. From here on we will assume you have allow arguments and metachars enabled since it makes it simpler to try things out <strong>BEWARE</strong> that there are security implications to this so you might wanna read up before rolling this configuration into production.</p>
+<p>As we stated before check_nrpe is a lot more powerful than the legacy check_nt and there is a lot of built in commands as well as a lot of external ones you can use.
+Lets start with a simple one CheckCPU and see how to use it.</p>
+<p>If we check the docs for it it has an example like so:</p>
+<div class="highlight-text"><div class="highlight"><pre>checkCPU warn=80 crit=90 time=20m time=10s time=4
+CPU Load ok.|&#39;20m average&#39;=11%;80;90; &#39;10s average&#39;=7%;80;90; &#39;4 average&#39;=10%;80;90;
+</pre></div>
+</div>
+<p>Now this is a &#8220;nscp test mode command&#8221; so it is not usable in it self for you instead you need to change it slightly.
+The first word is the command and the rest are arguments.
+check_nrpe has two options for settings commands (-c) and arguments (-a) and is used like so:</p>
+<div class="highlight-bat"><div class="highlight"><pre>check_nrpe ... -c <span class="p">&lt;</span><span class="n">command</span>&gt; [-a <span class="p">&lt;</span><span class="n">argument</span>&gt; <span class="p">&lt;</span><span class="n">argument</span>&gt; <span class="p">&lt;</span><span class="n">argument</span>&gt;]
+</pre></div>
+</div>
+<p>in this case (CheckCPU) this translates to:</p>
+<div class="highlight-text"><div class="highlight"><pre>check_nrpe ... -c CheckCPU -a warn=80 crit=90 time=20m time=10s time=4
+CPU Load ok.|&#39;20m average&#39;=11%;80;90; &#39;10s average&#39;=7%;80;90; &#39;4 average&#39;=10%;80;90;
+</pre></div>
+</div>
+<p>And that is as hard as it gets all you need to do is figure out which arguments you want to use for the command and stack them all in a long line.</p>
+</div>
+<div class="section" id="nagios-configuration">
+<h2>7. Nagios configuration<a class="headerlink" href="#nagios-configuration" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nrpe-002.png" src="../../_images/nagios-active-nrpe-002.png" />
+<div class="section" id="introduction">
+<h3>7.1 Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<img alt="../../_images/nagios-configuration-inheritance.png" src="../../_images/nagios-configuration-inheritance.png" />
+<p>Nagios configuration is in itself a whole chapter and this is just a quick peek on how you can do things. First off there are a few concepts to understand:</p>
+<ul class="simple">
+<li>templates are the same as the corresponding item but they have a flag register = 0 which makes them &#8220;unlistable items&#8221;</li>
+<li>services are essentially checks (is check CPU)</li>
+<li>hosts are essentially computers</li>
+<li>groups are an important concept which I ignore here for simplicity (I recommend you use it)</li>
+</ul>
+<p>The configuration is at the end layer quite simple you have a &#8220;check&#8221; and a &#8220;host&#8221; and you connect them with a service. Like I show at the bottom line in the diagram above. Whats makes this a tad more complicated is that you can inherit things from a &#8220;parent&#8221; definition. Which is what I show with arrows (bottom to top) above. The templates with dashed lines are the base templates which all services and hosts inherit.</p>
+</div>
+<div class="section" id="template">
+<h3>7.2 Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<p>First, its best practice to create a new template for each different type of host you&#8217;ll be monitoring. Let&#8217;s create a new template for windows servers.</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="nx">define</span> <span class="nx">host</span><span class="p">{</span>
+  <span class="nx">name</span>                                <span class="nx">tpl</span><span class="o">-</span><span class="nx">windows</span><span class="o">-</span><span class="nx">servers</span> <span class="p">;</span> <span class="nx">Name</span> <span class="nx">of</span> <span class="k">this</span> <span class="nx">template</span>
+  <span class="nx">use</span>                                 <span class="nx">generic</span><span class="o">-</span><span class="nx">host</span> <span class="p">;</span> <span class="nx">Inherit</span> <span class="k">default</span> <span class="nx">values</span>
+  <span class="nx">check_period</span>                <span class="mi">24</span><span class="nx">x7</span>
+  <span class="nx">check_interval</span>              <span class="mi">5</span>
+  <span class="nx">retry_interval</span>              <span class="mi">1</span>
+  <span class="nx">max_check_attempts</span>  <span class="mi">10</span>
+  <span class="nx">check_command</span>               <span class="nx">check</span><span class="o">-</span><span class="nx">host</span><span class="o">-</span><span class="nx">alive</span>
+  <span class="nx">notification_period</span> <span class="mi">24</span><span class="nx">x7</span>
+  <span class="nx">notification_interval</span>       <span class="mi">30</span>
+  <span class="nx">notification_options</span>        <span class="nx">d</span><span class="p">,</span><span class="nx">r</span>
+  <span class="nx">contact_groups</span>              <span class="nx">admins</span>
+  <span class="nx">register</span>                    <span class="mi">0</span> <span class="p">;</span> <span class="nx">DONT</span> <span class="nx">REGISTER</span> <span class="nx">THIS</span> <span class="o">-</span> <span class="nx">ITS</span> <span class="nx">A</span> <span class="nx">TEMPLATE</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Notice that the tpl-windows-servers template definition is inheriting default values from the generic-host template, which is
+defined in the sample localhost.cfg file that gets installed when you follow the Nagios quickstart installation guide.</p>
+</div>
+<div class="section" id="host-definition">
+<h3>7.3 Host definition<a class="headerlink" href="#host-definition" title="Permalink to this headline">¶</a></h3>
+<p>Next we need to define a new host for the remote windows server that references the newly created tpl-windows-servers host template.</p>
+<div class="highlight-js"><div class="highlight"><pre>define host{
+  use                 tpl-windows-servers ; Inherit default values from a template
+  host_name   windowshost ; The name we&#39;re giving to this server
+  alias               My First Windows Server ; A longer name for the server
+  address             10.0.0.2 ; IP address of the server
+}
+</pre></div>
+</div>
+<p>Defining a service for monitoring the remote Windows server.</p>
+</div>
+<div class="section" id="service-definitions">
+<h3>7.4 Service definitions<a class="headerlink" href="#service-definitions" title="Permalink to this headline">¶</a></h3>
+<p>The following service will monitor the CPU load on the remote host. The &#8220;alias_cpu&#8221; argument which is passed to the check_nrpe command definition tells NSClient++ to run the &#8220;alias_cpu&#8221; command as defined in the alias section of the nsclient.ini file.</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="nx">define</span> <span class="nx">service</span><span class="p">{</span>
+  <span class="nx">use</span>                 <span class="nx">generic</span><span class="o">-</span><span class="nx">service</span>
+  <span class="nx">host_name</span>           <span class="nx">windowshost</span>
+  <span class="nx">service_description</span> <span class="nx">CPU</span> <span class="nx">Load</span>
+  <span class="nx">check_command</span>               <span class="nx">check_nrpe</span><span class="o">!</span><span class="nx">alias_cpu</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following service will monitor the free drive space on /dev/hda1 on the remote host.</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="nx">define</span> <span class="nx">service</span><span class="p">{</span>
+  <span class="nx">use</span>                         <span class="nx">generic</span><span class="o">-</span><span class="nx">service</span>
+  <span class="nx">host_name</span>           <span class="nx">windowshost</span>
+  <span class="nx">service_description</span> <span class="nx">Free</span> <span class="nx">Space</span>
+  <span class="nx">check_command</span>               <span class="nx">check_nrpe</span><span class="o">!</span><span class="nx">alias_disk</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="where-to-go-next">
+<h2>8. Where to go next<a class="headerlink" href="#where-to-go-next" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nrpe.png" src="../../_images/nagios-active-nrpe.png" />
+<p>This is of cores not the end now you need to check out what checks you want to use run on your servers.
+There is a lot of built-in checks but there are a lot more external scripts you can use and download from for instance <a class="reference external" href="http://www.monitoringexchange.org/">monitoring exchange</a> or the new <a class="reference external" href="http://exchange.nagios.org/">nagios exchange</a>.</p>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using NSClient++ from nagios with check_nrpe</a><ul>
+<li><a class="reference internal" href="#overview-of-nrpe">1. Overview of NRPE</a></li>
+<li><a class="reference internal" href="#nagios-command-line">2. Nagios command line</a></li>
+<li><a class="reference internal" href="#nsclient-configuration">3. NSClient++ configuration</a></li>
+<li><a class="reference internal" href="#finding-and-solving-problems">4. Finding and solving problems</a></li>
+<li><a class="reference internal" href="#nsclient-configuration-revisited">5. NSClient++ configuration (revisited)</a><ul>
+<li><a class="reference internal" href="#nrpe-specific-setting-in-nsclient">5.1 NRPE specific setting in NSClient++</a></li>
+<li><a class="reference internal" href="#modules">5.2 Modules</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nagios-command-line-revisited">6. Nagios command line (revisited)</a></li>
+<li><a class="reference internal" href="#nagios-configuration">7. Nagios configuration</a><ul>
+<li><a class="reference internal" href="#introduction">7.1 Introduction</a></li>
+<li><a class="reference internal" href="#template">7.2 Template</a></li>
+<li><a class="reference internal" href="#host-definition">7.3 Host definition</a></li>
+<li><a class="reference internal" href="#service-definitions">7.4 Service definitions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#where-to-go-next">8. Where to go next</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="check_nt.html"
+                        title="previous chapter">Using NSClient++ from nagios with check_nt</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nsca.html"
+                        title="next chapter">Using NSClient++ from nagios with NSCA</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/tutorial/nagios/nrpe.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nsca.html" title="Using NSClient++ from nagios with NSCA"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="check_nt.html" title="Using NSClient++ from nagios with check_nt"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >NSClient++ Tutorial</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Using NSClient++ from nagios</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

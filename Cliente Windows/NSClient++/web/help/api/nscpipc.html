@@ -1,0 +1,439 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>NSCPIPC &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../index.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <script type="text/javascript" src="../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="nscpipc">
+<h1>NSCPIPC<a class="headerlink" href="#nscpipc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="common">
+<h2>Common<a class="headerlink" href="#common" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="NSCPIPC.Common">
+<em class="property">class </em><code class="descclassname">NSCPIPC.</code><code class="descname">Common</code><a class="headerlink" href="#NSCPIPC.Common" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="NSCPIPC.Common.Version">
+<code class="descname">Version</code><a class="headerlink" href="#NSCPIPC.Common.Version" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>VERSION_1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.Common.MessageTypes">
+<code class="descname">MessageTypes</code><a class="headerlink" href="#NSCPIPC.Common.MessageTypes" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QUERY_REQUEST</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>QUERY_RESPONSE</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>EXEC_REQUEST</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>EXEC_RESPONSE</td>
+<td>4</td>
+</tr>
+<tr class="row-even"><td>SUBMIT_REQUEST</td>
+<td>5</td>
+</tr>
+<tr class="row-odd"><td>SUBMIT_RESPONSE</td>
+<td>6</td>
+</tr>
+<tr class="row-even"><td>SETTINGS_REQUEST</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>SETTINGS_RESPONSE</td>
+<td>11</td>
+</tr>
+<tr class="row-even"><td>REGISTRY_REQUEST</td>
+<td>12</td>
+</tr>
+<tr class="row-odd"><td>REGISTRY_RESPONSE</td>
+<td>13</td>
+</tr>
+<tr class="row-even"><td>ERROR_MESSAGE</td>
+<td>99</td>
+</tr>
+<tr class="row-odd"><td>CUSTOM_MESSAGE</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#NSCPIPC.Common.Header" title="NSCPIPC.Common.Header"><code class="xref py py-class docutils literal"><span class="pre">NSCPIPC.Common.Header</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="header">
+<h3>Header<a class="headerlink" href="#header" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="NSCPIPC.Common.Header">
+<em class="property">class </em><code class="descclassname">NSCPIPC.Common.</code><code class="descname">Header</code><a class="headerlink" href="#NSCPIPC.Common.Header" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="NSCPIPC.Common.Header.version">
+<code class="descname">version</code><a class="headerlink" href="#NSCPIPC.Common.Header.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.Common.Header.type">
+<code class="descname">type</code><a class="headerlink" href="#NSCPIPC.Common.Header.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.Common.Header.cookie">
+<code class="descname">cookie</code><a class="headerlink" href="#NSCPIPC.Common.Header.cookie" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.Common.Header.sequence">
+<code class="descname">sequence</code><a class="headerlink" href="#NSCPIPC.Common.Header.sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="headermessage">
+<h2>HeaderMessage<a class="headerlink" href="#headermessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="NSCPIPC.HeaderMessage">
+<em class="property">class </em><code class="descclassname">NSCPIPC.</code><code class="descname">HeaderMessage</code><a class="headerlink" href="#NSCPIPC.HeaderMessage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="NSCPIPC.HeaderMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#NSCPIPC.HeaderMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.HeaderMessage.type">
+<code class="descname">type</code><a class="headerlink" href="#NSCPIPC.HeaderMessage.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.HeaderMessage.custom_type">
+<code class="descname">custom_type</code><a class="headerlink" href="#NSCPIPC.HeaderMessage.custom_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.HeaderMessage.message">
+<code class="descname">message</code><a class="headerlink" href="#NSCPIPC.HeaderMessage.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="payloadmessage">
+<h2>PayloadMessage<a class="headerlink" href="#payloadmessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="NSCPIPC.PayloadMessage">
+<em class="property">class </em><code class="descclassname">NSCPIPC.</code><code class="descname">PayloadMessage</code><a class="headerlink" href="#NSCPIPC.PayloadMessage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="NSCPIPC.PayloadMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#NSCPIPC.PayloadMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.PayloadMessage.type">
+<code class="descname">type</code><a class="headerlink" href="#NSCPIPC.PayloadMessage.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.PayloadMessage.message">
+<code class="descname">message</code><a class="headerlink" href="#NSCPIPC.PayloadMessage.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="errormessage">
+<h2>ErrorMessage<a class="headerlink" href="#errormessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="NSCPIPC.ErrorMessage">
+<em class="property">class </em><code class="descclassname">NSCPIPC.</code><code class="descname">ErrorMessage</code><a class="headerlink" href="#NSCPIPC.ErrorMessage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.error">
+<code class="descname">error</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.sender">
+<code class="descname">sender</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.sender" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.recipient">
+<code class="descname">recipient</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.recipient" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.request_id">
+<code class="descname">request_id</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.request_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#NSCPIPC.ErrorMessage.Message" title="NSCPIPC.ErrorMessage.Message"><code class="xref py py-class docutils literal"><span class="pre">NSCPIPC.ErrorMessage.Message</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="message">
+<h3>Message<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="NSCPIPC.ErrorMessage.Message">
+<em class="property">class </em><code class="descclassname">NSCPIPC.ErrorMessage.</code><code class="descname">Message</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.Message" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.Message.Severity">
+<code class="descname">Severity</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.Message.Severity" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>IS_OK</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>HAS_WARNINGS</td>
+<td>5</td>
+</tr>
+<tr class="row-even"><td>IS_WARNING</td>
+<td>6</td>
+</tr>
+<tr class="row-odd"><td>HAS_ERRRORS</td>
+<td>7</td>
+</tr>
+<tr class="row-even"><td>IS_ERRROR</td>
+<td>8</td>
+</tr>
+<tr class="row-odd"><td>IS_FATAL</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.Message.line">
+<code class="descname">line</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.Message.line" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.Message.date">
+<code class="descname">date</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.Message.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.Message.severity">
+<code class="descname">severity</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.Message.severity" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.Message.message">
+<code class="descname">message</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.Message.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="NSCPIPC.ErrorMessage.Message.details">
+<code class="descname">details</code><a class="headerlink" href="#NSCPIPC.ErrorMessage.Message.details" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">NSCPIPC</a><ul>
+<li><a class="reference internal" href="#common">Common</a><ul>
+<li><a class="reference internal" href="#header">Header</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#headermessage">HeaderMessage</a></li>
+<li><a class="reference internal" href="#payloadmessage">PayloadMessage</a></li>
+<li><a class="reference internal" href="#errormessage">ErrorMessage</a><ul>
+<li><a class="reference internal" href="#message">Message</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../bugs.html">Report a Bug</a></li>
+  <li><a href="../_sources/api/nscpipc.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

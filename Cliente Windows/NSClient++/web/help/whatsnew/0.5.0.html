@@ -1,0 +1,562 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>What’s New in NSClient++ 0.5.0 &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../index.html" />
+    <link rel="up" title="What’s New in NSClient++" href="index.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="What’s New in NSClient++ 0.4.4" href="0.4.4.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <script type="text/javascript" src="../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="changelog.html" title="Changelog"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="0.4.4.html" title="What’s New in NSClient++ 0.4.4"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">What&#8217;s New in NSClient++</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="what-s-new-in-nsclient-0-5-0">
+<h1>What&#8217;s New in NSClient++ 0.5.0<a class="headerlink" href="#what-s-new-in-nsclient-0-5-0" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Michael Medin</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The main goals of the 0.5.0 is t make NSClient++ easier to use and more future proof.</p>
+<blockquote>
+<div><ul class="simple">
+<li>New and improved WebUI</li>
+<li>Metrics support</li>
+<li>Improved clients and better support for graphite et.al.</li>
+<li>Fixed count in filters which was not working before</li>
+<li>Added floating point number support to filters</li>
+<li>Numerous bugfixes and minor enhancements</li>
+</ul>
+</div></blockquote>
+<p><strong>PLEASE NOTE</strong> NRPE has been changed (from 0.4.3), for details read below.</p>
+</div>
+<div class="section" id="new-and-improved-webui">
+<h2>New and improved WebUI<a class="headerlink" href="#new-and-improved-webui" title="Permalink to this headline">¶</a></h2>
+<p>While I really loved the new WebUI in 0.4.3 it is much a proof of concept. I have in 0.5.0 reworked this to be much more feature complete and usable but more importatly (for me) better architected.
+The WebUI is now I think ready for prime time and will probably make configuring NSClient++ much much simpler.
+A side effect of the new WebUI is the REST support which NSClient++ now has meaning you can now check/configure/* NSClient++ using a REST API.</p>
+</div>
+<div class="section" id="metrics">
+<h2>Metrics<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h2>
+<p>While metrics might seem like a dumbed down check command (as it lacks the checks) it is actually the foundation of there next generation of NSClient++.
+But for end-users the main goal right now is that Graphite and Collec-t becomes much simpler.
+In the future it will also allow for checking compound metrics and other advanced things which is difficult to do today.</p>
+</div>
+<div class="section" id="improved-clients">
+<h2>Improved clients<a class="headerlink" href="#improved-clients" title="Permalink to this headline">¶</a></h2>
+<p>The client for instance check_nrpe was a bit buggy in 0.4.4 and 0.4.3. They have been rewritten from scratch and work much more smoothly now.
+They also work in many instance where before they did not for instance graphite now works.</p>
+</div>
+<div class="section" id="floating-point-support">
+<h2>Floating point support<a class="headerlink" href="#floating-point-support" title="Permalink to this headline">¶</a></h2>
+<p>Another small but important change is allowing floating point support in filters the only real benefit of this currently is that you can specify 2.3G as well as check_pdh where you can now check floating point counters.
+But as this required a major overhaul of the filter framework it has been long in the making and another important milestone.</p>
+</div>
+<div class="section" id="filtering-on-count">
+<h2>Filtering on count<a class="headerlink" href="#filtering-on-count" title="Permalink to this headline">¶</a></h2>
+<p>count has been a pain for many people as it accidentaly broke in 0.4.3. The problem was that the filter evaluates count on every item this means count &lt; 5 will always be true as the first time count is always 1.
+This has been fixed and in many cases it will just work.
+There is however a case when you need to change your filter and that is when you check BOTH count and a value.
+For instance the following will not work: &#8220;count &lt; 5 and load &gt; 20%&#8221;. The problem is that count is not avalible when we check load.
+Thus &#8220;the first core&#8221; ends up again in an impossible state count is unknown and once count is known the various cou values are no longer avalible.
+To work around this you can splt them up into multiple filters like so: &#8220;filter=count&lt;5&#8221; &#8220;filter=load&gt;20%&#8221;.</p>
+</div>
+<div class="section" id="breaking-changes">
+<h2>Breaking changes<a class="headerlink" href="#breaking-changes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>check_eventlog: Eventlog rendering failures are now returned as messages instead of nsclient++ log messages</li>
+<li>check_eventlog: Change the default eventlog command to set warnings for warning in eventlog and crit for errors (instead of using count)</li>
+<li>check_drivesize: default check only checks mounted drives</li>
+<li>External Scripts: #238 Added killer so processes are killed when NSClient++ exits</li>
+<li>check_tasksched: Renamed status to task_status as it clashes with regular status (Fixed #170)</li>
+<li>check_service: removed trigger detection from default service state Fixes #249
+I think this causes more confusion then good so for people who want this please do it manually instead... i.e. add &#8220;and is_trigger = 0&#8221;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="bugfixes-enhancements">
+<h2>Bugfixes enhancements<a class="headerlink" href="#bugfixes-enhancements" title="Permalink to this headline">¶</a></h2>
+<p>The full list of changes (sorted by contex) can be found here:</p>
+<div class="section" id="additions">
+<h3>Additions<a class="headerlink" href="#additions" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>New command: check_and_forward to run a check forward check results as passive data
+check_and_forward command=check_cpu target=NSCA</li>
+<li>New command check_nscp_version to check the NSClient++ version</li>
+<li>New experimental command: check_network</li>
+<li>New command check_ping (CheckNet module)</li>
+<li>New concept metrics</li>
+<li>New Module and check: check_nscp to check nscp via REST</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="check-commands">
+<h3>Check commands<a class="headerlink" href="#check-commands" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>filters and checks (global)</dt>
+<dd><ul class="first last simple">
+<li>Added support for both g and G in size filters</li>
+<li>Added total=all to have total object match all items regardless of if they match the filter or not.</li>
+<li>Added escape-html flag to all check commands and escape html option to all real time filters.</li>
+<li>Added multiple filter/warn/crit expressions to allow using count separate from items thresholds</li>
+<li>Fixed #297 like not ignoring case when comparing strings in filters</li>
+<li>filters: Fixed #292 Unicode support for filters</li>
+<li>Moved filter object handling inside filter engine</li>
+<li>Fixed #294: count not working properly when used together with a regular check</li>
+<li>Fixed #280 parsing filters with large numbers</li>
+<li>Improved help and documentation</li>
+<li>Fixed #117 invalid perf syntax when specifying none</li>
+<li>Fixed #201 negative perf data in checks</li>
+<li>Fixed potential issue with time expressions which are empty</li>
+<li>Fixed #114 issue with empty-state which was ignored</li>
+</ul>
+</dd>
+<dt>check_drivesize:</dt>
+<dd><ul class="first last simple">
+<li>Added ignore-unreadable which was apparently removed at some point, new behavior as it uses the drive flags to determine status</li>
+<li>Added support for check_drivesize exclude=c and exclude=d: to make backwards compatibility better</li>
+<li>Added support for parsing floating point numbers in size units (i.e. &#8220;warn=free &gt; 2.5G&#8221;)</li>
+<li>Added ignore-unreadable which was apparently removed at some point, new behavior as it uses the drive flags to determine status</li>
+<li>Possible fix for #265 Added drive flags to filter and distinguish between drive characteristics
+New flags for filters and syntax are: hotplug, removable, readable, writable and erasable</li>
+<li>Fixed #123 CheckAllOthers</li>
+<li>Improved errors and logging</li>
+<li>Possible fix for #265 Added drive flags to filter and distinguish between drive characteristics</li>
+</ul>
+</dd>
+<dt>check_pdh:</dt>
+<dd><ul class="first last simple">
+<li>Added float support to check_pdh</li>
+<li>Fixed indexes expansion for check_pdh</li>
+<li>Fixed reload of counters</li>
+<li>Fixed some PDH issues and improved error reporting</li>
+<li>Fixed #296 and #310 compatibility issue with checkCounter and type=double</li>
+<li>Fixed #272 floating point performance data</li>
+</ul>
+</dd>
+<dt>check_eventlog:</dt>
+<dd><ul class="first last simple">
+<li>Added task, keywords GUID support for eventlog filters</li>
+<li>#204 Fixed message rendering for eventlog messages</li>
+<li>#204 Added support for modern API to real time eventlogs</li>
+<li>#204 Fixed int to string conversion filter issue</li>
+<li>Improved eventlog cli to support listing tasks and keywords</li>
+</ul>
+</dd>
+<dt>check_log_files:</dt>
+<dd><ul class="first last simple">
+<li>Added support for space and strings in column split/line split</li>
+<li>Fixed #198 CheckLogFIle not working if files does not exist on startup</li>
+<li>Fixed CheckLogFIle realtime</li>
+</ul>
+</dd>
+<dt>check_files:</dt>
+<dd><ul class="first last simple">
+<li>Added support for showing file dates in local time (not just UTC)</li>
+<li>Fixed #231 added filter on folder and file:
+check_files path=c:/source/py &#8220;filter=type = &#8216;file&#8217;&#8221; show-all &#8220;detail-syntax=%(path)/%(file): %(type)&#8221;</li>
+<li>Fixed check_files empty message to say files not drives.</li>
+</ul>
+</dd>
+<dt>check_tasksched:</dt>
+<dd><ul class="first last simple">
+<li>Fixed #274 Added has_run to check_tasksched</li>
+<li>Fix for #215 added new option to check_tasksched to force using the old api
+check_tasksched force-old</li>
+</ul>
+</dd>
+<dt>check_uptime:</dt>
+<dd><ul class="first last simple">
+<li>Fixed missing return data in check_uptime</li>
+</ul>
+</dd>
+<dt>check_service:</dt>
+<dd><ul class="first last simple">
+<li>Added support for classifying service and filtering services based on classification</li>
+<li>#131 Added support for service=&lt;service description&gt; to check_service</li>
+<li>Removed trigger detection from default service state Fixes #249
+I think this causes more confusion then good so foe people who want this please do it manually instead... i.e. add &#8220;and is_trigger = 0&#8221;</li>
+<li>Fixed #130 missing perf data on check_service (intentionally no perf for &#8220;all services&#8221; as that is a long list)</li>
+</ul>
+</dd>
+<dt>check_process:</dt>
+<dd><ul class="first last simple">
+<li>Added total to check_process</li>
+</ul>
+</dd>
+<dt>check_wmi:</dt>
+<dd><ul class="first last simple">
+<li>improved error handling for wmi queries</li>
+</ul>
+</dd>
+<dt>check_always_ok:</dt>
+<dd><ul class="first last simple">
+<li>Fixed missing error for check_always_ok when command failed</li>
+</ul>
+</dd>
+<dt>check_multi:</dt>
+<dd><ul class="first last simple">
+<li>Fixed #301 check_multi does not parse qouted commands properly (possibly breaking change)</li>
+</ul>
+</dd>
+<dt>check_nscp:</dt>
+<dd><ul class="first last simple">
+<li>Added SSl support and general fixes to check_nscp (check_remote_nscp)</li>
+<li>Added preliminary REST client</li>
+</ul>
+</dd>
+<dt>check_ping:</dt>
+<dd><ul class="first last simple">
+<li>Fixed #140 check_ping syntax string</li>
+</ul>
+</dd>
+<dt>scheduler:</dt>
+<dd><ul class="first last simple">
+<li>Added support for cron statements: schedule = 47 * * * *</li>
+<li>Fixed scheduler reload not resetting old schedules</li>
+<li>Change so scheduler logs actual file sinstead of wrapper.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="scripts">
+<h3>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>External Scripts:</dt>
+<dd><ul class="first last simple">
+<li>Added option capture output to external script to disable output capture and handled inheritance (Fixes #232)</li>
+<li>Added -noprofile to powershell script wrapper (#207)</li>
+<li>Added ability to run visual processes in the UI session.
+Two new keywords: display controls if the process is showed and session controls which process the session is run in.</li>
+<li>Added support for %ARGS% as well as $ARGS$</li>
+<li>Fixed #223 broken %ARGS% with the $ARGS$ fix</li>
+<li>Fixed #207 Return error when powershell script not found</li>
+<li>Fixed #196 missing version</li>
+<li>Fixed #196 uppercase aliases not working</li>
+<li>Improved security when external scripts fails
+command lines which may contain password are no longer returned</li>
+</ul>
+</dd>
+<dt>PythonScript:</dt>
+<dd><ul class="first last simple">
+<li>Added target_mode flag to exec to diverge between targeted commands and generic ones.</li>
+<li>Fixed sample python script cli</li>
+<li>Fixed exec alias in python script cli</li>
+<li>Fixed python to string (will log better when it cant convert to string)</li>
+<li>Fixed so python script will unregister its commands on reload</li>
+</ul>
+</dd>
+<dt>bundled scripts:</dt>
+<dd><ul class="first last simple">
+<li>Fixed sample timeout script (check_60s.bat)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="protocols">
+<h3>Protocols<a class="headerlink" href="#protocols" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>NRPE:</dt>
+<dd><ul class="first last simple">
+<li>Added support for -a to check_nrpe command (Fixed #158 )</li>
+<li>Added &#8211;port to nscp nrpe install</li>
+<li>Fixed #261 Invalid return from check_nrpe</li>
+<li>#258 Fixed issue with check_nrpe and ssl=false option</li>
+</ul>
+</dd>
+<dt>NSCA:</dt>
+<dd><ul class="first last simple">
+<li>Fixed #315 Fixed invalid host_check for NSCA</li>
+<li>Fixed #300 alias not used when sending NSCP results</li>
+</ul>
+</dd>
+<dt>NRDP:</dt>
+<dd><ul class="first last simple">
+<li>Fixed #285 missing hostname for NRDP</li>
+</ul>
+</dd>
+<dt>check_nt:</dt>
+<dd><ul class="first last simple">
+<li>Fixed #157 CDROM included in check_nt DISKUSAGE</li>
+<li>Fixed some potential check_nt issues</li>
+<li>Fixed #202 check_nt not working in 0.5.x</li>
+<li>Fixed a few potential crashes with check_nt</li>
+</ul>
+</dd>
+<dt>graphite:</dt>
+<dd><ul class="first last simple">
+<li>Added error when there is no data to send in graphite sender</li>
+<li>Added (optional) sending status to graphite</li>
+<li>Added flag to disable sending perf data to graphite</li>
+<li>Fixed (back) formatting in graphite</li>
+<li>Fixed default values in graphite</li>
+<li>Fixed graphite paths for metrics</li>
+<li>Fixed sending graphite data so it works :)</li>
+<li>Fixed so source host names is set in NSCA and Graphite client</li>
+</ul>
+</dd>
+<dt>collectd:</dt>
+<dd><ul class="first last simple">
+<li>Added brand new collectd client</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="core">
+<h3>Core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Various/Core:</dt>
+<dd><ul class="first last simple">
+<li>Added exec from clients (i.e. web and test)</li>
+<li>Added support for unregistring commands</li>
+<li>Added restart to nscp service</li>
+<li>Fixed #259 parsing extra space on command line</li>
+<li>Fixed services showing twice in service list</li>
+<li>Fixed pressing ctrl+c on command line</li>
+<li>Fixed missing default section in settings</li>
+<li>Improved error handling for channel failures</li>
+<li>removed reading one line schedules</li>
+<li>Fixed issue with reading invalid config values</li>
+<li>Fixed inheritance and path issue with settings objects</li>
+<li>Service wont restart if it is not started when crashed (ie. running in test mode for instance)</li>
+<li>Fixed locale setting (and error logging for service related errors)</li>
+<li>Fixed erratic segv in clients when socket is closed twice</li>
+<li>Improved handling around connection failures</li>
+<li>Improved the crash reporter syntax:
+reporter.exe send b1438ab2-20a3-4b2d-bc30-7c3033c084e1.dmp</li>
+<li>Improved #275 so next settings system is tried if the first one failes</li>
+<li>Fixed settings key issue</li>
+<li>Fixed #132 round issue with performance data and %</li>
+<li>Fixed compatibility issue when using both MaxWarn and MinWarn</li>
+</ul>
+</dd>
+<dt>Metrics:</dt>
+<dd><ul class="first last simple">
+<li>Added network metrics</li>
+<li>Added metrics submission and fetching to python scripts</li>
+<li>Added test client command metrics to display all metrics</li>
+<li>Added metrics to internal scheduler</li>
+<li>Added thread count to scheduler metrics</li>
+<li>Added metrics support to clients and added metrics sending to graphite client</li>
+<li>Added metrics to scheduler</li>
+</ul>
+</dd>
+<dt>WebUI:</dt>
+<dd><ul class="first last simple">
+<li>Added ugly but working filter list for metrics</li>
+<li>Added filtering to query and module</li>
+<li>Added feedback to loading modules as well as proper save</li>
+<li>Added support for allowed hosts to WEBServer</li>
+<li>Fixed 220: WebPage not loading in IE</li>
+<li>Fixed option bug in WEBServer command line</li>
+<li>Fixed metrics in WebUI</li>
+<li>Fixed collection strategy value in web ui</li>
+<li>Fixed metrics (with new py)</li>
+<li>Fixed logout/login issue in webui</li>
+<li>Fixed disk graphs in WebUI</li>
+<li>Fixed some issues in setting dialog</li>
+<li>WebUI added help to settings dialog (about tabs)</li>
+<li>WEBUI: Changed to save menu is always shown and added auto save support</li>
+<li>Fixed password command line for the web client (i.e. nscp web password)</li>
+<li>Fixed command lines for password in WEB UI</li>
+<li>Updated mongoose Fixing: Busy wait when socket failes</li>
+</ul>
+</dd>
+<dt>MSI installer:</dt>
+<dd><ul class="first last simple">
+<li>(re)added CONF_SET installer key</li>
+<li>Added support for setting arbitrary keys on command line</li>
+</ul>
+</dd>
+<dt>Linux:</dt>
+<dd><ul class="first last simple">
+<li>Brand new much improved linux packages</li>
+</ul>
+</dd>
+<dt>API:</dt>
+<dd><ul class="first last simple">
+<li>Started to cleanuup &#8220;return codes&#8221; in the API which has been all over the place before. This will most likely fix all NSCA/Scheduler issues</li>
+<li>Removed encrypt from the API has it has not been implemented for some time</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="changes-in-0-4-4">
+<h2>Changes in 0.4.4<a class="headerlink" href="#changes-in-0-4-4" title="Permalink to this headline">¶</a></h2>
+<p>For a list of all changes in 0.4.4 see <a class="reference internal" href="0.4.4.html"><em>What&#8217;s new in NSClient++ 0.4.4</em></a></p>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">What&#8217;s New in NSClient++ 0.5.0</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#new-and-improved-webui">New and improved WebUI</a></li>
+<li><a class="reference internal" href="#metrics">Metrics</a></li>
+<li><a class="reference internal" href="#improved-clients">Improved clients</a></li>
+<li><a class="reference internal" href="#floating-point-support">Floating point support</a></li>
+<li><a class="reference internal" href="#filtering-on-count">Filtering on count</a></li>
+<li><a class="reference internal" href="#breaking-changes">Breaking changes</a></li>
+<li><a class="reference internal" href="#bugfixes-enhancements">Bugfixes enhancements</a><ul>
+<li><a class="reference internal" href="#additions">Additions</a></li>
+<li><a class="reference internal" href="#check-commands">Check commands</a></li>
+<li><a class="reference internal" href="#scripts">Scripts</a></li>
+<li><a class="reference internal" href="#protocols">Protocols</a></li>
+<li><a class="reference internal" href="#core">Core</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#changes-in-0-4-4">Changes in 0.4.4</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="0.4.4.html"
+                        title="previous chapter">What&#8217;s New in NSClient++ 0.4.4</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="changelog.html"
+                        title="next chapter">Changelog</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../bugs.html">Report a Bug</a></li>
+  <li><a href="../_sources/whatsnew/0.5.0.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="changelog.html" title="Changelog"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="0.4.4.html" title="What’s New in NSClient++ 0.4.4"
+             >previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >What&#8217;s New in NSClient++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

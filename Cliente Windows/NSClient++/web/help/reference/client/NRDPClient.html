@@ -1,0 +1,1128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>NRDPClient — NRDPClient &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Reference Manual" href="../index.html" />
+    <link rel="next" title="NRPEClient — NRPEClient" href="NRPEClient.html" />
+    <link rel="prev" title="GraphiteClient — GraphiteClient" href="GraphiteClient.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="NRPEClient.html" title="NRPEClient — NRPEClient"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="GraphiteClient.html" title="GraphiteClient — GraphiteClient"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <dl class="module">
+<dt id="NRDPClient">
+<code class="descname">NRDPClient</code><dd></dd>NRDP client can be used both from command line and from queries to check remote systes via NRDP<a class="headerlink" href="#NRDPClient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="nrdpclient-nrdpclient">
+<h1><code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code> &#8212; NRDPClient<a class="headerlink" href="#nrdpclient-nrdpclient" title="Permalink to this headline">¶</a></h1>
+<p>NRDP client can be used both from command line and from queries to check remote systes via NRDP</p>
+<p><strong>Queries (Overview)</strong>:</p>
+<p>A list of all available queries (check commands)</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp" title="NRDPClient.submit_nrdp"><code class="xref nscp nscp-query docutils literal"><span class="pre">submit_nrdp</span></code></a></td>
+<td>Submit information to the remote NRDP Server.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Commands (Overview)</strong>:</p>
+<p><strong>TODO:</strong> Add a list of all external commands (this is not check commands)</p>
+<p><strong>Configuration (Overview)</strong>:</p>
+<p>Common Keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client" title="NRDPClient./settings/NRDP/client"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client.channel" title="NRDPClient./settings/NRDP/client.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>CHANNEL</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client" title="NRDPClient./settings/NRDP/client"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client.hostname" title="NRDPClient./settings/NRDP/client.hostname"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">hostname</span></code></a></td>
+<td>HOSTNAME</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default" title="NRDPClient./settings/NRDP/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.address" title="NRDPClient./settings/NRDP/client/targets/default.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>TARGET ADDRESS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default" title="NRDPClient./settings/NRDP/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.retries" title="NRDPClient./settings/NRDP/client/targets/default.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>RETRIES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default" title="NRDPClient./settings/NRDP/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.timeout" title="NRDPClient./settings/NRDP/client/targets/default.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>TIMEOUT</td>
+</tr>
+</tbody>
+</table>
+<p>Advanced keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default" title="NRDPClient./settings/NRDP/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.host" title="NRDPClient./settings/NRDP/client/targets/default.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>TARGET HOST</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default" title="NRDPClient./settings/NRDP/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.port" title="NRDPClient./settings/NRDP/client/targets/default.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>TARGET PORT</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Sample keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample" title="NRDPClient./settings/NRDP/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.address" title="NRDPClient./settings/NRDP/client/targets/sample.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>TARGET ADDRESS</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample" title="NRDPClient./settings/NRDP/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.host" title="NRDPClient./settings/NRDP/client/targets/sample.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>TARGET HOST</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample" title="NRDPClient./settings/NRDP/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.port" title="NRDPClient./settings/NRDP/client/targets/sample.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>TARGET PORT</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample" title="NRDPClient./settings/NRDP/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.retries" title="NRDPClient./settings/NRDP/client/targets/sample.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>RETRIES</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample" title="NRDPClient./settings/NRDP/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRDP/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.timeout" title="NRDPClient./settings/NRDP/client/targets/sample.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>TIMEOUT</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h2>
+<p>A quick reference for all available queries (check commands) in the NRDPClient module.</p>
+<div class="section" id="submit-nrdp">
+<h3><a class="reference internal" href="#NRDPClient.submit_nrdp" title="NRDPClient.submit_nrdp"><code class="xref nscp nscp-query docutils literal"><span class="pre">submit_nrdp</span></code></a><a class="headerlink" href="#submit-nrdp" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="NRDPClient.submit_nrdp">
+<code class="descclassname">NRDPClient</code><code class="descname">submit_nrdp</code><dd></dd>Submit information to the remote NRDP Server.<a class="headerlink" href="#NRDPClient.submit_nrdp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.help" title="NRDPClient.submit_nrdp.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.help-pb" title="NRDPClient.submit_nrdp.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.show-default" title="NRDPClient.submit_nrdp.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.help-short" title="NRDPClient.submit_nrdp.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.host" title="NRDPClient.submit_nrdp.host"><code class="xref nscp nscp-option docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>The host of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.port" title="NRDPClient.submit_nrdp.port"><code class="xref nscp nscp-option docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>The port of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.address" title="NRDPClient.submit_nrdp.address"><code class="xref nscp nscp-option docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>The address (host:port) of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.timeout" title="NRDPClient.submit_nrdp.timeout"><code class="xref nscp nscp-option docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of seconds before connection times out (default=10)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.target" title="NRDPClient.submit_nrdp.target"><code class="xref nscp nscp-option docutils literal"><span class="pre">target</span></code></a></td>
+<td>&nbsp;</td>
+<td>Target to use (lookup connection info from config)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.retry" title="NRDPClient.submit_nrdp.retry"><code class="xref nscp nscp-option docutils literal"><span class="pre">retry</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of times ti retry a failed connection attempt (default=2)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.retries" title="NRDPClient.submit_nrdp.retries"><code class="xref nscp nscp-option docutils literal"><span class="pre">retries</span></code></a></td>
+<td>&nbsp;</td>
+<td>legacy version of retry</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.source-host" title="NRDPClient.submit_nrdp.source-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">source-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.sender-host" title="NRDPClient.submit_nrdp.sender-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">sender-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.command" title="NRDPClient.submit_nrdp.command"><code class="xref nscp nscp-option docutils literal"><span class="pre">command</span></code></a></td>
+<td>&nbsp;</td>
+<td>The name of the command that the remote daemon should run</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.alias" title="NRDPClient.submit_nrdp.alias"><code class="xref nscp nscp-option docutils literal"><span class="pre">alias</span></code></a></td>
+<td>&nbsp;</td>
+<td>Same as command</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.message" title="NRDPClient.submit_nrdp.message"><code class="xref nscp nscp-option docutils literal"><span class="pre">message</span></code></a></td>
+<td>&nbsp;</td>
+<td>Message</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.result" title="NRDPClient.submit_nrdp.result"><code class="xref nscp nscp-option docutils literal"><span class="pre">result</span></code></a></td>
+<td>&nbsp;</td>
+<td>Result code either a number or OK, WARN, CRIT, UNKNOWN</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.separator" title="NRDPClient.submit_nrdp.separator"><code class="xref nscp nscp-option docutils literal"><span class="pre">separator</span></code></a></td>
+<td>&nbsp;</td>
+<td>Separator to use for the batch command (default is</td>
+<td>)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.batch" title="NRDPClient.submit_nrdp.batch"><code class="xref nscp nscp-option docutils literal"><span class="pre">batch</span></code></a></td>
+<td>&nbsp;</td>
+<td>Add multiple records using the separator format is: command</td>
+<td>result</td>
+<td>message</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.key" title="NRDPClient.submit_nrdp.key"><code class="xref nscp nscp-option docutils literal"><span class="pre">key</span></code></a></td>
+<td>&nbsp;</td>
+<td>The security token</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.password" title="NRDPClient.submit_nrdp.password"><code class="xref nscp nscp-option docutils literal"><span class="pre">password</span></code></a></td>
+<td>&nbsp;</td>
+<td>The security token</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.source-host" title="NRDPClient.submit_nrdp.source-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">source-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.sender-host" title="NRDPClient.submit_nrdp.sender-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">sender-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient.submit_nrdp.token" title="NRDPClient.submit_nrdp.token"><code class="xref nscp nscp-option docutils literal"><span class="pre">token</span></code></a></td>
+<td>&nbsp;</td>
+<td>The security token</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="arguments">
+<h4>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.help">
+<code class="descname">help</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.help-pb">
+<code class="descname">help-pb</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.show-default">
+<code class="descname">show-default</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.help-short">
+<code class="descname">help-short</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.host">
+<code class="descname">host</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The host of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.port">
+<code class="descname">port</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.port" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The port of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.address">
+<code class="descname">address</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.address" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The address (host:port) of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.timeout">
+<code class="descname">timeout</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of seconds before connection times out (default=10)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.target">
+<code class="descname">target</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.target" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Target to use (lookup connection info from config)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.retry">
+<code class="descname">retry</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.retry" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of times ti retry a failed connection attempt (default=2)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.retries">
+<code class="descname">retries</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.retries" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">legacy version of retry</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.source-host">
+<code class="descname">source-host</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.source-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.sender-host">
+<code class="descname">sender-host</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.sender-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.command">
+<code class="descname">command</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.command" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The name of the command that the remote daemon should run</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.alias">
+<code class="descname">alias</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.alias" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Same as command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.message">
+<code class="descname">message</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.message" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.result">
+<code class="descname">result</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.result" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Result code either a number or OK, WARN, CRIT, UNKNOWN</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.separator">
+<code class="descname">separator</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.separator" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Separator to use for the batch command (default is <a href="#id1"><span class="problematic" id="id2">|</span></a>)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.batch">
+<code class="descname">batch</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.batch" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Add multiple records using the separator format is: command|result|message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.key">
+<code class="descname">key</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.key" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The security token</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.password">
+<code class="descname">password</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.password" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The security token</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt>
+<code class="descname">source-host</code><em class="property"> (NRDPClient, submit_nrdp)</em></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt>
+<code class="descname">sender-host</code><em class="property"> (NRDPClient, submit_nrdp)</em></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRDPClient.submit_nrdp.token">
+<code class="descname">token</code><em class="property"> (NRDPClient, submit_nrdp)</em><a class="headerlink" href="#NRDPClient.submit_nrdp.token" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The security token</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="settings-nrdp-client">
+<h3>/ settings/ NRDP/ client<a class="headerlink" href="#settings-nrdp-client" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRDPClient./settings/NRDP/client">
+<code class="descname">/settings/NRDP/client</code><em class="property"> (NRDPClient)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>SMTP CLIENT SECTION</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Section for SMTP passive check module.</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client.channel" title="NRDPClient./settings/NRDP/client.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>NRDP</td>
+<td>CHANNEL</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client.hostname" title="NRDPClient./settings/NRDP/client.hostname"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">hostname</span></code></a></td>
+<td>auto</td>
+<td>HOSTNAME</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># SMTP CLIENT SECTION
+# Section for SMTP passive check module.
+[/settings/NRDP/client]
+channel=NRDP
+hostname=auto
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client.channel">
+<code class="descname">channel</code><em class="property"> (NRDPClient, /settings/NRDP/client)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client.channel" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CHANNEL</strong></p>
+<div class="line-block">
+<div class="line">The channel to listen to.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRDP/client</p>
+<p><strong>Key</strong>: channel</p>
+<p><strong>Default value</strong>: NRDP</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client]
+# CHANNEL
+channel=NRDP
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client.hostname">
+<code class="descname">hostname</code><em class="property"> (NRDPClient, /settings/NRDP/client)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client.hostname" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>HOSTNAME</strong></p>
+<div class="line-block">
+<div class="line">The host name of the monitored computer.</div>
+<div class="line">Set this to auto (default) to use the windows name of the computer.</div>
+<div class="line"><br /></div>
+<div class="line">auto  Hostname</div>
+<div class="line">${host}       Hostname</div>
+<div class="line">${host_lc}</div>
+<div class="line">Hostname in lowercase</div>
+<div class="line">${host_uc}    Hostname in uppercase</div>
+<div class="line">${domain}     Domainname</div>
+<div class="line">${domain_lc}  Domainname in lowercase</div>
+<div class="line">${domain_uc}  Domainname in uppercase</div>
+</div>
+<p><strong>Path</strong>: /settings/NRDP/client</p>
+<p><strong>Key</strong>: hostname</p>
+<p><strong>Default value</strong>: auto</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client]
+# HOSTNAME
+hostname=auto
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="handlers">
+<h3>…  / handlers<a class="headerlink" href="#handlers" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRDPClient./settings/NRDP/client/handlers">
+<code class="descname">/settings/NRDP/client/handlers</code><em class="property"> (NRDPClient)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/handlers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>CLIENT HANDLER SECTION</strong></p>
+<blockquote>
+<div><p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># CLIENT HANDLER SECTION
+#
+[/settings/NRDP/client/handlers]
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="targets">
+<h3>…  / targets<a class="headerlink" href="#targets" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRDPClient./settings/NRDP/client/targets">
+<code class="descname">/settings/NRDP/client/targets</code><em class="property"> (NRDPClient)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>REMOTE TARGET DEFINITIONS</strong></p>
+<blockquote>
+<div><p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># REMOTE TARGET DEFINITIONS
+#
+[/settings/NRDP/client/targets]
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="targets-default">
+<h3>…  / targets / default<a class="headerlink" href="#targets-default" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRDPClient./settings/NRDP/client/targets/default">
+<code class="descname">/settings/NRDP/client/targets/default</code><em class="property"> (NRDPClient)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>TARGET</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Target definition for: default</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.address" title="NRDPClient./settings/NRDP/client/targets/default.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET ADDRESS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.host" title="NRDPClient./settings/NRDP/client/targets/default.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET HOST</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.port" title="NRDPClient./settings/NRDP/client/targets/default.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET PORT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.retries" title="NRDPClient./settings/NRDP/client/targets/default.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>3</td>
+<td>RETRIES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/default.timeout" title="NRDPClient./settings/NRDP/client/targets/default.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>30</td>
+<td>TIMEOUT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># TARGET
+# Target definition for: default
+[/settings/NRDP/client/targets/default]
+address=
+host=
+port=
+retries=3
+timeout=30
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/default.address">
+<code class="descname">address</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/default)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/default.address" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET ADDRESS</strong></p>
+<div class="line-block">
+<div class="line">Target host address</div>
+</div>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/default</p>
+<p><strong>Key</strong>: address</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/default]
+# TARGET ADDRESS
+address=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/default.host">
+<code class="descname">host</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/default)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/default.host" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET HOST</strong></p>
+<div class="line-block">
+<div class="line">The target server to report results to.</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/default</p>
+<p><strong>Key</strong>: host</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/default]
+# TARGET HOST
+host=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/default.port">
+<code class="descname">port</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/default)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/default.port" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET PORT</strong></p>
+<div class="line-block">
+<div class="line">The target server port</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/default</p>
+<p><strong>Key</strong>: port</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/default]
+# TARGET PORT
+port=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/default.retries">
+<code class="descname">retries</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/default)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/default.retries" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>RETRIES</strong></p>
+<div class="line-block">
+<div class="line">Number of times to retry sending.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/default</p>
+<p><strong>Key</strong>: retries</p>
+<p><strong>Default value</strong>: 3</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/default]
+# RETRIES
+retries=3
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/default.timeout">
+<code class="descname">timeout</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/default)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/default.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TIMEOUT</strong></p>
+<div class="line-block">
+<div class="line">Timeout when reading/writing packets to/from sockets.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/default</p>
+<p><strong>Key</strong>: timeout</p>
+<p><strong>Default value</strong>: 30</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/default]
+# TIMEOUT
+timeout=30
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="targets-sample">
+<h3>…  / targets / sample<a class="headerlink" href="#targets-sample" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRDPClient./settings/NRDP/client/targets/sample">
+<code class="descname">/settings/NRDP/client/targets/sample</code><em class="property"> (NRDPClient)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/sample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>TARGET</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Target definition for: sample</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.address" title="NRDPClient./settings/NRDP/client/targets/sample.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET ADDRESS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.host" title="NRDPClient./settings/NRDP/client/targets/sample.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET HOST</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.port" title="NRDPClient./settings/NRDP/client/targets/sample.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET PORT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.retries" title="NRDPClient./settings/NRDP/client/targets/sample.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>3</td>
+<td>RETRIES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRDPClient./settings/NRDP/client/targets/sample.timeout" title="NRDPClient./settings/NRDP/client/targets/sample.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>30</td>
+<td>TIMEOUT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># TARGET
+# Target definition for: sample
+[/settings/NRDP/client/targets/sample]
+address=
+host=
+port=
+retries=3
+timeout=30
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/sample.address">
+<code class="descname">address</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/sample)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/sample.address" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET ADDRESS</strong></p>
+<div class="line-block">
+<div class="line">Target host address</div>
+</div>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/sample</p>
+<p><strong>Key</strong>: address</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/sample]
+# TARGET ADDRESS
+address=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/sample.host">
+<code class="descname">host</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/sample)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/sample.host" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET HOST</strong></p>
+<div class="line-block">
+<div class="line">The target server to report results to.</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/sample</p>
+<p><strong>Key</strong>: host</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/sample]
+# TARGET HOST
+host=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/sample.port">
+<code class="descname">port</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/sample)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/sample.port" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET PORT</strong></p>
+<div class="line-block">
+<div class="line">The target server port</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/sample</p>
+<p><strong>Key</strong>: port</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/sample]
+# TARGET PORT
+port=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/sample.retries">
+<code class="descname">retries</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/sample)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/sample.retries" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>RETRIES</strong></p>
+<div class="line-block">
+<div class="line">Number of times to retry sending.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/sample</p>
+<p><strong>Key</strong>: retries</p>
+<p><strong>Default value</strong>: 3</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/sample]
+# RETRIES
+retries=3
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRDPClient./settings/NRDP/client/targets/sample.timeout">
+<code class="descname">timeout</code><em class="property"> (NRDPClient, /settings/NRDP/client/targets/sample)</em><a class="headerlink" href="#NRDPClient./settings/NRDP/client/targets/sample.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TIMEOUT</strong></p>
+<div class="line-block">
+<div class="line">Timeout when reading/writing packets to/from sockets.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRDP/client/targets/sample</p>
+<p><strong>Key</strong>: timeout</p>
+<p><strong>Default value</strong>: 30</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRDPClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRDP/client/targets/sample]
+# TIMEOUT
+timeout=30
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">NRDPClient</span></code> &#8212; NRDPClient</a><ul>
+<li><a class="reference internal" href="#queries">Queries</a><ul>
+<li><a class="reference internal" href="#submit-nrdp"><code class="docutils literal"><span class="pre">submit_nrdp</span></code></a><ul>
+<li><a class="reference internal" href="#arguments">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#settings-nrdp-client">/ settings/ NRDP/ client</a></li>
+<li><a class="reference internal" href="#handlers">…  / handlers</a></li>
+<li><a class="reference internal" href="#targets">…  / targets</a></li>
+<li><a class="reference internal" href="#targets-default">…  / targets / default</a></li>
+<li><a class="reference internal" href="#targets-sample">…  / targets / sample</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="GraphiteClient.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">GraphiteClient</span></code> &#8212; GraphiteClient</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="NRPEClient.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">NRPEClient</span></code> &#8212; NRPEClient</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/reference/client/NRDPClient.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="NRPEClient.html" title="NRPEClient — NRPEClient"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="GraphiteClient.html" title="GraphiteClient — GraphiteClient"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

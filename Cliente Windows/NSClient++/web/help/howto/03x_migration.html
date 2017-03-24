@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Migrating to 0.4.1 &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../index.html" />
+    <link rel="up" title="How To" href="index.html" />
+    <link rel="next" title="External Scripts" href="external_scripts.html" />
+    <link rel="prev" title="How To" href="index.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <script type="text/javascript" src="../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="external_scripts.html" title="External Scripts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="How To"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">How To</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="migrating-to-0-4-1">
+<span id="how-to-migrating-to-041"></span><h1>Migrating to 0.4.1<a class="headerlink" href="#migrating-to-0-4-1" title="Permalink to this headline">¶</a></h1>
+<p>Since 0.4.1 has now been released it is important to consider how this will affect existing users. In general there are three major strategies:</p>
+<ol class="arabic simple">
+<li>I am happy and don&#8217;t want to change anything</li>
+<li>I am willing to migrate manually</li>
+<li>I Want to migrate automatically</li>
+</ol>
+<p>Depending on your choice of route you will end up either with a brand new NSClient++ which is very powerful or one whilst being brand new will work very much like the old one. Thus the drawback to not migrating to the &#8220;new format&#8221; that you wont (easily) be able to use new features.
+Your migration strategy is also affected by the fact that in the next 6-to-12 months NSClient++ 0.4.2 will be released which is also a technology shift and which might very well introduce some migration work as well.</p>
+<div class="section" id="background-whats-has-changed">
+<h2>Background (Whats has changed)<a class="headerlink" href="#background-whats-has-changed" title="Permalink to this headline">¶</a></h2>
+<p>In 0.4.0 a new format for the configuration was introduced. In addition to this some modules were renamed, some were changed from an architectural perspective and some were deprecated. The reason for this is that the &#8220;old&#8221; NSCient++ was approaching 10 years and was simply not designed for the flexibility which it offers today.
+I will readily admit that NSClient++ is the most flexible and powerful monitoring agent available in the open source space (and this is not PR speak it is the truth).
+To accommodate this flexibility the format <strong>had to change</strong>, it would have been impossible to keep backwards compatibility.
+But the changes are mainly structural and designed to make things look more similar so from a human perspective the change is minor.
+For instance compare the NRPE server configuration:</p>
+<p><strong>0.3.9:</strong></p>
+<div class="highlight-ini"><div class="highlight"><pre>[modules]
+NRPEListsner
+
+[NRPE]
+port = 1234
+allow_arguments = 1
+</pre></div>
+</div>
+<p><strong>0.4.1:</strong></p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[/modules]</span>
+<span class="na">NRPEServer</span> <span class="o">=</span> <span class="s">enabled</span>
+
+<span class="k">[/settings/NRPE/server]</span>
+<span class="na">port</span> <span class="o">=</span> <span class="s">1234</span>
+<span class="na">allow arguments</span> <span class="o">=</span> <span class="s">1</span>
+</pre></div>
+</div>
+<p>If we analyse this we can see four structural changes:</p>
+<ol class="arabic simple">
+<li>Servers are now called Servers (they used to be called Listeners)
+Thus NRPEListener is now NRPEServer</li>
+<li>Syntax is now KEY=VALUE, before it was sometimes just KEY, and sometimes KEY=VALUE
+Thus where before it was module-name it is now module-name= enabled</li>
+<li>Paths are now hierarchical and there are two reasons for this. The first one is that you can now load a module multiple times which requires you to configure it more than once which is impossible in a flat structure. The second reason is that where before it was 10-15 section there is now probably closer to hundreds.
+<a class="reference external" href="NRPE">NRPE</a> is now <a class="reference external" href="/settings/NRPE/server">/settings/NRPE/server</a></li>
+<li>Keys are now using space not dash, underscore nor space etc. This is the only change I really regret doing but the idea was to make it simpler since before there was no rule.
+Thus allowed-hosts is now &#8220;allowed hosts&#8221;</li>
+</ol>
+<p>This is pretty much it in terms of structural changes. Some modules were changed, for instance NSCAAgent was split up into NSCAClient and Scheduler to allow for other passive protocols.</p>
+</div>
+<div class="section" id="future-what-s-to-come">
+<h2>Future (What&#8217;s to come)<a class="headerlink" href="#future-what-s-to-come" title="Permalink to this headline">¶</a></h2>
+<p>So what will happen in the future?
+Well, two tings.</p>
+<ol class="arabic simple">
+<li>Next version will support Lua configuration (i.e. scripts) which will handle all migration so hopefully this is the last change.</li>
+<li>Next version will feature a new command check subsystem</li>
+</ol>
+<p>The first change is just good, the latter change might have impacts on how you use NSClient++ (it might be good to look into this if you&#8217;re  planning to migrate). Just a quick recap (see milestone <a class="reference external" href="milestone:0.4.2">milestone:0.4.2</a> for more details): checks will no longer support variable lists,  instead more common argument parsing system is used throughout. I think this is a simplification which helps since it is pretty confusing the way arguments are parsed today. For instance:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="na">1</span> <span class="o">=</span> <span class="s">CheckCounter MaxWarn=10 Counter=\a\a MaxWarn=20</span>
+<span class="na">2</span> <span class="o">=</span> <span class="s">CheckCounter MaxWarn=10 Counter=\b\b MaxWarn=20 Counter=\c\c</span>
+</pre></div>
+</div>
+<p>Compare the following two aliases, what would you expect for bounds?</p>
+<ol class="arabic simple">
+<li>aa = 10 or 20? (Answer is: 20)</li>
+<li>bb = 10 or 20? (Answer is: 10)</li>
+<li>cc = 10 or 20? (Answer is: 20)</li>
+</ol>
+<p>Pretty confusing right? In the future options will override each other so the answer in 0.4.2 will become:</p>
+<ol class="arabic simple">
+<li>aa = 10 or 20? (Answer is: 20)</li>
+<li>bb = 10 or 20? (Answer is: 20)</li>
+<li>cc = 10 or 20? (Answer is: 20)</li>
+</ol>
+<p>Essentially rendering the Multiple MaxWarn statements meaningless.</p>
+<p>But this also means that you can only have one bound for each check (something you can easily get around by using CheckMulti so I don&#8217;t think it&#8217;s a big deal). But if you are using a lot of Multiple MaxWarn/Crit statements you might take this time to either wait before you upgrade or start looking at ways to change your checks (like check multi).</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="na">old</span> <span class="o">=</span> <span class="s">CheckCounter MaxWarn=10 Counter=\b\b MaxWarn=20 Counter=\c\c</span>
+<span class="na">new</span> <span class="o">=</span> <span class="s">CheckMulti command=&quot;CheckCounter Counter=\b\b MaxWarn=10&quot; command=&quot;MaxWarn=20 Counter=\c\c&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">I also don&#8217;t &#8220;officially&#8221; support 0.3.x any more.
+This does not mean I wont help you but it does mean I reserve the right to say &#8220;sorry, you have to upgrade for that&#8221;. or &#8220;can you reproduce on 0.4.1?&#8221;.
+I always try to help people but without a support team I only have so much time to dedicate to support.</p>
+</div>
+</div>
+<div class="section" id="hands-on">
+<h2>Hands-on<a class="headerlink" href="#hands-on" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="i-don-t-want-to-upgrade">
+<h3>I don&#8217;t want to upgrade<a class="headerlink" href="#i-don-t-want-to-upgrade" title="Permalink to this headline">¶</a></h3>
+<p>This is fine and you can keep using the old format even with the new version without any problems.
+It is important to understand the limitations by doing this:</p>
+<ul class="simple">
+<li>No new things: None of the new keys will be available to you unless you &#8220;include&#8221; a new syntax file.</li>
+<li>No automatic process: You cannot use the &#8220;nscp settings&#8221; command line for managing your configuration.</li>
+<li>No remote configuration (in 0.4.2): since the remote configuration tools will work using nscp settings they will not work either.</li>
+<li>No registry support: Old settings file ONLY work with the old ini file not the old registry concept.</li>
+</ul>
+<p>It is simple to keep the old format. When you upgrade you select &#8220;Old configuration&#8221; in the installer UI. And afterwards you can at any time run the following command to change the configuration file:</p>
+<div class="highlight-bat"><div class="highlight"><pre>nscp settings --switch old
+</pre></div>
+</div>
+<p>To change to the old file. This assumes you have the file since it is not shipped with NSClient++ any more. If you want you can always get the old ini file from github here: <a class="reference external" href="https://github.com/mickem/nscp/blob/0.3.9/NSC.dist">https://github.com/mickem/nscp/blob/0.3.9/NSC.dist</a></p>
+</div>
+<div class="section" id="i-want-to-migrate">
+<h3>I want to migrate<a class="headerlink" href="#i-want-to-migrate" title="Permalink to this headline">¶</a></h3>
+<p>Migrating automatically should work for most people and can be done from the installer or manually at a later time. It is very possible to install with &#8220;Old configuration&#8221; and then migrate at a later time.
+To migrate the configuration you run the following command:</p>
+<div class="highlight-bat"><div class="highlight"><pre>nscp settings --migrate-to ini
+</pre></div>
+</div>
+</div>
+<div class="section" id="i-want-to-change-by-hand">
+<h3>I want to change by hand<a class="headerlink" href="#i-want-to-change-by-hand" title="Permalink to this headline">¶</a></h3>
+<p>migrating by hand is perhaps also a valid option if you don&#8217;t have too much configuration. In this case there is (in builds post 0.4.1.89) a sample (full) config file from which you can copy/paste the settings.
+Another option is to use the settings command line tool to generate, add and remove default values.</p>
+<p>See the guide on using settings command line interface (TODO).
+In the mean time the following commands might be a pointer:</p>
+<div class="highlight-bat"><div class="highlight"><pre>nscp settings --help
+nscp settings --validate
+nscp settings --generate ini --add-defaults
+nscp settings --generate ini --remove-defaults
+nscp settings --path <span class="n">/settings/NRPE/server</span> --key <span class="s2">&quot;allowed hosts&quot;</span> --<span class="k">set</span> <span class="nv">127</span>.<span class="m">0</span>.<span class="m">0</span>.<span class="m">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+<p><strong>TODO</strong>: Add this section!</p>
+</div>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Migrating to 0.4.1</a><ul>
+<li><a class="reference internal" href="#background-whats-has-changed">Background (Whats has changed)</a></li>
+<li><a class="reference internal" href="#future-what-s-to-come">Future (What&#8217;s to come)</a></li>
+<li><a class="reference internal" href="#hands-on">Hands-on</a><ul>
+<li><a class="reference internal" href="#i-don-t-want-to-upgrade">I don&#8217;t want to upgrade</a></li>
+<li><a class="reference internal" href="#i-want-to-migrate">I want to migrate</a></li>
+<li><a class="reference internal" href="#i-want-to-change-by-hand">I want to change by hand</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">How To</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="external_scripts.html"
+                        title="next chapter">External Scripts</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../bugs.html">Report a Bug</a></li>
+  <li><a href="../_sources/howto/03x_migration.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="external_scripts.html" title="External Scripts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="How To"
+             >previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >How To</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

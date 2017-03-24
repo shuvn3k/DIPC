@@ -1,0 +1,3063 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>NRPEClient — NRPEClient &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Reference Manual" href="../index.html" />
+    <link rel="next" title="NRPEServer — NRPEServer" href="NRPEServer.html" />
+    <link rel="prev" title="NRDPClient — NRDPClient" href="NRDPClient.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="NRPEServer.html" title="NRPEServer — NRPEServer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="NRDPClient.html" title="NRDPClient — NRDPClient"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <dl class="module">
+<dt id="NRPEClient">
+<code class="descname">NRPEClient</code><dd></dd>NRPE client can be used both from command line and from queries to check remote systes via NRPE as well as configure the NRPE server<a class="headerlink" href="#NRPEClient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="nrpeclient-nrpeclient">
+<h1><code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code> &#8212; NRPEClient<a class="headerlink" href="#nrpeclient-nrpeclient" title="Permalink to this headline">¶</a></h1>
+<p>NRPE client can be used both from command line and from queries to check remote systes via NRPE as well as configure the NRPE server</p>
+<p><strong>Queries (Overview)</strong>:</p>
+<p>A list of all available queries (check commands)</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe" title="NRPEClient.check_nrpe"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_nrpe</span></code></a></td>
+<td>Request remote information via NRPE.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe" title="NRPEClient.exec_nrpe"><code class="xref nscp nscp-query docutils literal"><span class="pre">exec_nrpe</span></code></a></td>
+<td>Execute remote script via NRPE. (Most likely you want nrpe_query).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_forward" title="NRPEClient.nrpe_forward"><code class="xref nscp nscp-query docutils literal"><span class="pre">nrpe_forward</span></code></a></td>
+<td>Forward the request as-is to remote host via NRPE.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query" title="NRPEClient.nrpe_query"><code class="xref nscp nscp-query docutils literal"><span class="pre">nrpe_query</span></code></a></td>
+<td>Request remote information via NRPE.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe" title="NRPEClient.submit_nrpe"><code class="xref nscp nscp-query docutils literal"><span class="pre">submit_nrpe</span></code></a></td>
+<td>Submit information to remote host via NRPE. (Most likely you want nrpe_query).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Commands (Overview)</strong>:</p>
+<p><strong>TODO:</strong> Add a list of all external commands (this is not check commands)</p>
+<p><strong>Configuration (Overview)</strong>:</p>
+<p>Common Keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client" title="NRPEClient./settings/NRPE/client"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client.channel" title="NRPEClient./settings/NRPE/client.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>CHANNEL</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.address" title="NRPEClient./settings/NRPE/client/targets/default.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>TARGET ADDRESS</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.allowed ciphers" title="NRPEClient./settings/NRPE/client/targets/default.allowed ciphers"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">allowed</span> <span class="pre">ciphers</span></code></a></td>
+<td>ALLOWED CIPHERS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.certificate" title="NRPEClient./settings/NRPE/client/targets/default.certificate"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span></code></a></td>
+<td>SSL CERTIFICATE</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.insecure" title="NRPEClient./settings/NRPE/client/targets/default.insecure"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">insecure</span></code></a></td>
+<td>Insecure legacy mode</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.payload length" title="NRPEClient./settings/NRPE/client/targets/default.payload length"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">payload</span> <span class="pre">length</span></code></a></td>
+<td>PAYLOAD LENGTH</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.retries" title="NRPEClient./settings/NRPE/client/targets/default.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>RETRIES</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.timeout" title="NRPEClient./settings/NRPE/client/targets/default.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>TIMEOUT</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.use ssl" title="NRPEClient./settings/NRPE/client/targets/default.use ssl"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">use</span> <span class="pre">ssl</span></code></a></td>
+<td>ENABLE SSL ENCRYPTION</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.verify mode" title="NRPEClient./settings/NRPE/client/targets/default.verify mode"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">verify</span> <span class="pre">mode</span></code></a></td>
+<td>VERIFY MODE</td>
+</tr>
+</tbody>
+</table>
+<p>Advanced keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.ca" title="NRPEClient./settings/NRPE/client/targets/default.ca"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ca</span></code></a></td>
+<td>CA</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.certificate format" title="NRPEClient./settings/NRPE/client/targets/default.certificate format"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span> <span class="pre">format</span></code></a></td>
+<td>CERTIFICATE FORMAT</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.certificate key" title="NRPEClient./settings/NRPE/client/targets/default.certificate key"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span> <span class="pre">key</span></code></a></td>
+<td>SSL CERTIFICATE</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.dh" title="NRPEClient./settings/NRPE/client/targets/default.dh"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">dh</span></code></a></td>
+<td>DH KEY</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.host" title="NRPEClient./settings/NRPE/client/targets/default.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>TARGET HOST</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default" title="NRPEClient./settings/NRPE/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.port" title="NRPEClient./settings/NRPE/client/targets/default.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>TARGET PORT</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Sample keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.address" title="NRPEClient./settings/NRPE/client/targets/sample.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>TARGET ADDRESS</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.allowed ciphers" title="NRPEClient./settings/NRPE/client/targets/sample.allowed ciphers"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">allowed</span> <span class="pre">ciphers</span></code></a></td>
+<td>ALLOWED CIPHERS</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.ca" title="NRPEClient./settings/NRPE/client/targets/sample.ca"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ca</span></code></a></td>
+<td>CA</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.certificate" title="NRPEClient./settings/NRPE/client/targets/sample.certificate"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span></code></a></td>
+<td>SSL CERTIFICATE</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.certificate format" title="NRPEClient./settings/NRPE/client/targets/sample.certificate format"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span> <span class="pre">format</span></code></a></td>
+<td>CERTIFICATE FORMAT</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.certificate key" title="NRPEClient./settings/NRPE/client/targets/sample.certificate key"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span> <span class="pre">key</span></code></a></td>
+<td>SSL CERTIFICATE</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.dh" title="NRPEClient./settings/NRPE/client/targets/sample.dh"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">dh</span></code></a></td>
+<td>DH KEY</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.host" title="NRPEClient./settings/NRPE/client/targets/sample.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>TARGET HOST</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.insecure" title="NRPEClient./settings/NRPE/client/targets/sample.insecure"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">insecure</span></code></a></td>
+<td>Insecure legacy mode</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.payload length" title="NRPEClient./settings/NRPE/client/targets/sample.payload length"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">payload</span> <span class="pre">length</span></code></a></td>
+<td>PAYLOAD LENGTH</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.port" title="NRPEClient./settings/NRPE/client/targets/sample.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>TARGET PORT</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.retries" title="NRPEClient./settings/NRPE/client/targets/sample.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>RETRIES</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.timeout" title="NRPEClient./settings/NRPE/client/targets/sample.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>TIMEOUT</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.use ssl" title="NRPEClient./settings/NRPE/client/targets/sample.use ssl"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">use</span> <span class="pre">ssl</span></code></a></td>
+<td>ENABLE SSL ENCRYPTION</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample" title="NRPEClient./settings/NRPE/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/NRPE/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.verify mode" title="NRPEClient./settings/NRPE/client/targets/sample.verify mode"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">verify</span> <span class="pre">mode</span></code></a></td>
+<td>VERIFY MODE</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h2>
+<p>A quick reference for all available queries (check commands) in the NRPEClient module.</p>
+<div class="section" id="check-nrpe">
+<h3><a class="reference internal" href="#NRPEClient.check_nrpe" title="NRPEClient.check_nrpe"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_nrpe</span></code></a><a class="headerlink" href="#check-nrpe" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="NRPEClient.check_nrpe">
+<code class="descclassname">NRPEClient</code><code class="descname">check_nrpe</code><dd></dd>Request remote information via NRPE.<a class="headerlink" href="#NRPEClient.check_nrpe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.help" title="NRPEClient.check_nrpe.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.help-pb" title="NRPEClient.check_nrpe.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.show-default" title="NRPEClient.check_nrpe.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.help-short" title="NRPEClient.check_nrpe.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.host" title="NRPEClient.check_nrpe.host"><code class="xref nscp nscp-option docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>The host of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.port" title="NRPEClient.check_nrpe.port"><code class="xref nscp nscp-option docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>The port of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.address" title="NRPEClient.check_nrpe.address"><code class="xref nscp nscp-option docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>The address (host:port) of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.timeout" title="NRPEClient.check_nrpe.timeout"><code class="xref nscp nscp-option docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of seconds before connection times out (default=10)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.target" title="NRPEClient.check_nrpe.target"><code class="xref nscp nscp-option docutils literal"><span class="pre">target</span></code></a></td>
+<td>&nbsp;</td>
+<td>Target to use (lookup connection info from config)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.retry" title="NRPEClient.check_nrpe.retry"><code class="xref nscp nscp-option docutils literal"><span class="pre">retry</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of times ti retry a failed connection attempt (default=2)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.retries" title="NRPEClient.check_nrpe.retries"><code class="xref nscp nscp-option docutils literal"><span class="pre">retries</span></code></a></td>
+<td>&nbsp;</td>
+<td>legacy version of retry</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.source-host" title="NRPEClient.check_nrpe.source-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">source-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.sender-host" title="NRPEClient.check_nrpe.sender-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">sender-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.command" title="NRPEClient.check_nrpe.command"><code class="xref nscp nscp-option docutils literal"><span class="pre">command</span></code></a></td>
+<td>&nbsp;</td>
+<td>The name of the command that the remote daemon should run</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.argument" title="NRPEClient.check_nrpe.argument"><code class="xref nscp nscp-option docutils literal"><span class="pre">argument</span></code></a></td>
+<td>&nbsp;</td>
+<td>Set command line arguments</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.separator" title="NRPEClient.check_nrpe.separator"><code class="xref nscp nscp-option docutils literal"><span class="pre">separator</span></code></a></td>
+<td>&nbsp;</td>
+<td>Separator to use for the batch command (default is</td>
+<td>)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.batch" title="NRPEClient.check_nrpe.batch"><code class="xref nscp nscp-option docutils literal"><span class="pre">batch</span></code></a></td>
+<td>&nbsp;</td>
+<td>Add multiple records using the separator format is: command</td>
+<td>argument</td>
+<td>argument</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.certificate" title="NRPEClient.check_nrpe.certificate"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.dh" title="NRPEClient.check_nrpe.dh"><code class="xref nscp nscp-option docutils literal"><span class="pre">dh</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.certificate-key" title="NRPEClient.check_nrpe.certificate-key"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate-key</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate to use</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.certificate-format" title="NRPEClient.check_nrpe.certificate-format"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate-format</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.ca" title="NRPEClient.check_nrpe.ca"><code class="xref nscp nscp-option docutils literal"><span class="pre">ca</span></code></a></td>
+<td>&nbsp;</td>
+<td>Certificate authority</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.verify" title="NRPEClient.check_nrpe.verify"><code class="xref nscp nscp-option docutils literal"><span class="pre">verify</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.allowed-ciphers" title="NRPEClient.check_nrpe.allowed-ciphers"><code class="xref nscp nscp-option docutils literal"><span class="pre">allowed-ciphers</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.ssl" title="NRPEClient.check_nrpe.ssl"><code class="xref nscp nscp-option docutils literal"><span class="pre">ssl</span></code></a></td>
+<td>1</td>
+<td>Initial an ssl handshake with the server.</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.insecure" title="NRPEClient.check_nrpe.insecure"><code class="xref nscp nscp-option docutils literal"><span class="pre">insecure</span></code></a></td>
+<td>N/A</td>
+<td>Use insecure legacy mode</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.check_nrpe.payload-length" title="NRPEClient.check_nrpe.payload-length"><code class="xref nscp nscp-option docutils literal"><span class="pre">payload-length</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.check_nrpe.buffer-length" title="NRPEClient.check_nrpe.buffer-length"><code class="xref nscp nscp-option docutils literal"><span class="pre">buffer-length</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="arguments">
+<h4>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.help">
+<code class="descname">help</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.help-pb">
+<code class="descname">help-pb</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.show-default">
+<code class="descname">show-default</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.help-short">
+<code class="descname">help-short</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.host">
+<code class="descname">host</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The host of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.port">
+<code class="descname">port</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.port" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The port of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.address">
+<code class="descname">address</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.address" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The address (host:port) of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.timeout">
+<code class="descname">timeout</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of seconds before connection times out (default=10)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.target">
+<code class="descname">target</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.target" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Target to use (lookup connection info from config)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.retry">
+<code class="descname">retry</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.retry" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of times ti retry a failed connection attempt (default=2)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.retries">
+<code class="descname">retries</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.retries" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">legacy version of retry</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.source-host">
+<code class="descname">source-host</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.source-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.sender-host">
+<code class="descname">sender-host</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.sender-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.command">
+<code class="descname">command</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.command" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The name of the command that the remote daemon should run</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.argument">
+<code class="descname">argument</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.argument" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Set command line arguments</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.separator">
+<code class="descname">separator</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.separator" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Separator to use for the batch command (default is <a href="#id1"><span class="problematic" id="id2">|</span></a>)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.batch">
+<code class="descname">batch</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.batch" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Add multiple records using the separator format is: command|argument|argument</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.certificate">
+<code class="descname">certificate</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.certificate" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.dh">
+<code class="descname">dh</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.dh" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.certificate-key">
+<code class="descname">certificate-key</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.certificate-key" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate to use</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.certificate-format">
+<code class="descname">certificate-format</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.certificate-format" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.ca">
+<code class="descname">ca</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.ca" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Certificate authority</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.verify">
+<code class="descname">verify</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.verify" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.allowed-ciphers">
+<code class="descname">allowed-ciphers</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.allowed-ciphers" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.ssl">
+<code class="descname">ssl</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.ssl" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Initial an ssl handshake with the server.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.insecure">
+<code class="descname">insecure</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.insecure" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Use insecure legacy mode</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.payload-length">
+<code class="descname">payload-length</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.payload-length" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.check_nrpe.buffer-length">
+<code class="descname">buffer-length</code><em class="property"> (NRPEClient, check_nrpe)</em><a class="headerlink" href="#NRPEClient.check_nrpe.buffer-length" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="exec-nrpe">
+<h3><a class="reference internal" href="#NRPEClient.exec_nrpe" title="NRPEClient.exec_nrpe"><code class="xref nscp nscp-query docutils literal"><span class="pre">exec_nrpe</span></code></a><a class="headerlink" href="#exec-nrpe" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="NRPEClient.exec_nrpe">
+<code class="descclassname">NRPEClient</code><code class="descname">exec_nrpe</code><dd></dd>Execute remote script via NRPE. (Most likely you want nrpe_query).<a class="headerlink" href="#NRPEClient.exec_nrpe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.help" title="NRPEClient.exec_nrpe.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.help-pb" title="NRPEClient.exec_nrpe.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.show-default" title="NRPEClient.exec_nrpe.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.help-short" title="NRPEClient.exec_nrpe.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.host" title="NRPEClient.exec_nrpe.host"><code class="xref nscp nscp-option docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>The host of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.port" title="NRPEClient.exec_nrpe.port"><code class="xref nscp nscp-option docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>The port of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.address" title="NRPEClient.exec_nrpe.address"><code class="xref nscp nscp-option docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>The address (host:port) of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.timeout" title="NRPEClient.exec_nrpe.timeout"><code class="xref nscp nscp-option docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of seconds before connection times out (default=10)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.target" title="NRPEClient.exec_nrpe.target"><code class="xref nscp nscp-option docutils literal"><span class="pre">target</span></code></a></td>
+<td>&nbsp;</td>
+<td>Target to use (lookup connection info from config)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.retry" title="NRPEClient.exec_nrpe.retry"><code class="xref nscp nscp-option docutils literal"><span class="pre">retry</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of times ti retry a failed connection attempt (default=2)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.retries" title="NRPEClient.exec_nrpe.retries"><code class="xref nscp nscp-option docutils literal"><span class="pre">retries</span></code></a></td>
+<td>&nbsp;</td>
+<td>legacy version of retry</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.source-host" title="NRPEClient.exec_nrpe.source-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">source-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.sender-host" title="NRPEClient.exec_nrpe.sender-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">sender-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.command" title="NRPEClient.exec_nrpe.command"><code class="xref nscp nscp-option docutils literal"><span class="pre">command</span></code></a></td>
+<td>&nbsp;</td>
+<td>The name of the command that the remote daemon should run</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.argument" title="NRPEClient.exec_nrpe.argument"><code class="xref nscp nscp-option docutils literal"><span class="pre">argument</span></code></a></td>
+<td>&nbsp;</td>
+<td>Set command line arguments</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.separator" title="NRPEClient.exec_nrpe.separator"><code class="xref nscp nscp-option docutils literal"><span class="pre">separator</span></code></a></td>
+<td>&nbsp;</td>
+<td>Separator to use for the batch command (default is</td>
+<td>)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.batch" title="NRPEClient.exec_nrpe.batch"><code class="xref nscp nscp-option docutils literal"><span class="pre">batch</span></code></a></td>
+<td>&nbsp;</td>
+<td>Add multiple records using the separator format is: command</td>
+<td>argument</td>
+<td>argument</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.certificate" title="NRPEClient.exec_nrpe.certificate"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.dh" title="NRPEClient.exec_nrpe.dh"><code class="xref nscp nscp-option docutils literal"><span class="pre">dh</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.certificate-key" title="NRPEClient.exec_nrpe.certificate-key"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate-key</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate to use</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.certificate-format" title="NRPEClient.exec_nrpe.certificate-format"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate-format</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.ca" title="NRPEClient.exec_nrpe.ca"><code class="xref nscp nscp-option docutils literal"><span class="pre">ca</span></code></a></td>
+<td>&nbsp;</td>
+<td>Certificate authority</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.verify" title="NRPEClient.exec_nrpe.verify"><code class="xref nscp nscp-option docutils literal"><span class="pre">verify</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.allowed-ciphers" title="NRPEClient.exec_nrpe.allowed-ciphers"><code class="xref nscp nscp-option docutils literal"><span class="pre">allowed-ciphers</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.ssl" title="NRPEClient.exec_nrpe.ssl"><code class="xref nscp nscp-option docutils literal"><span class="pre">ssl</span></code></a></td>
+<td>1</td>
+<td>Initial an ssl handshake with the server.</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.insecure" title="NRPEClient.exec_nrpe.insecure"><code class="xref nscp nscp-option docutils literal"><span class="pre">insecure</span></code></a></td>
+<td>N/A</td>
+<td>Use insecure legacy mode</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.payload-length" title="NRPEClient.exec_nrpe.payload-length"><code class="xref nscp nscp-option docutils literal"><span class="pre">payload-length</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.exec_nrpe.buffer-length" title="NRPEClient.exec_nrpe.buffer-length"><code class="xref nscp nscp-option docutils literal"><span class="pre">buffer-length</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id3">
+<h4>Arguments<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.help">
+<code class="descname">help</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.help-pb">
+<code class="descname">help-pb</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.show-default">
+<code class="descname">show-default</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.help-short">
+<code class="descname">help-short</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.host">
+<code class="descname">host</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The host of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.port">
+<code class="descname">port</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.port" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The port of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.address">
+<code class="descname">address</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.address" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The address (host:port) of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.timeout">
+<code class="descname">timeout</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of seconds before connection times out (default=10)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.target">
+<code class="descname">target</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.target" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Target to use (lookup connection info from config)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.retry">
+<code class="descname">retry</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.retry" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of times ti retry a failed connection attempt (default=2)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.retries">
+<code class="descname">retries</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.retries" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">legacy version of retry</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.source-host">
+<code class="descname">source-host</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.source-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.sender-host">
+<code class="descname">sender-host</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.sender-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.command">
+<code class="descname">command</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.command" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The name of the command that the remote daemon should run</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.argument">
+<code class="descname">argument</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.argument" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Set command line arguments</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.separator">
+<code class="descname">separator</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.separator" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Separator to use for the batch command (default is <a href="#id4"><span class="problematic" id="id5">|</span></a>)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.batch">
+<code class="descname">batch</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.batch" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Add multiple records using the separator format is: command|argument|argument</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.certificate">
+<code class="descname">certificate</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.certificate" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.dh">
+<code class="descname">dh</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.dh" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.certificate-key">
+<code class="descname">certificate-key</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.certificate-key" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate to use</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.certificate-format">
+<code class="descname">certificate-format</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.certificate-format" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.ca">
+<code class="descname">ca</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.ca" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Certificate authority</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.verify">
+<code class="descname">verify</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.verify" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.allowed-ciphers">
+<code class="descname">allowed-ciphers</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.allowed-ciphers" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.ssl">
+<code class="descname">ssl</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.ssl" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Initial an ssl handshake with the server.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.insecure">
+<code class="descname">insecure</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.insecure" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Use insecure legacy mode</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.payload-length">
+<code class="descname">payload-length</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.payload-length" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.exec_nrpe.buffer-length">
+<code class="descname">buffer-length</code><em class="property"> (NRPEClient, exec_nrpe)</em><a class="headerlink" href="#NRPEClient.exec_nrpe.buffer-length" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="nrpe-forward">
+<h3><a class="reference internal" href="#NRPEClient.nrpe_forward" title="NRPEClient.nrpe_forward"><code class="xref nscp nscp-query docutils literal"><span class="pre">nrpe_forward</span></code></a><a class="headerlink" href="#nrpe-forward" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="NRPEClient.nrpe_forward">
+<code class="descclassname">NRPEClient</code><code class="descname">nrpe_forward</code><dd></dd>Forward the request as-is to remote host via NRPE.<a class="headerlink" href="#NRPEClient.nrpe_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_forward.*" title="NRPEClient.nrpe_forward.*"><code class="xref nscp nscp-option docutils literal"><span class="pre">*</span></code></a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id6">
+<h4>Arguments<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="NRPEClient.nrpe_forward.*">
+<code class="descname">*</code><em class="property"> (NRPEClient, nrpe_forward)</em><a class="headerlink" href="#NRPEClient.nrpe_forward.*" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="nrpe-query">
+<h3><a class="reference internal" href="#NRPEClient.nrpe_query" title="NRPEClient.nrpe_query"><code class="xref nscp nscp-query docutils literal"><span class="pre">nrpe_query</span></code></a><a class="headerlink" href="#nrpe-query" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="NRPEClient.nrpe_query">
+<code class="descclassname">NRPEClient</code><code class="descname">nrpe_query</code><dd></dd>Request remote information via NRPE.<a class="headerlink" href="#NRPEClient.nrpe_query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.help" title="NRPEClient.nrpe_query.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.help-pb" title="NRPEClient.nrpe_query.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.show-default" title="NRPEClient.nrpe_query.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.help-short" title="NRPEClient.nrpe_query.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.host" title="NRPEClient.nrpe_query.host"><code class="xref nscp nscp-option docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>The host of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.port" title="NRPEClient.nrpe_query.port"><code class="xref nscp nscp-option docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>The port of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.address" title="NRPEClient.nrpe_query.address"><code class="xref nscp nscp-option docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>The address (host:port) of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.timeout" title="NRPEClient.nrpe_query.timeout"><code class="xref nscp nscp-option docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of seconds before connection times out (default=10)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.target" title="NRPEClient.nrpe_query.target"><code class="xref nscp nscp-option docutils literal"><span class="pre">target</span></code></a></td>
+<td>&nbsp;</td>
+<td>Target to use (lookup connection info from config)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.retry" title="NRPEClient.nrpe_query.retry"><code class="xref nscp nscp-option docutils literal"><span class="pre">retry</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of times ti retry a failed connection attempt (default=2)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.retries" title="NRPEClient.nrpe_query.retries"><code class="xref nscp nscp-option docutils literal"><span class="pre">retries</span></code></a></td>
+<td>&nbsp;</td>
+<td>legacy version of retry</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.source-host" title="NRPEClient.nrpe_query.source-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">source-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.sender-host" title="NRPEClient.nrpe_query.sender-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">sender-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.command" title="NRPEClient.nrpe_query.command"><code class="xref nscp nscp-option docutils literal"><span class="pre">command</span></code></a></td>
+<td>&nbsp;</td>
+<td>The name of the command that the remote daemon should run</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.argument" title="NRPEClient.nrpe_query.argument"><code class="xref nscp nscp-option docutils literal"><span class="pre">argument</span></code></a></td>
+<td>&nbsp;</td>
+<td>Set command line arguments</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.separator" title="NRPEClient.nrpe_query.separator"><code class="xref nscp nscp-option docutils literal"><span class="pre">separator</span></code></a></td>
+<td>&nbsp;</td>
+<td>Separator to use for the batch command (default is</td>
+<td>)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.batch" title="NRPEClient.nrpe_query.batch"><code class="xref nscp nscp-option docutils literal"><span class="pre">batch</span></code></a></td>
+<td>&nbsp;</td>
+<td>Add multiple records using the separator format is: command</td>
+<td>argument</td>
+<td>argument</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.certificate" title="NRPEClient.nrpe_query.certificate"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.dh" title="NRPEClient.nrpe_query.dh"><code class="xref nscp nscp-option docutils literal"><span class="pre">dh</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.certificate-key" title="NRPEClient.nrpe_query.certificate-key"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate-key</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate to use</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.certificate-format" title="NRPEClient.nrpe_query.certificate-format"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate-format</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.ca" title="NRPEClient.nrpe_query.ca"><code class="xref nscp nscp-option docutils literal"><span class="pre">ca</span></code></a></td>
+<td>&nbsp;</td>
+<td>Certificate authority</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.verify" title="NRPEClient.nrpe_query.verify"><code class="xref nscp nscp-option docutils literal"><span class="pre">verify</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.allowed-ciphers" title="NRPEClient.nrpe_query.allowed-ciphers"><code class="xref nscp nscp-option docutils literal"><span class="pre">allowed-ciphers</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.ssl" title="NRPEClient.nrpe_query.ssl"><code class="xref nscp nscp-option docutils literal"><span class="pre">ssl</span></code></a></td>
+<td>1</td>
+<td>Initial an ssl handshake with the server.</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.insecure" title="NRPEClient.nrpe_query.insecure"><code class="xref nscp nscp-option docutils literal"><span class="pre">insecure</span></code></a></td>
+<td>N/A</td>
+<td>Use insecure legacy mode</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.nrpe_query.payload-length" title="NRPEClient.nrpe_query.payload-length"><code class="xref nscp nscp-option docutils literal"><span class="pre">payload-length</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.nrpe_query.buffer-length" title="NRPEClient.nrpe_query.buffer-length"><code class="xref nscp nscp-option docutils literal"><span class="pre">buffer-length</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id7">
+<h4>Arguments<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.help">
+<code class="descname">help</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.help-pb">
+<code class="descname">help-pb</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.show-default">
+<code class="descname">show-default</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.help-short">
+<code class="descname">help-short</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.host">
+<code class="descname">host</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The host of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.port">
+<code class="descname">port</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.port" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The port of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.address">
+<code class="descname">address</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.address" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The address (host:port) of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.timeout">
+<code class="descname">timeout</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of seconds before connection times out (default=10)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.target">
+<code class="descname">target</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.target" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Target to use (lookup connection info from config)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.retry">
+<code class="descname">retry</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.retry" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of times ti retry a failed connection attempt (default=2)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.retries">
+<code class="descname">retries</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.retries" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">legacy version of retry</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.source-host">
+<code class="descname">source-host</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.source-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.sender-host">
+<code class="descname">sender-host</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.sender-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.command">
+<code class="descname">command</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.command" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The name of the command that the remote daemon should run</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.argument">
+<code class="descname">argument</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.argument" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Set command line arguments</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.separator">
+<code class="descname">separator</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.separator" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Separator to use for the batch command (default is <a href="#id8"><span class="problematic" id="id9">|</span></a>)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.batch">
+<code class="descname">batch</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.batch" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Add multiple records using the separator format is: command|argument|argument</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.certificate">
+<code class="descname">certificate</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.certificate" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.dh">
+<code class="descname">dh</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.dh" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.certificate-key">
+<code class="descname">certificate-key</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.certificate-key" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate to use</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.certificate-format">
+<code class="descname">certificate-format</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.certificate-format" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.ca">
+<code class="descname">ca</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.ca" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Certificate authority</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.verify">
+<code class="descname">verify</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.verify" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.allowed-ciphers">
+<code class="descname">allowed-ciphers</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.allowed-ciphers" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.ssl">
+<code class="descname">ssl</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.ssl" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Initial an ssl handshake with the server.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.insecure">
+<code class="descname">insecure</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.insecure" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Use insecure legacy mode</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.payload-length">
+<code class="descname">payload-length</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.payload-length" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.nrpe_query.buffer-length">
+<code class="descname">buffer-length</code><em class="property"> (NRPEClient, nrpe_query)</em><a class="headerlink" href="#NRPEClient.nrpe_query.buffer-length" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="submit-nrpe">
+<h3><a class="reference internal" href="#NRPEClient.submit_nrpe" title="NRPEClient.submit_nrpe"><code class="xref nscp nscp-query docutils literal"><span class="pre">submit_nrpe</span></code></a><a class="headerlink" href="#submit-nrpe" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="NRPEClient.submit_nrpe">
+<code class="descclassname">NRPEClient</code><code class="descname">submit_nrpe</code><dd></dd>Submit information to remote host via NRPE. (Most likely you want nrpe_query).<a class="headerlink" href="#NRPEClient.submit_nrpe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.help" title="NRPEClient.submit_nrpe.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.help-pb" title="NRPEClient.submit_nrpe.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.show-default" title="NRPEClient.submit_nrpe.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.help-short" title="NRPEClient.submit_nrpe.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.host" title="NRPEClient.submit_nrpe.host"><code class="xref nscp nscp-option docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>The host of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.port" title="NRPEClient.submit_nrpe.port"><code class="xref nscp nscp-option docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>The port of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.address" title="NRPEClient.submit_nrpe.address"><code class="xref nscp nscp-option docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>The address (host:port) of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.timeout" title="NRPEClient.submit_nrpe.timeout"><code class="xref nscp nscp-option docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of seconds before connection times out (default=10)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.target" title="NRPEClient.submit_nrpe.target"><code class="xref nscp nscp-option docutils literal"><span class="pre">target</span></code></a></td>
+<td>&nbsp;</td>
+<td>Target to use (lookup connection info from config)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.retry" title="NRPEClient.submit_nrpe.retry"><code class="xref nscp nscp-option docutils literal"><span class="pre">retry</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of times ti retry a failed connection attempt (default=2)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.retries" title="NRPEClient.submit_nrpe.retries"><code class="xref nscp nscp-option docutils literal"><span class="pre">retries</span></code></a></td>
+<td>&nbsp;</td>
+<td>legacy version of retry</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.source-host" title="NRPEClient.submit_nrpe.source-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">source-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.sender-host" title="NRPEClient.submit_nrpe.sender-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">sender-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.command" title="NRPEClient.submit_nrpe.command"><code class="xref nscp nscp-option docutils literal"><span class="pre">command</span></code></a></td>
+<td>&nbsp;</td>
+<td>The name of the command that the remote daemon should run</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.alias" title="NRPEClient.submit_nrpe.alias"><code class="xref nscp nscp-option docutils literal"><span class="pre">alias</span></code></a></td>
+<td>&nbsp;</td>
+<td>Same as command</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.message" title="NRPEClient.submit_nrpe.message"><code class="xref nscp nscp-option docutils literal"><span class="pre">message</span></code></a></td>
+<td>&nbsp;</td>
+<td>Message</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.result" title="NRPEClient.submit_nrpe.result"><code class="xref nscp nscp-option docutils literal"><span class="pre">result</span></code></a></td>
+<td>&nbsp;</td>
+<td>Result code either a number or OK, WARN, CRIT, UNKNOWN</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.separator" title="NRPEClient.submit_nrpe.separator"><code class="xref nscp nscp-option docutils literal"><span class="pre">separator</span></code></a></td>
+<td>&nbsp;</td>
+<td>Separator to use for the batch command (default is</td>
+<td>)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.batch" title="NRPEClient.submit_nrpe.batch"><code class="xref nscp nscp-option docutils literal"><span class="pre">batch</span></code></a></td>
+<td>&nbsp;</td>
+<td>Add multiple records using the separator format is: command</td>
+<td>result</td>
+<td>message</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.certificate" title="NRPEClient.submit_nrpe.certificate"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.dh" title="NRPEClient.submit_nrpe.dh"><code class="xref nscp nscp-option docutils literal"><span class="pre">dh</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.certificate-key" title="NRPEClient.submit_nrpe.certificate-key"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate-key</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate to use</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.certificate-format" title="NRPEClient.submit_nrpe.certificate-format"><code class="xref nscp nscp-option docutils literal"><span class="pre">certificate-format</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.ca" title="NRPEClient.submit_nrpe.ca"><code class="xref nscp nscp-option docutils literal"><span class="pre">ca</span></code></a></td>
+<td>&nbsp;</td>
+<td>Certificate authority</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.verify" title="NRPEClient.submit_nrpe.verify"><code class="xref nscp nscp-option docutils literal"><span class="pre">verify</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.allowed-ciphers" title="NRPEClient.submit_nrpe.allowed-ciphers"><code class="xref nscp nscp-option docutils literal"><span class="pre">allowed-ciphers</span></code></a></td>
+<td>&nbsp;</td>
+<td>Client certificate format</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.ssl" title="NRPEClient.submit_nrpe.ssl"><code class="xref nscp nscp-option docutils literal"><span class="pre">ssl</span></code></a></td>
+<td>1</td>
+<td>Initial an ssl handshake with the server.</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.insecure" title="NRPEClient.submit_nrpe.insecure"><code class="xref nscp nscp-option docutils literal"><span class="pre">insecure</span></code></a></td>
+<td>N/A</td>
+<td>Use insecure legacy mode</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.payload-length" title="NRPEClient.submit_nrpe.payload-length"><code class="xref nscp nscp-option docutils literal"><span class="pre">payload-length</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload (has to be same as on the server)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient.submit_nrpe.buffer-length" title="NRPEClient.submit_nrpe.buffer-length"><code class="xref nscp nscp-option docutils literal"><span class="pre">buffer-length</span></code></a></td>
+<td>&nbsp;</td>
+<td>Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="id10">
+<h4>Arguments<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.help">
+<code class="descname">help</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.help-pb">
+<code class="descname">help-pb</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.show-default">
+<code class="descname">show-default</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.help-short">
+<code class="descname">help-short</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.host">
+<code class="descname">host</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The host of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.port">
+<code class="descname">port</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.port" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The port of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.address">
+<code class="descname">address</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.address" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The address (host:port) of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.timeout">
+<code class="descname">timeout</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of seconds before connection times out (default=10)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.target">
+<code class="descname">target</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.target" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Target to use (lookup connection info from config)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.retry">
+<code class="descname">retry</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.retry" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of times ti retry a failed connection attempt (default=2)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.retries">
+<code class="descname">retries</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.retries" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">legacy version of retry</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.source-host">
+<code class="descname">source-host</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.source-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.sender-host">
+<code class="descname">sender-host</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.sender-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.command">
+<code class="descname">command</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.command" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The name of the command that the remote daemon should run</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.alias">
+<code class="descname">alias</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.alias" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Same as command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.message">
+<code class="descname">message</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.message" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.result">
+<code class="descname">result</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.result" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Result code either a number or OK, WARN, CRIT, UNKNOWN</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.separator">
+<code class="descname">separator</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.separator" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Separator to use for the batch command (default is <a href="#id11"><span class="problematic" id="id12">|</span></a>)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.batch">
+<code class="descname">batch</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.batch" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Add multiple records using the separator format is: command|result|message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.certificate">
+<code class="descname">certificate</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.certificate" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.dh">
+<code class="descname">dh</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.dh" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.certificate-key">
+<code class="descname">certificate-key</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.certificate-key" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate to use</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.certificate-format">
+<code class="descname">certificate-format</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.certificate-format" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.ca">
+<code class="descname">ca</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.ca" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Certificate authority</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.verify">
+<code class="descname">verify</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.verify" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.allowed-ciphers">
+<code class="descname">allowed-ciphers</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.allowed-ciphers" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Client certificate format</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.ssl">
+<code class="descname">ssl</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.ssl" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Initial an ssl handshake with the server.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.insecure">
+<code class="descname">insecure</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.insecure" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Use insecure legacy mode</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.payload-length">
+<code class="descname">payload-length</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.payload-length" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload (has to be same as on the server)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="NRPEClient.submit_nrpe.buffer-length">
+<code class="descname">buffer-length</code><em class="property"> (NRPEClient, submit_nrpe)</em><a class="headerlink" href="#NRPEClient.submit_nrpe.buffer-length" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="settings-nrpe-client">
+<h3>/ settings/ NRPE/ client<a class="headerlink" href="#settings-nrpe-client" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRPEClient./settings/NRPE/client">
+<code class="descname">/settings/NRPE/client</code><em class="property"> (NRPEClient)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>NRPE CLIENT SECTION</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Section for NRPE active/passive check module.</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client.channel" title="NRPEClient./settings/NRPE/client.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>NRPE</td>
+<td>CHANNEL</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># NRPE CLIENT SECTION
+# Section for NRPE active/passive check module.
+[/settings/NRPE/client]
+channel=NRPE
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client.channel">
+<code class="descname">channel</code><em class="property"> (NRPEClient, /settings/NRPE/client)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client.channel" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CHANNEL</strong></p>
+<div class="line-block">
+<div class="line">The channel to listen to.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client</p>
+<p><strong>Key</strong>: channel</p>
+<p><strong>Default value</strong>: NRPE</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client]
+# CHANNEL
+channel=NRPE
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="handlers">
+<h3>…  / handlers<a class="headerlink" href="#handlers" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRPEClient./settings/NRPE/client/handlers">
+<code class="descname">/settings/NRPE/client/handlers</code><em class="property"> (NRPEClient)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/handlers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>CLIENT HANDLER SECTION</strong></p>
+<blockquote>
+<div><p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># CLIENT HANDLER SECTION
+#
+[/settings/NRPE/client/handlers]
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="targets">
+<h3>…  / targets<a class="headerlink" href="#targets" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRPEClient./settings/NRPE/client/targets">
+<code class="descname">/settings/NRPE/client/targets</code><em class="property"> (NRPEClient)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>REMOTE TARGET DEFINITIONS</strong></p>
+<blockquote>
+<div><p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># REMOTE TARGET DEFINITIONS
+#
+[/settings/NRPE/client/targets]
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="targets-default">
+<h3>…  / targets / default<a class="headerlink" href="#targets-default" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRPEClient./settings/NRPE/client/targets/default">
+<code class="descname">/settings/NRPE/client/targets/default</code><em class="property"> (NRPEClient)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>TARGET</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Target definition for: default</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.address" title="NRPEClient./settings/NRPE/client/targets/default.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET ADDRESS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.allowed ciphers" title="NRPEClient./settings/NRPE/client/targets/default.allowed ciphers"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">allowed</span> <span class="pre">ciphers</span></code></a></td>
+<td>&nbsp;</td>
+<td>ALLOWED CIPHERS</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.ca" title="NRPEClient./settings/NRPE/client/targets/default.ca"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ca</span></code></a></td>
+<td>&nbsp;</td>
+<td>CA</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.certificate" title="NRPEClient./settings/NRPE/client/targets/default.certificate"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span></code></a></td>
+<td>&nbsp;</td>
+<td>SSL CERTIFICATE</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.certificate format" title="NRPEClient./settings/NRPE/client/targets/default.certificate format"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span> <span class="pre">format</span></code></a></td>
+<td>&nbsp;</td>
+<td>CERTIFICATE FORMAT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.certificate key" title="NRPEClient./settings/NRPE/client/targets/default.certificate key"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span> <span class="pre">key</span></code></a></td>
+<td>&nbsp;</td>
+<td>SSL CERTIFICATE</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.dh" title="NRPEClient./settings/NRPE/client/targets/default.dh"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">dh</span></code></a></td>
+<td>&nbsp;</td>
+<td>DH KEY</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.host" title="NRPEClient./settings/NRPE/client/targets/default.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET HOST</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.insecure" title="NRPEClient./settings/NRPE/client/targets/default.insecure"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">insecure</span></code></a></td>
+<td>&nbsp;</td>
+<td>Insecure legacy mode</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.payload length" title="NRPEClient./settings/NRPE/client/targets/default.payload length"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">payload</span> <span class="pre">length</span></code></a></td>
+<td>0</td>
+<td>PAYLOAD LENGTH</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.port" title="NRPEClient./settings/NRPE/client/targets/default.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET PORT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.retries" title="NRPEClient./settings/NRPE/client/targets/default.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>3</td>
+<td>RETRIES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.timeout" title="NRPEClient./settings/NRPE/client/targets/default.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>30</td>
+<td>TIMEOUT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.use ssl" title="NRPEClient./settings/NRPE/client/targets/default.use ssl"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">use</span> <span class="pre">ssl</span></code></a></td>
+<td>0</td>
+<td>ENABLE SSL ENCRYPTION</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/default.verify mode" title="NRPEClient./settings/NRPE/client/targets/default.verify mode"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">verify</span> <span class="pre">mode</span></code></a></td>
+<td>&nbsp;</td>
+<td>VERIFY MODE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># TARGET
+# Target definition for: default
+[/settings/NRPE/client/targets/default]
+address=
+allowed ciphers=
+ca=
+certificate=
+certificate format=
+certificate key=
+dh=
+host=
+insecure=
+payload length=0
+port=
+retries=3
+timeout=30
+use ssl=0
+verify mode=
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.address">
+<code class="descname">address</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.address" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET ADDRESS</strong></p>
+<div class="line-block">
+<div class="line">Target host address</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: address</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# TARGET ADDRESS
+address=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.allowed ciphers">
+<code class="descname">allowed ciphers</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.allowed ciphers" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>ALLOWED CIPHERS</strong></p>
+<div class="line-block">
+<div class="line">A better value is: ALL:!ADH:!LOW:!EXP:!MD5:&#64;STRENGTH</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: allowed ciphers</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# ALLOWED CIPHERS
+allowed ciphers=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.ca">
+<code class="descname">ca</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.ca" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CA</strong></p>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: ca</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# CA
+ca=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.certificate">
+<code class="descname">certificate</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.certificate" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SSL CERTIFICATE</strong></p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: certificate</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# SSL CERTIFICATE
+certificate=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.certificate format">
+<code class="descname">certificate format</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.certificate format" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CERTIFICATE FORMAT</strong></p>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: certificate format</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# CERTIFICATE FORMAT
+certificate format=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.certificate key">
+<code class="descname">certificate key</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.certificate key" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SSL CERTIFICATE</strong></p>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: certificate key</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# SSL CERTIFICATE
+certificate key=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.dh">
+<code class="descname">dh</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.dh" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DH KEY</strong></p>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: dh</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# DH KEY
+dh=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.host">
+<code class="descname">host</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.host" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET HOST</strong></p>
+<div class="line-block">
+<div class="line">The target server to report results to.</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: host</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# TARGET HOST
+host=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.insecure">
+<code class="descname">insecure</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.insecure" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Insecure legacy mode</strong></p>
+<div class="line-block">
+<div class="line">Use insecure legacy mode to connect to old NRPE server</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: insecure</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# Insecure legacy mode
+insecure=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.payload length">
+<code class="descname">payload length</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.payload length" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PAYLOAD LENGTH</strong></p>
+<div class="line-block">
+<div class="line">Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: payload length</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# PAYLOAD LENGTH
+payload length=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.port">
+<code class="descname">port</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.port" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET PORT</strong></p>
+<div class="line-block">
+<div class="line">The target server port</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: port</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# TARGET PORT
+port=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.retries">
+<code class="descname">retries</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.retries" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>RETRIES</strong></p>
+<div class="line-block">
+<div class="line">Number of times to retry sending.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: retries</p>
+<p><strong>Default value</strong>: 3</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# RETRIES
+retries=3
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.timeout">
+<code class="descname">timeout</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TIMEOUT</strong></p>
+<div class="line-block">
+<div class="line">Timeout when reading/writing packets to/from sockets.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: timeout</p>
+<p><strong>Default value</strong>: 30</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# TIMEOUT
+timeout=30
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.use ssl">
+<code class="descname">use ssl</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.use ssl" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>ENABLE SSL ENCRYPTION</strong></p>
+<div class="line-block">
+<div class="line">This option controls if SSL should be enabled.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: use ssl</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# ENABLE SSL ENCRYPTION
+use ssl=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/default.verify mode">
+<code class="descname">verify mode</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/default)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/default.verify mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>VERIFY MODE</strong></p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/default</p>
+<p><strong>Key</strong>: verify mode</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/default]
+# VERIFY MODE
+verify mode=
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="targets-sample">
+<h3>…  / targets / sample<a class="headerlink" href="#targets-sample" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample">
+<code class="descname">/settings/NRPE/client/targets/sample</code><em class="property"> (NRPEClient)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>TARGET</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Target definition for: sample</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.address" title="NRPEClient./settings/NRPE/client/targets/sample.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET ADDRESS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.allowed ciphers" title="NRPEClient./settings/NRPE/client/targets/sample.allowed ciphers"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">allowed</span> <span class="pre">ciphers</span></code></a></td>
+<td>&nbsp;</td>
+<td>ALLOWED CIPHERS</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.ca" title="NRPEClient./settings/NRPE/client/targets/sample.ca"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ca</span></code></a></td>
+<td>&nbsp;</td>
+<td>CA</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.certificate" title="NRPEClient./settings/NRPE/client/targets/sample.certificate"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span></code></a></td>
+<td>&nbsp;</td>
+<td>SSL CERTIFICATE</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.certificate format" title="NRPEClient./settings/NRPE/client/targets/sample.certificate format"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span> <span class="pre">format</span></code></a></td>
+<td>&nbsp;</td>
+<td>CERTIFICATE FORMAT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.certificate key" title="NRPEClient./settings/NRPE/client/targets/sample.certificate key"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">certificate</span> <span class="pre">key</span></code></a></td>
+<td>&nbsp;</td>
+<td>SSL CERTIFICATE</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.dh" title="NRPEClient./settings/NRPE/client/targets/sample.dh"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">dh</span></code></a></td>
+<td>&nbsp;</td>
+<td>DH KEY</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.host" title="NRPEClient./settings/NRPE/client/targets/sample.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET HOST</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.insecure" title="NRPEClient./settings/NRPE/client/targets/sample.insecure"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">insecure</span></code></a></td>
+<td>&nbsp;</td>
+<td>Insecure legacy mode</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.payload length" title="NRPEClient./settings/NRPE/client/targets/sample.payload length"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">payload</span> <span class="pre">length</span></code></a></td>
+<td>0</td>
+<td>PAYLOAD LENGTH</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.port" title="NRPEClient./settings/NRPE/client/targets/sample.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET PORT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.retries" title="NRPEClient./settings/NRPE/client/targets/sample.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>3</td>
+<td>RETRIES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.timeout" title="NRPEClient./settings/NRPE/client/targets/sample.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>30</td>
+<td>TIMEOUT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.use ssl" title="NRPEClient./settings/NRPE/client/targets/sample.use ssl"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">use</span> <span class="pre">ssl</span></code></a></td>
+<td>0</td>
+<td>ENABLE SSL ENCRYPTION</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#NRPEClient./settings/NRPE/client/targets/sample.verify mode" title="NRPEClient./settings/NRPE/client/targets/sample.verify mode"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">verify</span> <span class="pre">mode</span></code></a></td>
+<td>&nbsp;</td>
+<td>VERIFY MODE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># TARGET
+# Target definition for: sample
+[/settings/NRPE/client/targets/sample]
+address=
+allowed ciphers=
+ca=
+certificate=
+certificate format=
+certificate key=
+dh=
+host=
+insecure=
+payload length=0
+port=
+retries=3
+timeout=30
+use ssl=0
+verify mode=
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.address">
+<code class="descname">address</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.address" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET ADDRESS</strong></p>
+<div class="line-block">
+<div class="line">Target host address</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: address</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# TARGET ADDRESS
+address=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.allowed ciphers">
+<code class="descname">allowed ciphers</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.allowed ciphers" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>ALLOWED CIPHERS</strong></p>
+<div class="line-block">
+<div class="line">A better value is: ALL:!ADH:!LOW:!EXP:!MD5:&#64;STRENGTH</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: allowed ciphers</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# ALLOWED CIPHERS
+allowed ciphers=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.ca">
+<code class="descname">ca</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.ca" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CA</strong></p>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: ca</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# CA
+ca=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.certificate">
+<code class="descname">certificate</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.certificate" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SSL CERTIFICATE</strong></p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: certificate</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# SSL CERTIFICATE
+certificate=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.certificate format">
+<code class="descname">certificate format</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.certificate format" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CERTIFICATE FORMAT</strong></p>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: certificate format</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# CERTIFICATE FORMAT
+certificate format=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.certificate key">
+<code class="descname">certificate key</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.certificate key" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SSL CERTIFICATE</strong></p>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: certificate key</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# SSL CERTIFICATE
+certificate key=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.dh">
+<code class="descname">dh</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.dh" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DH KEY</strong></p>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: dh</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# DH KEY
+dh=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.host">
+<code class="descname">host</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.host" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET HOST</strong></p>
+<div class="line-block">
+<div class="line">The target server to report results to.</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: host</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# TARGET HOST
+host=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.insecure">
+<code class="descname">insecure</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.insecure" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Insecure legacy mode</strong></p>
+<div class="line-block">
+<div class="line">Use insecure legacy mode to connect to old NRPE server</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: insecure</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# Insecure legacy mode
+insecure=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.payload length">
+<code class="descname">payload length</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.payload length" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PAYLOAD LENGTH</strong></p>
+<div class="line-block">
+<div class="line">Length of payload to/from the NRPE agent. This is a hard specific value so you have to &#8220;configure&#8221; (read recompile) your NRPE agent to use the same value for it to work.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: payload length</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# PAYLOAD LENGTH
+payload length=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.port">
+<code class="descname">port</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.port" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET PORT</strong></p>
+<div class="line-block">
+<div class="line">The target server port</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: port</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# TARGET PORT
+port=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.retries">
+<code class="descname">retries</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.retries" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>RETRIES</strong></p>
+<div class="line-block">
+<div class="line">Number of times to retry sending.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: retries</p>
+<p><strong>Default value</strong>: 3</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# RETRIES
+retries=3
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.timeout">
+<code class="descname">timeout</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TIMEOUT</strong></p>
+<div class="line-block">
+<div class="line">Timeout when reading/writing packets to/from sockets.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: timeout</p>
+<p><strong>Default value</strong>: 30</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# TIMEOUT
+timeout=30
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.use ssl">
+<code class="descname">use ssl</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.use ssl" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>ENABLE SSL ENCRYPTION</strong></p>
+<div class="line-block">
+<div class="line">This option controls if SSL should be enabled.</div>
+</div>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: use ssl</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# ENABLE SSL ENCRYPTION
+use ssl=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="NRPEClient./settings/NRPE/client/targets/sample.verify mode">
+<code class="descname">verify mode</code><em class="property"> (NRPEClient, /settings/NRPE/client/targets/sample)</em><a class="headerlink" href="#NRPEClient./settings/NRPE/client/targets/sample.verify mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>VERIFY MODE</strong></p>
+<p><strong>Path</strong>: /settings/NRPE/client/targets/sample</p>
+<p><strong>Key</strong>: verify mode</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">NRPEClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/NRPE/client/targets/sample]
+# VERIFY MODE
+verify mode=
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">NRPEClient</span></code> &#8212; NRPEClient</a><ul>
+<li><a class="reference internal" href="#queries">Queries</a><ul>
+<li><a class="reference internal" href="#check-nrpe"><code class="docutils literal"><span class="pre">check_nrpe</span></code></a><ul>
+<li><a class="reference internal" href="#arguments">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exec-nrpe"><code class="docutils literal"><span class="pre">exec_nrpe</span></code></a><ul>
+<li><a class="reference internal" href="#id3">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nrpe-forward"><code class="docutils literal"><span class="pre">nrpe_forward</span></code></a><ul>
+<li><a class="reference internal" href="#id6">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nrpe-query"><code class="docutils literal"><span class="pre">nrpe_query</span></code></a><ul>
+<li><a class="reference internal" href="#id7">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#submit-nrpe"><code class="docutils literal"><span class="pre">submit_nrpe</span></code></a><ul>
+<li><a class="reference internal" href="#id10">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#settings-nrpe-client">/ settings/ NRPE/ client</a></li>
+<li><a class="reference internal" href="#handlers">…  / handlers</a></li>
+<li><a class="reference internal" href="#targets">…  / targets</a></li>
+<li><a class="reference internal" href="#targets-default">…  / targets / default</a></li>
+<li><a class="reference internal" href="#targets-sample">…  / targets / sample</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="NRDPClient.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">NRDPClient</span></code> &#8212; NRDPClient</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="NRPEServer.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">NRPEServer</span></code> &#8212; NRPEServer</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/reference/client/NRPEClient.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="NRPEServer.html" title="NRPEServer — NRPEServer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="NRDPClient.html" title="NRDPClient — NRDPClient"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

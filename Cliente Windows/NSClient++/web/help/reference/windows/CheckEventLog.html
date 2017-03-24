@@ -1,0 +1,2862 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CheckEventLog — CheckEventLog &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Reference Manual" href="../index.html" />
+    <link rel="next" title="CheckSystem — CheckSystem" href="CheckSystem.html" />
+    <link rel="prev" title="CheckDisk — CheckDisk" href="CheckDisk.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="CheckSystem.html" title="CheckSystem — CheckSystem"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="CheckDisk.html" title="CheckDisk — CheckDisk"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <dl class="module">
+<dt id="CheckEventLog">
+<code class="descname">CheckEventLog</code><dd></dd>Check for errors and warnings in the event log.<a class="headerlink" href="#CheckEventLog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="checkeventlog-checkeventlog">
+<h1><code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code> &#8212; CheckEventLog<a class="headerlink" href="#checkeventlog-checkeventlog" title="Permalink to this headline">¶</a></h1>
+<p>Check for errors and warnings in the event log.</p>
+<p><strong>Queries (Overview)</strong>:</p>
+<p>A list of all available queries (check commands)</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog" title="CheckEventLog.check_eventlog"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_eventlog</span></code></a></td>
+<td>Check for errors in the event log.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog" title="CheckEventLog.checkeventlog"><code class="xref nscp nscp-query docutils literal"><span class="pre">checkeventlog</span></code></a></td>
+<td>Legacy version of check_eventlog</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Commands (Overview)</strong>:</p>
+<p><strong>TODO:</strong> Add a list of all external commands (this is not check commands)</p>
+<p><strong>Configuration (Overview)</strong>:</p>
+<p>Common Keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog" title="CheckEventLog./settings/eventlog"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog.buffer size" title="CheckEventLog./settings/eventlog.buffer size"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">buffer</span> <span class="pre">size</span></code></a></td>
+<td>BUFFER_SIZE</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog" title="CheckEventLog./settings/eventlog"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog.debug" title="CheckEventLog./settings/eventlog.debug"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">debug</span></code></a></td>
+<td>DEBUG</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog" title="CheckEventLog./settings/eventlog"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog.lookup names" title="CheckEventLog./settings/eventlog.lookup names"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">lookup</span> <span class="pre">names</span></code></a></td>
+<td>LOOKUP NAMES</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog" title="CheckEventLog./settings/eventlog"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog.syntax" title="CheckEventLog./settings/eventlog.syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">syntax</span></code></a></td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time" title="CheckEventLog./settings/eventlog/real-time"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time.debug" title="CheckEventLog./settings/eventlog/real-time.debug"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">debug</span></code></a></td>
+<td>DEBUG</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time" title="CheckEventLog./settings/eventlog/real-time"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time.enabled" title="CheckEventLog./settings/eventlog/real-time.enabled"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">enabled</span></code></a></td>
+<td>REAL TIME CHECKING</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time" title="CheckEventLog./settings/eventlog/real-time"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time.log" title="CheckEventLog./settings/eventlog/real-time.log"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">log</span></code></a></td>
+<td>LOGS TO CHECK</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time" title="CheckEventLog./settings/eventlog/real-time"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time.startup age" title="CheckEventLog./settings/eventlog/real-time.startup age"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">startup</span> <span class="pre">age</span></code></a></td>
+<td>STARTUP AGE</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.command" title="CheckEventLog./settings/eventlog/real-time/filters/default.command"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">command</span></code></a></td>
+<td>COMMAND NAME</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.critical" title="CheckEventLog./settings/eventlog/real-time/filters/default.critical"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">critical</span></code></a></td>
+<td>CRITICAL FILTER</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.destination" title="CheckEventLog./settings/eventlog/real-time/filters/default.destination"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">destination</span></code></a></td>
+<td>DESTINATION</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.detail syntax" title="CheckEventLog./settings/eventlog/real-time/filters/default.detail syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">detail</span> <span class="pre">syntax</span></code></a></td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.empty message" title="CheckEventLog./settings/eventlog/real-time/filters/default.empty message"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">empty</span> <span class="pre">message</span></code></a></td>
+<td>EMPTY MESSAGE</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.filter" title="CheckEventLog./settings/eventlog/real-time/filters/default.filter"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">filter</span></code></a></td>
+<td>FILTER</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.log" title="CheckEventLog./settings/eventlog/real-time/filters/default.log"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">log</span></code></a></td>
+<td>FILE</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.maximum age" title="CheckEventLog./settings/eventlog/real-time/filters/default.maximum age"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">maximum</span> <span class="pre">age</span></code></a></td>
+<td>MAGIMUM AGE</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.ok" title="CheckEventLog./settings/eventlog/real-time/filters/default.ok"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ok</span></code></a></td>
+<td>OK FILTER</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.ok syntax" title="CheckEventLog./settings/eventlog/real-time/filters/default.ok syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ok</span> <span class="pre">syntax</span></code></a></td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.severity" title="CheckEventLog./settings/eventlog/real-time/filters/default.severity"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">severity</span></code></a></td>
+<td>SEVERITY</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.target" title="CheckEventLog./settings/eventlog/real-time/filters/default.target"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">target</span></code></a></td>
+<td>DESTINATION</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.top syntax" title="CheckEventLog./settings/eventlog/real-time/filters/default.top syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">top</span> <span class="pre">syntax</span></code></a></td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.warning" title="CheckEventLog./settings/eventlog/real-time/filters/default.warning"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">warning</span></code></a></td>
+<td>WARNING FILTER</td>
+</tr>
+</tbody>
+</table>
+<p>Advanced keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.debug" title="CheckEventLog./settings/eventlog/real-time/filters/default.debug"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">debug</span></code></a></td>
+<td>DEBUG</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.escape html" title="CheckEventLog./settings/eventlog/real-time/filters/default.escape html"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">escape</span> <span class="pre">html</span></code></a></td>
+<td>ESCAPE HTML</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.logs" title="CheckEventLog./settings/eventlog/real-time/filters/default.logs"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">logs</span></code></a></td>
+<td>FILES</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.perf config" title="CheckEventLog./settings/eventlog/real-time/filters/default.perf config"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">perf</span> <span class="pre">config</span></code></a></td>
+<td>PERF CONFIG</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.source id" title="CheckEventLog./settings/eventlog/real-time/filters/default.source id"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">source</span> <span class="pre">id</span></code></a></td>
+<td>SOURCE ID</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="CheckEventLog./settings/eventlog/real-time/filters/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/default</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.target id" title="CheckEventLog./settings/eventlog/real-time/filters/default.target id"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">target</span> <span class="pre">id</span></code></a></td>
+<td>TARGET ID</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Sample keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.command" title="CheckEventLog./settings/eventlog/real-time/filters/sample.command"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">command</span></code></a></td>
+<td>COMMAND NAME</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.critical" title="CheckEventLog./settings/eventlog/real-time/filters/sample.critical"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">critical</span></code></a></td>
+<td>CRITICAL FILTER</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.debug" title="CheckEventLog./settings/eventlog/real-time/filters/sample.debug"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">debug</span></code></a></td>
+<td>DEBUG</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.destination" title="CheckEventLog./settings/eventlog/real-time/filters/sample.destination"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">destination</span></code></a></td>
+<td>DESTINATION</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.detail syntax" title="CheckEventLog./settings/eventlog/real-time/filters/sample.detail syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">detail</span> <span class="pre">syntax</span></code></a></td>
+<td>SYNTAX</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.empty message" title="CheckEventLog./settings/eventlog/real-time/filters/sample.empty message"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">empty</span> <span class="pre">message</span></code></a></td>
+<td>EMPTY MESSAGE</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.escape html" title="CheckEventLog./settings/eventlog/real-time/filters/sample.escape html"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">escape</span> <span class="pre">html</span></code></a></td>
+<td>ESCAPE HTML</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.filter" title="CheckEventLog./settings/eventlog/real-time/filters/sample.filter"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">filter</span></code></a></td>
+<td>FILTER</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.log" title="CheckEventLog./settings/eventlog/real-time/filters/sample.log"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">log</span></code></a></td>
+<td>FILE</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.logs" title="CheckEventLog./settings/eventlog/real-time/filters/sample.logs"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">logs</span></code></a></td>
+<td>FILES</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.maximum age" title="CheckEventLog./settings/eventlog/real-time/filters/sample.maximum age"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">maximum</span> <span class="pre">age</span></code></a></td>
+<td>MAGIMUM AGE</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.ok" title="CheckEventLog./settings/eventlog/real-time/filters/sample.ok"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ok</span></code></a></td>
+<td>OK FILTER</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.ok syntax" title="CheckEventLog./settings/eventlog/real-time/filters/sample.ok syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ok</span> <span class="pre">syntax</span></code></a></td>
+<td>SYNTAX</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.perf config" title="CheckEventLog./settings/eventlog/real-time/filters/sample.perf config"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">perf</span> <span class="pre">config</span></code></a></td>
+<td>PERF CONFIG</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.severity" title="CheckEventLog./settings/eventlog/real-time/filters/sample.severity"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">severity</span></code></a></td>
+<td>SEVERITY</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.source id" title="CheckEventLog./settings/eventlog/real-time/filters/sample.source id"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">source</span> <span class="pre">id</span></code></a></td>
+<td>SOURCE ID</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.target" title="CheckEventLog./settings/eventlog/real-time/filters/sample.target"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">target</span></code></a></td>
+<td>DESTINATION</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.target id" title="CheckEventLog./settings/eventlog/real-time/filters/sample.target id"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">target</span> <span class="pre">id</span></code></a></td>
+<td>TARGET ID</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.top syntax" title="CheckEventLog./settings/eventlog/real-time/filters/sample.top syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">top</span> <span class="pre">syntax</span></code></a></td>
+<td>SYNTAX</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="CheckEventLog./settings/eventlog/real-time/filters/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/eventlog/real-time/filters/sample</span></code></a></td>
+<td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.warning" title="CheckEventLog./settings/eventlog/real-time/filters/sample.warning"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">warning</span></code></a></td>
+<td>WARNING FILTER</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="samples">
+<h2>Samples<a class="headerlink" href="#samples" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="realtime-monitoring">
+<h2>Realtime monitoring<a class="headerlink" href="#realtime-monitoring" title="Permalink to this headline">¶</a></h2>
+<p>Setting up real time monitoring can be a bit daunting for first time users.
+But it is not as difficult as it might seem.</p>
+<p>The basic idea is depict in the following figure.</p>
+<p>We have a filter which listens to event log entries.
+These entries are (when they matched) turned into messages and statuses which is then sent onward to various channels.
+On the other end of these channels are (hopefully) someone who is interested in the message.</p>
+<p>In most cases the first channel you are interested in is NSCA which is the default name where the NSCACLient listenes.
+It will in turn foirward all incoming messages on to Nagios via NSCA.</p>
+<p>So in short we need to configure three things
+# Activate real time filtering
+# Add a filter which listenes for events
+# Setup a destination</p>
+<div class="section" id="enabling-realtime-filtering">
+<h3>Enabling realtime filtering<a class="headerlink" href="#enabling-realtime-filtering" title="Permalink to this headline">¶</a></h3>
+<p>To setup real time filtering we only need a single flag (as well as the eventlog module).</p>
+<p>configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/mnodules]
+ChecEventLog=enabled
+
+[/.../]
+realtime = enabled
+</pre></div>
+</div>
+<p>Adding this will not do much since we dont have a filter yet but adding one is prettyb simple as well so lets gon ahead and do that.</p>
+<p>configuration:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/...]
+</pre></div>
+</div>
+<p>If we were to test this (and please do go ahead) we would start getting warning on the concole about no one listening to our events.</p>
+<p>But noe we wnd up in a strange situation, how can we actually test this configuration?
+How can we generate messages in the windows eventlog?
+Fortunetly NSClient++ can help us there as well.</p>
+<p>execute the following to inser an error into the everntlog:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="queries">
+<h3>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h3>
+<p>A quick reference for all available queries (check commands) in the CheckEventLog module.</p>
+</div>
+</div>
+<div class="section" id="check-eventlog">
+<h2><a class="reference internal" href="#CheckEventLog.check_eventlog" title="CheckEventLog.check_eventlog"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_eventlog</span></code></a><a class="headerlink" href="#check-eventlog" title="Permalink to this headline">¶</a></h2>
+<dl class="query">
+<dt id="CheckEventLog.check_eventlog">
+<code class="descclassname">CheckEventLog</code><code class="descname">check_eventlog</code><dd></dd>Check for errors in the event log.<a class="headerlink" href="#CheckEventLog.check_eventlog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.filter" title="CheckEventLog.check_eventlog.filter"><code class="xref nscp nscp-option docutils literal"><span class="pre">filter</span></code></a></td>
+<td>level in (&#8216;warning&#8217;, &#8216;error&#8217;, &#8216;critical&#8217;)</td>
+<td>Filter which marks interesting items.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.warning" title="CheckEventLog.check_eventlog.warning"><code class="xref nscp nscp-option docutils literal"><span class="pre">warning</span></code></a></td>
+<td>level = &#8216;warning&#8217;, problem_count &gt; 0</td>
+<td>Filter which marks items which generates a warning state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.warn" title="CheckEventLog.check_eventlog.warn"><code class="xref nscp nscp-option docutils literal"><span class="pre">warn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Short alias for warning</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.critical" title="CheckEventLog.check_eventlog.critical"><code class="xref nscp nscp-option docutils literal"><span class="pre">critical</span></code></a></td>
+<td>level in (&#8216;error&#8217;, &#8216;critical&#8217;)</td>
+<td>Filter which marks items which generates a critical state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.crit" title="CheckEventLog.check_eventlog.crit"><code class="xref nscp nscp-option docutils literal"><span class="pre">crit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Short alias for critical.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.ok" title="CheckEventLog.check_eventlog.ok"><code class="xref nscp nscp-option docutils literal"><span class="pre">ok</span></code></a></td>
+<td>&nbsp;</td>
+<td>Filter which marks items which generates an ok state.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.debug" title="CheckEventLog.check_eventlog.debug"><code class="xref nscp nscp-option docutils literal"><span class="pre">debug</span></code></a></td>
+<td>N/A</td>
+<td>Show debugging information in the log</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.show-all" title="CheckEventLog.check_eventlog.show-all"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-all</span></code></a></td>
+<td>N/A</td>
+<td>Show details for all matches regardless of status (normally details are only showed for warnings and criticals).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.empty-state" title="CheckEventLog.check_eventlog.empty-state"><code class="xref nscp nscp-option docutils literal"><span class="pre">empty-state</span></code></a></td>
+<td>ok</td>
+<td>Return status to use when nothing matched filter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.perf-config" title="CheckEventLog.check_eventlog.perf-config"><code class="xref nscp nscp-option docutils literal"><span class="pre">perf-config</span></code></a></td>
+<td>level(ignored:true)</td>
+<td>Performance data generation configuration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.escape-html" title="CheckEventLog.check_eventlog.escape-html"><code class="xref nscp nscp-option docutils literal"><span class="pre">escape-html</span></code></a></td>
+<td>N/A</td>
+<td>Escape any &lt; and &gt; characters to prevent HTML encoding</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.help" title="CheckEventLog.check_eventlog.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.help-pb" title="CheckEventLog.check_eventlog.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.show-default" title="CheckEventLog.check_eventlog.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.help-short" title="CheckEventLog.check_eventlog.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.unique-index" title="CheckEventLog.check_eventlog.unique-index"><code class="xref nscp nscp-option docutils literal"><span class="pre">unique-index</span></code></a></td>
+<td>&nbsp;</td>
+<td>Unique syntax.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.top-syntax" title="CheckEventLog.check_eventlog.top-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">top-syntax</span></code></a></td>
+<td>${status}: ${count} message(s) ${problem_list}</td>
+<td>Top level syntax.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.ok-syntax" title="CheckEventLog.check_eventlog.ok-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">ok-syntax</span></code></a></td>
+<td>%(status): Event log seems fine</td>
+<td>ok syntax.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.empty-syntax" title="CheckEventLog.check_eventlog.empty-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">empty-syntax</span></code></a></td>
+<td>%(status): No entries found</td>
+<td>Empty syntax.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.detail-syntax" title="CheckEventLog.check_eventlog.detail-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">detail-syntax</span></code></a></td>
+<td>${file} ${source} (${message})</td>
+<td>Detail level syntax.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.perf-syntax" title="CheckEventLog.check_eventlog.perf-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">perf-syntax</span></code></a></td>
+<td>${file}_${source}</td>
+<td>Performance alias syntax.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.file" title="CheckEventLog.check_eventlog.file"><code class="xref nscp nscp-option docutils literal"><span class="pre">file</span></code></a></td>
+<td>&nbsp;</td>
+<td>File to read (can be specified multiple times to check multiple files.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.log" title="CheckEventLog.check_eventlog.log"><code class="xref nscp nscp-option docutils literal"><span class="pre">log</span></code></a></td>
+<td>&nbsp;</td>
+<td>Same as file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.scan-range" title="CheckEventLog.check_eventlog.scan-range"><code class="xref nscp nscp-option docutils literal"><span class="pre">scan-range</span></code></a></td>
+<td>&nbsp;</td>
+<td>Date range to scan.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.truncate-message" title="CheckEventLog.check_eventlog.truncate-message"><code class="xref nscp nscp-option docutils literal"><span class="pre">truncate-message</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum length of message for each event log message text.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.check_eventlog.unique" title="CheckEventLog.check_eventlog.unique"><code class="xref nscp nscp-option docutils literal"><span class="pre">unique</span></code></a></td>
+<td>1</td>
+<td>Shorthand for setting default unique index: ${log}-${source}-${id}.</td>
+</tr>
+</tbody>
+</table>
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.filter">
+<code class="descname">filter</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.filter" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks interesting items.</div>
+<div class="line">Interesting items are items which will be included in the check.</div>
+<div class="line">They do not denote warning or critical state instead it defines which items are relevant and you can remove unwanted items.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.warning">
+<code class="descname">warning</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.warning" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks items which generates a warning state.</div>
+<div class="line">If anything matches this filter the return status will be escalated to warning.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.warn">
+<code class="descname">warn</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.warn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Short alias for warning</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.critical">
+<code class="descname">critical</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.critical" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks items which generates a critical state.</div>
+<div class="line">If anything matches this filter the return status will be escalated to critical.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.crit">
+<code class="descname">crit</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.crit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Short alias for critical.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.ok">
+<code class="descname">ok</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.ok" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filter which marks items which generates an ok state.</div>
+<div class="line">If anything matches this any previous state for this item will be reset to ok.</div>
+<div class="line">Available options :</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>category</td>
+<td>TODO</td>
+</tr>
+<tr class="row-even"><td>computer</td>
+<td>Which computer generated the message</td>
+</tr>
+<tr class="row-odd"><td>customer</td>
+<td>TODO</td>
+</tr>
+<tr class="row-even"><td>file</td>
+<td>The logfile name</td>
+</tr>
+<tr class="row-odd"><td>guid</td>
+<td>The logfile name</td>
+</tr>
+<tr class="row-even"><td>id</td>
+<td>Eventlog id</td>
+</tr>
+<tr class="row-odd"><td>keyword</td>
+<td>The keyword associated with this event</td>
+</tr>
+<tr class="row-even"><td>level</td>
+<td>Severity level (error, warning, info, success, auditSucess, auditFailure)</td>
+</tr>
+<tr class="row-odd"><td>log</td>
+<td>alias for file</td>
+</tr>
+<tr class="row-even"><td>message</td>
+<td>The message rendered as a string.</td>
+</tr>
+<tr class="row-odd"><td>provider</td>
+<td>Source system.</td>
+</tr>
+<tr class="row-even"><td>rawid</td>
+<td>Raw message id (contains many other fields all baked into a single number)</td>
+</tr>
+<tr class="row-odd"><td>source</td>
+<td>Source system.</td>
+</tr>
+<tr class="row-even"><td>task</td>
+<td>The type of event (task)</td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>alias for level (old, deprecated)</td>
+</tr>
+<tr class="row-even"><td>written</td>
+<td>When the message was written to file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.debug">
+<code class="descname">debug</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.debug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show debugging information in the log</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.show-all">
+<code class="descname">show-all</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.show-all" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show details for all matches regardless of status (normally details are only showed for warnings and criticals).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.empty-state">
+<code class="descname">empty-state</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.empty-state" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Return status to use when nothing matched filter.</div>
+<div class="line">If no filter is specified this will never happen unless the file is empty.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.perf-config">
+<code class="descname">perf-config</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.perf-config" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Performance data generation configuration</div>
+<div class="line">TODO: obj ( key: value; key: value) obj (key:valuer;key:value)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.escape-html">
+<code class="descname">escape-html</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.escape-html" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Escape any &lt; and &gt; characters to prevent HTML encoding</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.help">
+<code class="descname">help</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.help-pb">
+<code class="descname">help-pb</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.show-default">
+<code class="descname">show-default</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.help-short">
+<code class="descname">help-short</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.unique-index">
+<code class="descname">unique-index</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.unique-index" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Unique syntax.</div>
+<div class="line">Used to filter unique items (counted will still increase but messages will not repeaters:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>category</td>
+<td>TODO</td>
+</tr>
+<tr class="row-odd"><td>computer</td>
+<td>Which computer generated the message</td>
+</tr>
+<tr class="row-even"><td>customer</td>
+<td>TODO</td>
+</tr>
+<tr class="row-odd"><td>file</td>
+<td>The logfile name</td>
+</tr>
+<tr class="row-even"><td>guid</td>
+<td>The logfile name</td>
+</tr>
+<tr class="row-odd"><td>id</td>
+<td>Eventlog id</td>
+</tr>
+<tr class="row-even"><td>keyword</td>
+<td>The keyword associated with this event</td>
+</tr>
+<tr class="row-odd"><td>level</td>
+<td>Severity level (error, warning, info, success, auditSucess, auditFailure)</td>
+</tr>
+<tr class="row-even"><td>log</td>
+<td>alias for file</td>
+</tr>
+<tr class="row-odd"><td>message</td>
+<td>The message rendered as a string.</td>
+</tr>
+<tr class="row-even"><td>provider</td>
+<td>Source system.</td>
+</tr>
+<tr class="row-odd"><td>rawid</td>
+<td>Raw message id (contains many other fields all baked into a single number)</td>
+</tr>
+<tr class="row-even"><td>source</td>
+<td>Source system.</td>
+</tr>
+<tr class="row-odd"><td>task</td>
+<td>The type of event (task)</td>
+</tr>
+<tr class="row-even"><td>type</td>
+<td>alias for level (old, deprecated)</td>
+</tr>
+<tr class="row-odd"><td>written</td>
+<td>When the message was written to file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.top-syntax">
+<code class="descname">top-syntax</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.top-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Top level syntax.</div>
+<div class="line">Used to format the message to return can include text as well as special keywords which will include information from the checks.</div>
+<div class="line">To add a keyword to the message you can use two syntaxes either ${keyword} or %(keyword) (there is no difference between them apart from ${} can be difficult to excpae on linux).</div>
+<div class="line">The available keywords are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.ok-syntax">
+<code class="descname">ok-syntax</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.ok-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">ok syntax.</div>
+<div class="line">DEPRECATED! This is the syntax for when an ok result is returned.</div>
+<div class="line">This value will not be used if your syntax contains %(list) or %(count).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.empty-syntax">
+<code class="descname">empty-syntax</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.empty-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Empty syntax.</div>
+<div class="line">DEPRECATED! This is the syntax for when nothing matches the filter.</div>
+<div class="line">Possible values are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>count</td>
+<td>Number of items matching the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>total</td>
+<td>Total number of items. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>ok_count</td>
+<td>Number of items matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>warn_count</td>
+<td>Number of items matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>crit_count</td>
+<td>Number of items matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>problem_count</td>
+<td>Number of items matched either warning or critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>list</td>
+<td>A list of all items which matched the filter. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>ok_list</td>
+<td>A list of all items which matched the ok criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>warn_list</td>
+<td>A list of all items which matched the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>crit_list</td>
+<td>A list of all items which matched the critical criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>problem_list</td>
+<td>A list of all items which matched either the critical or the warning criteria. Common option for all checks.</td>
+</tr>
+<tr class="row-odd"><td>detail_list</td>
+<td>A special list with critical, then warning and finally ok. Common option for all checks.</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>The returned status (OK/WARN/CRIT/UNKNOWN). Common option for all checks.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.detail-syntax">
+<code class="descname">detail-syntax</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.detail-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Detail level syntax.</div>
+<div class="line">Used to format each resulting item in the message.</div>
+<div class="line">%(list) will be replaced with all the items formated by this syntax string in the top-syntax.</div>
+<div class="line">To add a keyword to the message you can use two syntaxes either ${keyword} or %(keyword) (there is no difference between them apart from ${} can be difficult to excpae on linux).</div>
+<div class="line">The available keywords are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>category</td>
+<td>TODO</td>
+</tr>
+<tr class="row-odd"><td>computer</td>
+<td>Which computer generated the message</td>
+</tr>
+<tr class="row-even"><td>customer</td>
+<td>TODO</td>
+</tr>
+<tr class="row-odd"><td>file</td>
+<td>The logfile name</td>
+</tr>
+<tr class="row-even"><td>guid</td>
+<td>The logfile name</td>
+</tr>
+<tr class="row-odd"><td>id</td>
+<td>Eventlog id</td>
+</tr>
+<tr class="row-even"><td>keyword</td>
+<td>The keyword associated with this event</td>
+</tr>
+<tr class="row-odd"><td>level</td>
+<td>Severity level (error, warning, info, success, auditSucess, auditFailure)</td>
+</tr>
+<tr class="row-even"><td>log</td>
+<td>alias for file</td>
+</tr>
+<tr class="row-odd"><td>message</td>
+<td>The message rendered as a string.</td>
+</tr>
+<tr class="row-even"><td>provider</td>
+<td>Source system.</td>
+</tr>
+<tr class="row-odd"><td>rawid</td>
+<td>Raw message id (contains many other fields all baked into a single number)</td>
+</tr>
+<tr class="row-even"><td>source</td>
+<td>Source system.</td>
+</tr>
+<tr class="row-odd"><td>task</td>
+<td>The type of event (task)</td>
+</tr>
+<tr class="row-even"><td>type</td>
+<td>alias for level (old, deprecated)</td>
+</tr>
+<tr class="row-odd"><td>written</td>
+<td>When the message was written to file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.perf-syntax">
+<code class="descname">perf-syntax</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.perf-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Performance alias syntax.</div>
+<div class="line">This is the syntax for the base names of the performance data.</div>
+<div class="line">Possible values are:</div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Key</td>
+<td>Value</td>
+</tr>
+<tr class="row-even"><td>category</td>
+<td>TODO</td>
+</tr>
+<tr class="row-odd"><td>computer</td>
+<td>Which computer generated the message</td>
+</tr>
+<tr class="row-even"><td>customer</td>
+<td>TODO</td>
+</tr>
+<tr class="row-odd"><td>file</td>
+<td>The logfile name</td>
+</tr>
+<tr class="row-even"><td>guid</td>
+<td>The logfile name</td>
+</tr>
+<tr class="row-odd"><td>id</td>
+<td>Eventlog id</td>
+</tr>
+<tr class="row-even"><td>keyword</td>
+<td>The keyword associated with this event</td>
+</tr>
+<tr class="row-odd"><td>level</td>
+<td>Severity level (error, warning, info, success, auditSucess, auditFailure)</td>
+</tr>
+<tr class="row-even"><td>log</td>
+<td>alias for file</td>
+</tr>
+<tr class="row-odd"><td>message</td>
+<td>The message rendered as a string.</td>
+</tr>
+<tr class="row-even"><td>provider</td>
+<td>Source system.</td>
+</tr>
+<tr class="row-odd"><td>rawid</td>
+<td>Raw message id (contains many other fields all baked into a single number)</td>
+</tr>
+<tr class="row-even"><td>source</td>
+<td>Source system.</td>
+</tr>
+<tr class="row-odd"><td>task</td>
+<td>The type of event (task)</td>
+</tr>
+<tr class="row-even"><td>type</td>
+<td>alias for level (old, deprecated)</td>
+</tr>
+<tr class="row-odd"><td>written</td>
+<td>When the message was written to file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.file">
+<code class="descname">file</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.file" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">File to read (can be specified multiple times to check multiple files.</div>
+<div class="line">Notice that specifying multiple files will create an aggregate set you will not check each file individually.In other words if one file contains an error the entire check will result in error.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.log">
+<code class="descname">log</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.log" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Same as file</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.scan-range">
+<code class="descname">scan-range</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.scan-range" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Date range to scan.</div>
+<div class="line">A negative value scans backward (historical events) and a positive value scans forwards (future events). This is the approximate dates to search through this speeds up searching a lot but there is no guarantee messages are ordered.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.truncate-message">
+<code class="descname">truncate-message</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.truncate-message" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum length of message for each event log message text.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.check_eventlog.unique">
+<code class="descname">unique</code><em class="property"> (CheckEventLog, check_eventlog)</em><a class="headerlink" href="#CheckEventLog.check_eventlog.unique" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Shorthand for setting default unique index: ${log}-${source}-${id}.</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="checkeventlog">
+<h2><a class="reference internal" href="#CheckEventLog.checkeventlog" title="CheckEventLog.checkeventlog"><code class="xref nscp nscp-query docutils literal"><span class="pre">checkeventlog</span></code></a><a class="headerlink" href="#checkeventlog" title="Permalink to this headline">¶</a></h2>
+<dl class="query">
+<dt id="CheckEventLog.checkeventlog">
+<code class="descclassname">CheckEventLog</code><code class="descname">checkeventlog</code><dd></dd>Legacy version of check_eventlog<a class="headerlink" href="#CheckEventLog.checkeventlog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.help" title="CheckEventLog.checkeventlog.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.help-pb" title="CheckEventLog.checkeventlog.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.show-default" title="CheckEventLog.checkeventlog.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.help-short" title="CheckEventLog.checkeventlog.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.MaxWarn" title="CheckEventLog.checkeventlog.MaxWarn"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxWarn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.MaxCrit" title="CheckEventLog.checkeventlog.MaxCrit"><code class="xref nscp nscp-option docutils literal"><span class="pre">MaxCrit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a critical is returned.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.MinWarn" title="CheckEventLog.checkeventlog.MinWarn"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinWarn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.MinCrit" title="CheckEventLog.checkeventlog.MinCrit"><code class="xref nscp nscp-option docutils literal"><span class="pre">MinCrit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Minimum value before a critical is returned.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.warn" title="CheckEventLog.checkeventlog.warn"><code class="xref nscp nscp-option docutils literal"><span class="pre">warn</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a warning is returned.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.crit" title="CheckEventLog.checkeventlog.crit"><code class="xref nscp nscp-option docutils literal"><span class="pre">crit</span></code></a></td>
+<td>&nbsp;</td>
+<td>Maximum value before a critical is returned.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.filter" title="CheckEventLog.checkeventlog.filter"><code class="xref nscp nscp-option docutils literal"><span class="pre">filter</span></code></a></td>
+<td>&nbsp;</td>
+<td>The filter to use.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.file" title="CheckEventLog.checkeventlog.file"><code class="xref nscp nscp-option docutils literal"><span class="pre">file</span></code></a></td>
+<td>&nbsp;</td>
+<td>The file to check</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.debug" title="CheckEventLog.checkeventlog.debug"><code class="xref nscp nscp-option docutils literal"><span class="pre">debug</span></code></a></td>
+<td>1</td>
+<td>The file to check</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.truncate" title="CheckEventLog.checkeventlog.truncate"><code class="xref nscp nscp-option docutils literal"><span class="pre">truncate</span></code></a></td>
+<td>&nbsp;</td>
+<td>Deprecated and has no meaning</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.descriptions" title="CheckEventLog.checkeventlog.descriptions"><code class="xref nscp nscp-option docutils literal"><span class="pre">descriptions</span></code></a></td>
+<td>1</td>
+<td>Deprecated and has no meaning</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.unique" title="CheckEventLog.checkeventlog.unique"><code class="xref nscp nscp-option docutils literal"><span class="pre">unique</span></code></a></td>
+<td>1</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.syntax" title="CheckEventLog.checkeventlog.syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">syntax</span></code></a></td>
+<td>%source%, %strings%</td>
+<td>The syntax string</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.top-syntax" title="CheckEventLog.checkeventlog.top-syntax"><code class="xref nscp nscp-option docutils literal"><span class="pre">top-syntax</span></code></a></td>
+<td>${list}</td>
+<td>The top level syntax string</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog.checkeventlog.scan-range" title="CheckEventLog.checkeventlog.scan-range"><code class="xref nscp nscp-option docutils literal"><span class="pre">scan-range</span></code></a></td>
+<td>&nbsp;</td>
+<td>TODO</td>
+</tr>
+</tbody>
+</table>
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.help">
+<code class="descname">help</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.help-pb">
+<code class="descname">help-pb</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.show-default">
+<code class="descname">show-default</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.help-short">
+<code class="descname">help-short</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.MaxWarn">
+<code class="descname">MaxWarn</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.MaxWarn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.MaxCrit">
+<code class="descname">MaxCrit</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.MaxCrit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.MinWarn">
+<code class="descname">MinWarn</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.MinWarn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.MinCrit">
+<code class="descname">MinCrit</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.MinCrit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Minimum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.warn">
+<code class="descname">warn</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.warn" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a warning is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.crit">
+<code class="descname">crit</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.crit" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Maximum value before a critical is returned.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.filter">
+<code class="descname">filter</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.filter" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The filter to use.</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.file">
+<code class="descname">file</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.file" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The file to check</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.debug">
+<code class="descname">debug</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.debug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The file to check</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.truncate">
+<code class="descname">truncate</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.truncate" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Deprecated and has no meaning</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.descriptions">
+<code class="descname">descriptions</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.descriptions" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Deprecated and has no meaning</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.unique">
+<code class="descname">unique</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.unique" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.syntax">
+<code class="descname">syntax</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The syntax string</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.top-syntax">
+<code class="descname">top-syntax</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.top-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The top level syntax string</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="CheckEventLog.checkeventlog.scan-range">
+<code class="descname">scan-range</code><em class="property"> (CheckEventLog, checkeventlog)</em><a class="headerlink" href="#CheckEventLog.checkeventlog.scan-range" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">TODO</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="settings-eventlog">
+<h2>/ settings/ eventlog<a class="headerlink" href="#settings-eventlog" title="Permalink to this headline">¶</a></h2>
+<dl class="confpath">
+<dt id="CheckEventLog./settings/eventlog">
+<code class="descname">/settings/eventlog</code><em class="property"> (CheckEventLog)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>EVENT LOG SECTION</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Section for the EventLog Checker (CheckEventLog.dll).</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog.buffer size" title="CheckEventLog./settings/eventlog.buffer size"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">buffer</span> <span class="pre">size</span></code></a></td>
+<td>131072</td>
+<td>BUFFER_SIZE</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog.debug" title="CheckEventLog./settings/eventlog.debug"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">debug</span></code></a></td>
+<td>0</td>
+<td>DEBUG</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog.lookup names" title="CheckEventLog./settings/eventlog.lookup names"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">lookup</span> <span class="pre">names</span></code></a></td>
+<td>1</td>
+<td>LOOKUP NAMES</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog.syntax" title="CheckEventLog./settings/eventlog.syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>SYNTAX</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># EVENT LOG SECTION
+# Section for the EventLog Checker (CheckEventLog.dll).
+[/settings/eventlog]
+buffer size=131072
+debug=0
+lookup names=1
+syntax=
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog.buffer size">
+<code class="descname">buffer size</code><em class="property"> (CheckEventLog, /settings/eventlog)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog.buffer size" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>BUFFER_SIZE</strong></p>
+<div class="line-block">
+<div class="line">The size of the buffer to use when getting messages this affects the speed and maximum size of messages you can recieve.</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog</p>
+<p><strong>Key</strong>: buffer size</p>
+<p><strong>Default value</strong>: 131072</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog]
+# BUFFER_SIZE
+buffer size=131072
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog.debug">
+<code class="descname">debug</code><em class="property"> (CheckEventLog, /settings/eventlog)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DEBUG</strong></p>
+<div class="line-block">
+<div class="line">Log more information when filtering (useful to detect issues with filters) not useful in production as it is a bit of a resource hog.</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog</p>
+<p><strong>Key</strong>: debug</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog]
+# DEBUG
+debug=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog.lookup names">
+<code class="descname">lookup names</code><em class="property"> (CheckEventLog, /settings/eventlog)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog.lookup names" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>LOOKUP NAMES</strong></p>
+<div class="line-block">
+<div class="line">Lookup the names of eventlog files</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog</p>
+<p><strong>Key</strong>: lookup names</p>
+<p><strong>Default value</strong>: 1</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog]
+# LOOKUP NAMES
+lookup names=1
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog.syntax">
+<code class="descname">syntax</code><em class="property"> (CheckEventLog, /settings/eventlog)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog.syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">Set this to use a specific syntax string for all commands (that don&#8217;t specify one).</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog</p>
+<p><strong>Key</strong>: syntax</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog]
+# SYNTAX
+syntax=
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="real-time">
+<h2>…  / real-time<a class="headerlink" href="#real-time" title="Permalink to this headline">¶</a></h2>
+<dl class="confpath">
+<dt id="CheckEventLog./settings/eventlog/real-time">
+<code class="descname">/settings/eventlog/real-time</code><em class="property"> (CheckEventLog)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>CONFIGURE REALTIME CHECKING</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">A set of options to configure the real time checks</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time.debug" title="CheckEventLog./settings/eventlog/real-time.debug"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">debug</span></code></a></td>
+<td>0</td>
+<td>DEBUG</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time.enabled" title="CheckEventLog./settings/eventlog/real-time.enabled"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">enabled</span></code></a></td>
+<td>0</td>
+<td>REAL TIME CHECKING</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time.log" title="CheckEventLog./settings/eventlog/real-time.log"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">log</span></code></a></td>
+<td>application,system</td>
+<td>LOGS TO CHECK</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time.startup age" title="CheckEventLog./settings/eventlog/real-time.startup age"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">startup</span> <span class="pre">age</span></code></a></td>
+<td>30m</td>
+<td>STARTUP AGE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># CONFIGURE REALTIME CHECKING
+# A set of options to configure the real time checks
+[/settings/eventlog/real-time]
+debug=0
+enabled=0
+log=application,system
+startup age=30m
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time.debug">
+<code class="descname">debug</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DEBUG</strong></p>
+<div class="line-block">
+<div class="line">Log missed records (useful to detect issues with filters) not useful in production as it is a bit of a resource hog.</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time</p>
+<p><strong>Key</strong>: debug</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time]
+# DEBUG
+debug=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time.enabled">
+<code class="descname">enabled</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time.enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>REAL TIME CHECKING</strong></p>
+<div class="line-block">
+<div class="line">Spawns a background thread which detects issues and reports them back instantly.</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time</p>
+<p><strong>Key</strong>: enabled</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time]
+# REAL TIME CHECKING
+enabled=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time.log">
+<code class="descname">log</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time.log" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>LOGS TO CHECK</strong></p>
+<div class="line-block">
+<div class="line">Comma separated list of logs to check</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time</p>
+<p><strong>Key</strong>: log</p>
+<p><strong>Default value</strong>: application,system</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time]
+# LOGS TO CHECK
+log=application,system
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time.startup age">
+<code class="descname">startup age</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time.startup age" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>STARTUP AGE</strong></p>
+<div class="line-block">
+<div class="line">The initial age to scan when starting NSClient++</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time</p>
+<p><strong>Key</strong>: startup age</p>
+<p><strong>Default value</strong>: 30m</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time]
+# STARTUP AGE
+startup age=30m
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="real-time-filters">
+<h2>…  / real-time / filters<a class="headerlink" href="#real-time-filters" title="Permalink to this headline">¶</a></h2>
+<dl class="confpath">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters">
+<code class="descname">/settings/eventlog/real-time/filters</code><em class="property"> (CheckEventLog)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>REALTIME FILTERS</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">A set of filters to use in real-time mode</div>
+</div>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># REALTIME FILTERS
+# A set of filters to use in real-time mode
+[/settings/eventlog/real-time/filters]
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="real-time-filters-default">
+<h2>…  / real-time / filters / default<a class="headerlink" href="#real-time-filters-default" title="Permalink to this headline">¶</a></h2>
+<dl class="confpath">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default">
+<code class="descname">/settings/eventlog/real-time/filters/default</code><em class="property"> (CheckEventLog)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>REAL TIME FILTER DEFENITION</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Definition for real time filter:</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.command" title="CheckEventLog./settings/eventlog/real-time/filters/default.command"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">command</span></code></a></td>
+<td>&nbsp;</td>
+<td>COMMAND NAME</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.critical" title="CheckEventLog./settings/eventlog/real-time/filters/default.critical"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">critical</span></code></a></td>
+<td>&nbsp;</td>
+<td>CRITICAL FILTER</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.debug" title="CheckEventLog./settings/eventlog/real-time/filters/default.debug"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">debug</span></code></a></td>
+<td>0</td>
+<td>DEBUG</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.destination" title="CheckEventLog./settings/eventlog/real-time/filters/default.destination"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">destination</span></code></a></td>
+<td>&nbsp;</td>
+<td>DESTINATION</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.detail syntax" title="CheckEventLog./settings/eventlog/real-time/filters/default.detail syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">detail</span> <span class="pre">syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.empty message" title="CheckEventLog./settings/eventlog/real-time/filters/default.empty message"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">empty</span> <span class="pre">message</span></code></a></td>
+<td>eventlog found no records</td>
+<td>EMPTY MESSAGE</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.escape html" title="CheckEventLog./settings/eventlog/real-time/filters/default.escape html"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">escape</span> <span class="pre">html</span></code></a></td>
+<td>0</td>
+<td>ESCAPE HTML</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.filter" title="CheckEventLog./settings/eventlog/real-time/filters/default.filter"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">filter</span></code></a></td>
+<td>&nbsp;</td>
+<td>FILTER</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.log" title="CheckEventLog./settings/eventlog/real-time/filters/default.log"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">log</span></code></a></td>
+<td>&nbsp;</td>
+<td>FILE</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.logs" title="CheckEventLog./settings/eventlog/real-time/filters/default.logs"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">logs</span></code></a></td>
+<td>&nbsp;</td>
+<td>FILES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.maximum age" title="CheckEventLog./settings/eventlog/real-time/filters/default.maximum age"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">maximum</span> <span class="pre">age</span></code></a></td>
+<td>5m</td>
+<td>MAGIMUM AGE</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.ok" title="CheckEventLog./settings/eventlog/real-time/filters/default.ok"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ok</span></code></a></td>
+<td>&nbsp;</td>
+<td>OK FILTER</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.ok syntax" title="CheckEventLog./settings/eventlog/real-time/filters/default.ok syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ok</span> <span class="pre">syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.perf config" title="CheckEventLog./settings/eventlog/real-time/filters/default.perf config"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">perf</span> <span class="pre">config</span></code></a></td>
+<td>&nbsp;</td>
+<td>PERF CONFIG</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.severity" title="CheckEventLog./settings/eventlog/real-time/filters/default.severity"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">severity</span></code></a></td>
+<td>&nbsp;</td>
+<td>SEVERITY</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.source id" title="CheckEventLog./settings/eventlog/real-time/filters/default.source id"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">source</span> <span class="pre">id</span></code></a></td>
+<td>&nbsp;</td>
+<td>SOURCE ID</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.target" title="CheckEventLog./settings/eventlog/real-time/filters/default.target"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">target</span></code></a></td>
+<td>&nbsp;</td>
+<td>DESTINATION</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.target id" title="CheckEventLog./settings/eventlog/real-time/filters/default.target id"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">target</span> <span class="pre">id</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET ID</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.top syntax" title="CheckEventLog./settings/eventlog/real-time/filters/default.top syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">top</span> <span class="pre">syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/default.warning" title="CheckEventLog./settings/eventlog/real-time/filters/default.warning"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">warning</span></code></a></td>
+<td>&nbsp;</td>
+<td>WARNING FILTER</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># REAL TIME FILTER DEFENITION
+# Definition for real time filter:
+[/settings/eventlog/real-time/filters/default]
+command=
+critical=
+debug=0
+destination=
+detail syntax=
+empty message=eventlog found no records
+escape html=0
+filter=
+log=
+logs=
+maximum age=5m
+ok=
+ok syntax=
+perf config=
+severity=
+source id=
+target=
+target id=
+top syntax=
+warning=
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.command">
+<code class="descname">command</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.command" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>COMMAND NAME</strong></p>
+<div class="line-block">
+<div class="line">The name of the command (think nagios service name) to report up stream (defaults to alias if not set)</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: command</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# COMMAND NAME
+command=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.critical">
+<code class="descname">critical</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.critical" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CRITICAL FILTER</strong></p>
+<div class="line-block">
+<div class="line">If any rows match this filter severity will escalated to CRITICAL</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: critical</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# CRITICAL FILTER
+critical=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.debug">
+<code class="descname">debug</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DEBUG</strong></p>
+<div class="line-block">
+<div class="line">Enable this to display debug information for this match filter</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: debug</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# DEBUG
+debug=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.destination">
+<code class="descname">destination</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.destination" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DESTINATION</strong></p>
+<div class="line-block">
+<div class="line">The destination for intercepted messages</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: destination</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# DESTINATION
+destination=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.detail syntax">
+<code class="descname">detail syntax</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.detail syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">Format string for dates</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: detail syntax</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# SYNTAX
+detail syntax=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.empty message">
+<code class="descname">empty message</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.empty message" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>EMPTY MESSAGE</strong></p>
+<div class="line-block">
+<div class="line">The message to display if nothing matches the filter (generally considered the ok state).</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: empty message</p>
+<p><strong>Default value</strong>: eventlog found no records</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# EMPTY MESSAGE
+empty message=eventlog found no records
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.escape html">
+<code class="descname">escape html</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.escape html" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>ESCAPE HTML</strong></p>
+<div class="line-block">
+<div class="line">Escape HTML characters (&lt; and &gt;).</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: escape html</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# ESCAPE HTML
+escape html=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.filter">
+<code class="descname">filter</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>FILTER</strong></p>
+<div class="line-block">
+<div class="line">Scan files for matching rows for each matching rows an OK message will be submitted</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: filter</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# FILTER
+filter=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.log">
+<code class="descname">log</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.log" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>FILE</strong></p>
+<div class="line-block">
+<div class="line">The eventlog record to filter on (if set to &#8216;all&#8217; means all enabled logs)</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: log</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# FILE
+log=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.logs">
+<code class="descname">logs</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.logs" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>FILES</strong></p>
+<div class="line-block">
+<div class="line">The eventlog record to filter on (if set to &#8216;all&#8217; means all enabled logs)</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: logs</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# FILES
+logs=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.maximum age">
+<code class="descname">maximum age</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.maximum age" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>MAGIMUM AGE</strong></p>
+<div class="line-block">
+<div class="line">How long before reporting &#8220;ok&#8221;.</div>
+<div class="line">If this is set to &#8220;false&#8221; no periodic ok messages will be reported only errors.</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: maximum age</p>
+<p><strong>Default value</strong>: 5m</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# MAGIMUM AGE
+maximum age=5m
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.ok">
+<code class="descname">ok</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.ok" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>OK FILTER</strong></p>
+<div class="line-block">
+<div class="line">If any rows match this filter severity will escalated down to OK</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: ok</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# OK FILTER
+ok=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.ok syntax">
+<code class="descname">ok syntax</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.ok syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">Format string for dates</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: ok syntax</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# SYNTAX
+ok syntax=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.perf config">
+<code class="descname">perf config</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.perf config" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PERF CONFIG</strong></p>
+<div class="line-block">
+<div class="line">Performance data configuration</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: perf config</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# PERF CONFIG
+perf config=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.severity">
+<code class="descname">severity</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.severity" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SEVERITY</strong></p>
+<div class="line-block">
+<div class="line">THe severity of this message (OK, WARNING, CRITICAL, UNKNOWN)</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: severity</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# SEVERITY
+severity=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.source id">
+<code class="descname">source id</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.source id" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SOURCE ID</strong></p>
+<div class="line-block">
+<div class="line">The name of the source system, will automatically use the remote system if a remote system is called. Almost most sending systems will replace this with current systems hostname if not present. So use this only if you need specific source systems for specific schedules and not calling remote systems.</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: source id</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# SOURCE ID
+source id=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.target">
+<code class="descname">target</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.target" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DESTINATION</strong></p>
+<div class="line-block">
+<div class="line">Same as destination</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: target</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# DESTINATION
+target=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.target id">
+<code class="descname">target id</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.target id" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET ID</strong></p>
+<div class="line-block">
+<div class="line">The target to send the message to (will be resolved by the consumer)</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: target id</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# TARGET ID
+target id=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.top syntax">
+<code class="descname">top syntax</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.top syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">Format string for dates</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: top syntax</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# SYNTAX
+top syntax=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/default.warning">
+<code class="descname">warning</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/default)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/default.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>WARNING FILTER</strong></p>
+<div class="line-block">
+<div class="line">If any rows match this filter severity will escalated to WARNING</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/default</p>
+<p><strong>Key</strong>: warning</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/default]
+# WARNING FILTER
+warning=
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="real-time-filters-sample">
+<h2>…  / real-time / filters / sample<a class="headerlink" href="#real-time-filters-sample" title="Permalink to this headline">¶</a></h2>
+<dl class="confpath">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample">
+<code class="descname">/settings/eventlog/real-time/filters/sample</code><em class="property"> (CheckEventLog)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>REAL TIME FILTER DEFENITION</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Definition for real time filter:</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.command" title="CheckEventLog./settings/eventlog/real-time/filters/sample.command"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">command</span></code></a></td>
+<td>&nbsp;</td>
+<td>COMMAND NAME</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.critical" title="CheckEventLog./settings/eventlog/real-time/filters/sample.critical"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">critical</span></code></a></td>
+<td>&nbsp;</td>
+<td>CRITICAL FILTER</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.debug" title="CheckEventLog./settings/eventlog/real-time/filters/sample.debug"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">debug</span></code></a></td>
+<td>0</td>
+<td>DEBUG</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.destination" title="CheckEventLog./settings/eventlog/real-time/filters/sample.destination"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">destination</span></code></a></td>
+<td>&nbsp;</td>
+<td>DESTINATION</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.detail syntax" title="CheckEventLog./settings/eventlog/real-time/filters/sample.detail syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">detail</span> <span class="pre">syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.empty message" title="CheckEventLog./settings/eventlog/real-time/filters/sample.empty message"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">empty</span> <span class="pre">message</span></code></a></td>
+<td>eventlog found no records</td>
+<td>EMPTY MESSAGE</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.escape html" title="CheckEventLog./settings/eventlog/real-time/filters/sample.escape html"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">escape</span> <span class="pre">html</span></code></a></td>
+<td>0</td>
+<td>ESCAPE HTML</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.filter" title="CheckEventLog./settings/eventlog/real-time/filters/sample.filter"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">filter</span></code></a></td>
+<td>&nbsp;</td>
+<td>FILTER</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.log" title="CheckEventLog./settings/eventlog/real-time/filters/sample.log"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">log</span></code></a></td>
+<td>&nbsp;</td>
+<td>FILE</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.logs" title="CheckEventLog./settings/eventlog/real-time/filters/sample.logs"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">logs</span></code></a></td>
+<td>&nbsp;</td>
+<td>FILES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.maximum age" title="CheckEventLog./settings/eventlog/real-time/filters/sample.maximum age"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">maximum</span> <span class="pre">age</span></code></a></td>
+<td>5m</td>
+<td>MAGIMUM AGE</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.ok" title="CheckEventLog./settings/eventlog/real-time/filters/sample.ok"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ok</span></code></a></td>
+<td>&nbsp;</td>
+<td>OK FILTER</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.ok syntax" title="CheckEventLog./settings/eventlog/real-time/filters/sample.ok syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">ok</span> <span class="pre">syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.perf config" title="CheckEventLog./settings/eventlog/real-time/filters/sample.perf config"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">perf</span> <span class="pre">config</span></code></a></td>
+<td>&nbsp;</td>
+<td>PERF CONFIG</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.severity" title="CheckEventLog./settings/eventlog/real-time/filters/sample.severity"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">severity</span></code></a></td>
+<td>&nbsp;</td>
+<td>SEVERITY</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.source id" title="CheckEventLog./settings/eventlog/real-time/filters/sample.source id"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">source</span> <span class="pre">id</span></code></a></td>
+<td>&nbsp;</td>
+<td>SOURCE ID</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.target" title="CheckEventLog./settings/eventlog/real-time/filters/sample.target"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">target</span></code></a></td>
+<td>&nbsp;</td>
+<td>DESTINATION</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.target id" title="CheckEventLog./settings/eventlog/real-time/filters/sample.target id"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">target</span> <span class="pre">id</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET ID</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.top syntax" title="CheckEventLog./settings/eventlog/real-time/filters/sample.top syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">top</span> <span class="pre">syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.warning" title="CheckEventLog./settings/eventlog/real-time/filters/sample.warning"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">warning</span></code></a></td>
+<td>&nbsp;</td>
+<td>WARNING FILTER</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># REAL TIME FILTER DEFENITION
+# Definition for real time filter:
+[/settings/eventlog/real-time/filters/sample]
+command=
+critical=
+debug=0
+destination=
+detail syntax=
+empty message=eventlog found no records
+escape html=0
+filter=
+log=
+logs=
+maximum age=5m
+ok=
+ok syntax=
+perf config=
+severity=
+source id=
+target=
+target id=
+top syntax=
+warning=
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.command">
+<code class="descname">command</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.command" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>COMMAND NAME</strong></p>
+<div class="line-block">
+<div class="line">The name of the command (think nagios service name) to report up stream (defaults to alias if not set)</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: command</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# COMMAND NAME
+command=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.critical">
+<code class="descname">critical</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.critical" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CRITICAL FILTER</strong></p>
+<div class="line-block">
+<div class="line">If any rows match this filter severity will escalated to CRITICAL</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: critical</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# CRITICAL FILTER
+critical=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.debug">
+<code class="descname">debug</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DEBUG</strong></p>
+<div class="line-block">
+<div class="line">Enable this to display debug information for this match filter</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: debug</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# DEBUG
+debug=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.destination">
+<code class="descname">destination</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.destination" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DESTINATION</strong></p>
+<div class="line-block">
+<div class="line">The destination for intercepted messages</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: destination</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# DESTINATION
+destination=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.detail syntax">
+<code class="descname">detail syntax</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.detail syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">Format string for dates</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: detail syntax</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# SYNTAX
+detail syntax=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.empty message">
+<code class="descname">empty message</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.empty message" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>EMPTY MESSAGE</strong></p>
+<div class="line-block">
+<div class="line">The message to display if nothing matches the filter (generally considered the ok state).</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: empty message</p>
+<p><strong>Default value</strong>: eventlog found no records</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# EMPTY MESSAGE
+empty message=eventlog found no records
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.escape html">
+<code class="descname">escape html</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.escape html" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>ESCAPE HTML</strong></p>
+<div class="line-block">
+<div class="line">Escape HTML characters (&lt; and &gt;).</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: escape html</p>
+<p><strong>Default value</strong>: 0</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# ESCAPE HTML
+escape html=0
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.filter">
+<code class="descname">filter</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>FILTER</strong></p>
+<div class="line-block">
+<div class="line">Scan files for matching rows for each matching rows an OK message will be submitted</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: filter</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# FILTER
+filter=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.log">
+<code class="descname">log</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.log" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>FILE</strong></p>
+<div class="line-block">
+<div class="line">The eventlog record to filter on (if set to &#8216;all&#8217; means all enabled logs)</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: log</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# FILE
+log=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.logs">
+<code class="descname">logs</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.logs" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>FILES</strong></p>
+<div class="line-block">
+<div class="line">The eventlog record to filter on (if set to &#8216;all&#8217; means all enabled logs)</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: logs</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# FILES
+logs=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.maximum age">
+<code class="descname">maximum age</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.maximum age" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>MAGIMUM AGE</strong></p>
+<div class="line-block">
+<div class="line">How long before reporting &#8220;ok&#8221;.</div>
+<div class="line">If this is set to &#8220;false&#8221; no periodic ok messages will be reported only errors.</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: maximum age</p>
+<p><strong>Default value</strong>: 5m</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# MAGIMUM AGE
+maximum age=5m
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.ok">
+<code class="descname">ok</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.ok" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>OK FILTER</strong></p>
+<div class="line-block">
+<div class="line">If any rows match this filter severity will escalated down to OK</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: ok</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# OK FILTER
+ok=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.ok syntax">
+<code class="descname">ok syntax</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.ok syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">Format string for dates</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: ok syntax</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# SYNTAX
+ok syntax=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.perf config">
+<code class="descname">perf config</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.perf config" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PERF CONFIG</strong></p>
+<div class="line-block">
+<div class="line">Performance data configuration</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: perf config</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# PERF CONFIG
+perf config=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.severity">
+<code class="descname">severity</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.severity" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SEVERITY</strong></p>
+<div class="line-block">
+<div class="line">THe severity of this message (OK, WARNING, CRITICAL, UNKNOWN)</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: severity</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# SEVERITY
+severity=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.source id">
+<code class="descname">source id</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.source id" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SOURCE ID</strong></p>
+<div class="line-block">
+<div class="line">The name of the source system, will automatically use the remote system if a remote system is called. Almost most sending systems will replace this with current systems hostname if not present. So use this only if you need specific source systems for specific schedules and not calling remote systems.</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: source id</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# SOURCE ID
+source id=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.target">
+<code class="descname">target</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.target" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DESTINATION</strong></p>
+<div class="line-block">
+<div class="line">Same as destination</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: target</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# DESTINATION
+target=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.target id">
+<code class="descname">target id</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.target id" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET ID</strong></p>
+<div class="line-block">
+<div class="line">The target to send the message to (will be resolved by the consumer)</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: target id</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# TARGET ID
+target id=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.top syntax">
+<code class="descname">top syntax</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.top syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">Format string for dates</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: top syntax</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# SYNTAX
+top syntax=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="CheckEventLog./settings/eventlog/real-time/filters/sample.warning">
+<code class="descname">warning</code><em class="property"> (CheckEventLog, /settings/eventlog/real-time/filters/sample)</em><a class="headerlink" href="#CheckEventLog./settings/eventlog/real-time/filters/sample.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>WARNING FILTER</strong></p>
+<div class="line-block">
+<div class="line">If any rows match this filter severity will escalated to WARNING</div>
+</div>
+<p><strong>Path</strong>: /settings/eventlog/real-time/filters/sample</p>
+<p><strong>Key</strong>: warning</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">CheckEventLog</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/eventlog/real-time/filters/sample]
+# WARNING FILTER
+warning=
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">CheckEventLog</span></code> &#8212; CheckEventLog</a><ul>
+<li><a class="reference internal" href="#samples">Samples</a></li>
+<li><a class="reference internal" href="#realtime-monitoring">Realtime monitoring</a><ul>
+<li><a class="reference internal" href="#enabling-realtime-filtering">Enabling realtime filtering</a></li>
+<li><a class="reference internal" href="#queries">Queries</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#check-eventlog"><code class="docutils literal"><span class="pre">check_eventlog</span></code></a></li>
+<li><a class="reference internal" href="#checkeventlog"><code class="docutils literal"><span class="pre">checkeventlog</span></code></a></li>
+<li><a class="reference internal" href="#settings-eventlog">/ settings/ eventlog</a></li>
+<li><a class="reference internal" href="#real-time">…  / real-time</a></li>
+<li><a class="reference internal" href="#real-time-filters">…  / real-time / filters</a></li>
+<li><a class="reference internal" href="#real-time-filters-default">…  / real-time / filters / default</a></li>
+<li><a class="reference internal" href="#real-time-filters-sample">…  / real-time / filters / sample</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="CheckDisk.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">CheckDisk</span></code> &#8212; CheckDisk</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="CheckSystem.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">CheckSystem</span></code> &#8212; CheckSystem</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/reference/windows/CheckEventLog.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="CheckSystem.html" title="CheckSystem — CheckSystem"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="CheckDisk.html" title="CheckDisk — CheckDisk"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

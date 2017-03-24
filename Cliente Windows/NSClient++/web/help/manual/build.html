@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Building NSClient++ &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../index.html" />
+    <link rel="up" title="NSClient++ Manual" href="index.html" />
+    <link rel="next" title="Reference Manual" href="../reference/index.html" />
+    <link rel="prev" title="Checks" href="checks.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <script type="text/javascript" src="../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../reference/index.html" title="Reference Manual"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="checks.html" title="Checks"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">NSClient++ Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="building-nsclient">
+<h1>Building NSClient++<a class="headerlink" href="#building-nsclient" title="Permalink to this headline">¶</a></h1>
+<p>NSclient++ is fairly simple to build and setup. It requires python and cmake for the build process as well as a number of external libraries.
+This document is split between &#8220;Linux&#8221; and &#8220;Windows&#8221; since there is a substantial difference in how to build them.
+For people wanting a Apple osx version it can be built similrily to the Linux machines on that platform as well.</p>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<p>The dependencies are different on different Linux systems so we will start with a section on installing dependencies on various platforms.</p>
+<div class="section" id="dependencies-on-ubuntu">
+<h3>Dependencies on Ubuntu<a class="headerlink" href="#dependencies-on-ubuntu" title="Permalink to this headline">¶</a></h3>
+<p>First we need to install a set of packages:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install -y git
+sudo apt-get install -y build-essential
+sudo apt-get install -y cmake
+sudo apt-get install -y python python-dev
+sudo apt-get install -y libssl-dev
+sudo apt-get install -y libboost-all-dev
+sudo apt-get install -y protobuf-compiler python-protobuf libprotobuf-dev
+sudo apt-get install -y python-sphinx
+sudo apt-get install -y libcrypto++-dev libcrypto++
+sudo apt-get install -y liblua5.1-0-dev
+sudo apt-get install -y libgtest-dev
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-the-code-from-github">
+<h3>Getting the code from github<a class="headerlink" href="#getting-the-code-from-github" title="Permalink to this headline">¶</a></h3>
+<p>Next up we download the source code from github:</p>
+<div class="highlight-python"><div class="highlight"><pre>git clone --recursive https://github.com/mickem/nscp.git
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Building NSClient++<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>First we create a folder in which we will build the code:</p>
+<div class="highlight-python"><div class="highlight"><pre>mkdir build
+cd build
+</pre></div>
+</div>
+<p>Then we run cmake to create the build files:</p>
+<div class="highlight-python"><div class="highlight"><pre>cmake ../nscp
+</pre></div>
+</div>
+<p>Then we build the actual code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">make</span>
+</pre></div>
+</div>
+<p>Lastly we run the built-in test to make sure everything is working:</p>
+<div class="highlight-python"><div class="highlight"><pre>make test
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<p>Dependencies is a bit of a bother to manage on Windows since there is no general package mechanism for libraries.
+To help with the there is a script called fetch-deps.py which will help download and build all dependencies required.</p>
+<div class="section" id="tools">
+<h3>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h3>
+<p>All tools have to be installed manually by hand (fetchdeps only manages libraries):</p>
+<ul class="simple">
+<li>CMake 2.6</li>
+<li>Python 2.7 (Make sure the right python platform is in your path)</li>
+<li>Visual Studio (I use 2012 and 2015)</li>
+<li>WiX 3.9 (or later)</li>
+<li>Perl 5.12 (required by openssl)</li>
+<li>A git client (if you want to fetch the git sources)</li>
+</ul>
+<p>Validate all tools are in your path:</p>
+<div class="highlight-python"><div class="highlight"><pre>cmake --version
+python -V
+perl -v
+cl /?
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Get the source code using git::</dt>
+<dd>mkdir win32-build-folder
+cd win32-build-folder
+git clone &#8211;recursive <a class="reference external" href="https://github.com/mickem/nscp.git">https://github.com/mickem/nscp.git</a></dd>
+</dl>
+<p>Create a build folder:</p>
+<div class="highlight-python"><div class="highlight"><pre>mkdir build
+cd build
+mkdir &lt;plattform&gt;
+cd &lt;plattform&gt;
+</pre></div>
+</div>
+<p>Build all dependencies and required libraries (pick the right platform Win32 or x64):</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;source path&gt;nscp\build\python\fetchdeps.py --target &lt;platform&gt; --dyn --source &lt;source path&gt; --msver 2012
+</pre></div>
+</div>
+<p>Validate that we have all dependencies:</p>
+<div class="highlight-python"><div class="highlight"><pre>cmake -D TARGET=dist -D SOURCE=nscp -P nscp\check_deps.cmake
+</pre></div>
+</div>
+<p>Build NSClient++ (If you don&#8217;t know you your visual studio version name you can run cmake &#8211;help to list all available profiles):</p>
+<div class="highlight-python"><div class="highlight"><pre>cd dist
+cmake -G &quot;VISUAL STUDIO GNERATOR STRING&quot; ../nscp
+msbuild /p:Configuration=RelWithDebInfo NSCP.sln
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="vagrant">
+<h2>Vagrant<a class="headerlink" href="#vagrant" title="Permalink to this headline">¶</a></h2>
+<p>I provide a number of vagrant profiles which will built NSClient++ as well:</p>
+<div class="highlight-python"><div class="highlight"><pre>git clone --recursive https://github.com/mickem/nscp.git
+cd vagrant
+cd precise32 # Replace this with precise64 or oracle-linux-6.4_64
+vagrant up
+vagrant provision
+vagrant ssh
+# Once your done playing...
+vagrant destroy
+</pre></div>
+</div>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Building NSClient++</a><ul>
+<li><a class="reference internal" href="#linux">Linux</a><ul>
+<li><a class="reference internal" href="#dependencies-on-ubuntu">Dependencies on Ubuntu</a></li>
+<li><a class="reference internal" href="#getting-the-code-from-github">Getting the code from github</a></li>
+<li><a class="reference internal" href="#id1">Building NSClient++</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#windows">Windows</a><ul>
+<li><a class="reference internal" href="#tools">Tools</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vagrant">Vagrant</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="checks.html"
+                        title="previous chapter">Checks</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../reference/index.html"
+                        title="next chapter">Reference Manual</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../bugs.html">Report a Bug</a></li>
+  <li><a href="../_sources/manual/build.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../reference/index.html" title="Reference Manual"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="checks.html" title="Checks"
+             >previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >NSClient++ Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using NSClient++ from nagios with check_nt &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Using NSClient++ from nagios" href="index.html" />
+    <link rel="next" title="Using NSClient++ from nagios with check_nrpe" href="nrpe.html" />
+    <link rel="prev" title="Using NSClient++ from nagios" href="index.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nrpe.html" title="Using NSClient++ from nagios with check_nrpe"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Using NSClient++ from nagios"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >NSClient++ Tutorial</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Using NSClient++ from nagios</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-nsclient-from-nagios-with-check-nt">
+<h1>Using NSClient++ from nagios with check_nt<a class="headerlink" href="#using-nsclient-from-nagios-with-check-nt" title="Permalink to this headline">¶</a></h1>
+<img alt="../../_images/nagios-active-nsclient.png" src="../../_images/nagios-active-nsclient.png" />
+<p><strong>NOTICE</strong> The check_nt client support is available for compatibility mode and it is not recommended unless you already have an infrastructure around it. There are several features you will not be able to use with this scheme. I would recommend using NRPE instead.</p>
+<p>This is the simplest and most locked in way to use NSClient++ you are limited to a handful of checks and there is no way to exploit the power of NSClient++ from here. The good though is that it is very simple to use and setup so it might be a good way to start.
+It is also the &#8220;only&#8221; way to have password protection. But note that since there is no encryption the password is sent as clear text so if you are compromised it will be easy to find.
+Also since check_nt is distributed in the &#8220;normal plugin kit&#8221; you undoubtedly already have everything you need on the nagios side.</p>
+<p>Nagios have their own guide for setting this up here <cite>http://nagios.sourceforge.net/docs/3_0/monitoring-windows.html</cite></p>
+<div class="section" id="nagios-command-line">
+<h2>1. Nagios command line<a class="headerlink" href="#nagios-command-line" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nsclient-002.png" src="../../_images/nagios-active-nsclient-002.png" />
+<p>Using check_nt from the command line of your Nagios server is usually the bast place to start. If you are not familiar with it I would recommend you try this out as it will save you a lot of time when you are getting started or trying out new things. It is a good way to eliminate errors and you wont have to bother with restarting/waiting on Nagios when you need to make changes.
+To access NSClient++ from the Nagios server via the NSClient protocol you use a program (comes with the default plugins) called check_nt.</p>
+<div class="highlight-bat"><div class="highlight"><pre>check_nt -H <span class="p">&lt;</span><span class="n">client</span> ip&gt; -p <span class="p">&lt;</span><span class="n">port</span>&gt; -v <span class="p">&lt;</span><span class="n">command</span>&gt; ...
+</pre></div>
+</div>
+<ul>
+<li><p class="first">client ip = the IP of the server you want to monitor (i.e. where NSClient++ i installed).</p>
+</li>
+<li><p class="first">port = the port you are using for the NSClientListener (defaults to 12489)</p>
+</li>
+<li><dl class="first docutils">
+<dt>command = is the various things you can monitor.</dt>
+<dd><p class="first last">The various commands all take different additional arguments which are all showed in the help.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>To check the CPU load you can for instance run the following (assuming your windows server has 10.0.0.1 as ip address)</p>
+<div class="highlight-bat"><div class="highlight"><pre>check_nt -H <span class="m">10</span>.<span class="m">0</span>.<span class="m">0</span>.<span class="m">1</span> -p <span class="m">12489</span> -v CPULOAD -w <span class="m">80</span> -c <span class="m">90</span> -l <span class="m">5</span><span class="p">,</span><span class="m">80</span><span class="p">,</span><span class="m">90</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">80</span><span class="p">,</span><span class="m">90</span>
+CPU Load <span class="m">0</span>% (<span class="m">5</span> min average) <span class="m">0</span>% (<span class="m">10</span> min average)|<span class="s1">&#39;5 min avg Load&#39;</span><span class="o">=</span><span class="m">0</span>%;<span class="m">80</span>;<span class="m">90</span>;<span class="m">0</span>;<span class="m">100</span> <span class="s1">&#39;10 min avg Load&#39;</span><span class="o">=</span><span class="m">0</span>%;<span class="m">80</span>;<span class="m">90</span>;<span class="m">0</span>;<span class="m">100</span>
+</pre></div>
+</div>
+<p>If you instead got any of the following don&#8217;t worry, it is because your NSClient++ is not configured properly and, we will solve that in the next section.</p>
+</div>
+<div class="section" id="nsclient-configuration">
+<h2>2. NSClient++ configuration<a class="headerlink" href="#nsclient-configuration" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nsclient-001.png" src="../../_images/nagios-active-nsclient-001.png" />
+<p>The first thing you need to do is decide which modules you want to use. NSClient++ is modular by design this means you only use the features you want (and if you want you can use all of them). The modules can be roughly divided into two kinds.</p>
+<ol class="arabic simple">
+<li>check commands</li>
+<li>protocols (and utility modules).</li>
+</ol>
+<p>The first kind is the one you <em>use</em> it responds to your commands and &#8220;finds&#8221; monitored data for you.
+The second kind is the one that allows you to talk to the first kind.
+When it comes to modules for the NSClient mode you will need the following:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="58%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Module</th>
+<th class="head">Description</th>
+<th class="head">Commands</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>CheckSystem</td>
+<td>Handles many system checks</td>
+<td>CPU, MEMORY, COUNTER etc</td>
+</tr>
+<tr class="row-odd"><td>CheckDisk</td>
+<td>Handles Disk related checks</td>
+<td>USEDDISKSPACE</td>
+</tr>
+<tr class="row-even"><td>NSClientServer</td>
+<td>Listens and responds to incoming requests from nagios</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p>To enable modules you edit the /modules section in the nsclient.ini file and your section should look something like this:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[/modules]</span>
+<span class="na">CheckSystem</span><span class="o">=</span><span class="s">enabled</span>
+<span class="na">CheckDisk</span><span class="o">=</span><span class="s">enabled</span>
+<span class="na">NSClientServer</span><span class="o">=</span><span class="s">enabled</span>
+</pre></div>
+</div>
+<p>The other things you need to configure is who is allowed to ask questions (which ip addresses) this is done either under the <a class="reference external" href="Settings">Settings</a> section (globally) or under the <a class="reference external" href="NSClient">NSClient</a> (locally). I would recommend using the <a class="reference external" href="Settings">Settings</a> section as it will simplify things when you start using NRPE. The keys you need to change are allowed_hosts and password. And the value should be:</p>
+<ul class="simple">
+<li>allowed hosts = A list of addresses that is allowed to ask questions (i.e. your nagios ip).</li>
+<li>password = The password to use.</li>
+</ul>
+<p>The result should look like this (assuming you don&#8217;t use a password and the nagios ip address is 10.0.0.2):</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[/settings/default]</span>
+<span class="c1">;password=secret-password</span>
+<span class="na">allowed hosts</span><span class="o">=</span><span class="s">10.0.0.2</span>
+</pre></div>
+</div>
+<p>Notice that since you don&#8217;t use a password that key is commented out (;).</p>
+<div class="section" id="allowed-hosts">
+<h3>allowed hosts<a class="headerlink" href="#allowed-hosts" title="Permalink to this headline">¶</a></h3>
+<p>If you do not configure the allowed hosts directive correctly you might get this in Nagios:</p>
+<div class="highlight-text"><div class="highlight"><pre>Return code of 139 is out of bounds
+</pre></div>
+</div>
+<p>And if you check nsclient.log you would see:</p>
+<div class="highlight-text"><div class="highlight"><pre>2013-03-20 17:23:50: e:D:\source\nscp\trunk\include\check_nt/server/protocol.hpp:65: Rejected connection from: ::ffff:10.83.14.251
+</pre></div>
+</div>
+</div>
+<div class="section" id="trying-it">
+<h3>trying it<a class="headerlink" href="#trying-it" title="Permalink to this headline">¶</a></h3>
+<p><strong>Don&#8217;t forget to restart NSClient++</strong> after you make changes to the nsclient.ini file.</p>
+<div class="highlight-bat"><div class="highlight"><pre>net stop nscp
+net start nscp
+</pre></div>
+</div>
+<p>Now feel free to try the command line agent again and hopefully things should work out perfectly.
+Run the following command from your nagios server.</p>
+<div class="highlight-text"><div class="highlight"><pre>check_nt -H 10.0.0.1 -p 12489 -v CPULOAD -w 80 -c 90 -l 5,80,90,10,80,90
+CPU Load 0% (5 min average) 0% (10 min average) |&#39;5 min avg Load&#39;=0%;80;90;0;100 &#39;10 min avg Load&#39;=0%;80;90;0;100
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>check_nt -H 10.0.0.1 -p 12489 -v USEDDISKSPACE -d SHOWALL -l c
+c:\ - total: 149.00 Gb - used: 12.93 Gb (9%) - free: 136.07 Gb (91%) |&#39;c:\ Used Space&#39;=12.93Gb;0.00;0.00;0.00;149.00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="solving-problems">
+<h2>3. Solving problems<a class="headerlink" href="#solving-problems" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nsclient-003.png" src="../../_images/nagios-active-nsclient-003.png" />
+<p>A good way to find and solve problems is to run nsclient++ in &#8220;test&#8221; mode this is done by stopping the service and starting it in &#8220;test&#8221; mode.</p>
+<div class="highlight-bat"><div class="highlight"><pre>net stop nscp
+nscp test
+... test mode ... (quit with: exit)
+net start nscp
+</pre></div>
+</div>
+<p>When in test mode you will get a lot of interesting log messages when things are happening so it is fairly simple to figure out what is wrong. To try this out do the following:</p>
+<div class="highlight-bat"><div class="highlight"><pre>net stop nscp
+nscp test
+</pre></div>
+</div>
+<p>What you will see is the following output (or something similar):</p>
+<div class="highlight-text"><div class="highlight"><pre>Launching test mode - client mode
+d NSClient++.cpp(1106) Enabling debug mode...
+d NSClient++.cpp(494) Attempting to start NSCLient++ - 0.3.7.7 2009-07-05
+d NSClient++.cpp(897) Loading plugin: CheckSystem...
+d NSClient++.cpp(897) Loading plugin: NSClient server...
+d \PDHCollector.cpp(66) Autodetected w2k or later, using w2k PDH counters.
+l NSClient++.cpp(600) NSCLient++ - 0.3.7.7 2009-07-05 Started!
+d \PDHCollector.cpp(103) Using index to retrive counternames
+d \Socket.h(675) Bound to: 0.0.0.0:12489
+l NSClient++.cpp(402) Using settings from: INI-file
+l NSClient++.cpp(403) Enter command to inject or exit to terminate...
+</pre></div>
+</div>
+<p>Then when you run the check from Nagios again:</p>
+<div class="highlight-bat"><div class="highlight"><pre>check_nt -H <span class="m">10</span>.<span class="m">0</span>.<span class="m">0</span>.<span class="m">1</span> -p <span class="m">12489</span> -v USEDDISKSPACE -d SHOWALL -l c
+c:\ - total: <span class="m">149</span>.<span class="m">00</span> Gb - used: <span class="m">12</span>.<span class="m">93</span> Gb (<span class="m">9</span>%) - free: <span class="m">136</span>.<span class="m">07</span> Gb (<span class="m">91</span>%) |<span class="s1">&#39;c:\ Used Space&#39;</span><span class="o">=</span><span class="m">12</span>.<span class="m">93</span>Gb;<span class="m">0</span>.<span class="m">00</span>;<span class="m">0</span>.<span class="m">00</span>;<span class="m">0</span>.<span class="m">00</span>;<span class="m">149</span>.<span class="m">00</span>
+</pre></div>
+</div>
+<p>If you check the log from NSCLient++ you should see (amongst other):</p>
+<div class="highlight-text"><div class="highlight"><pre>d \NSClientListener.cpp(146) Data: None&amp;2&amp;5
+d \NSClientListener.cpp(171) Data: 5
+d NSClient++.cpp(1034) Injecting: checkCPU: 5, nsclient
+d NSClient++.cpp(1070) Injected Result: OK &#39;0&#39;
+d NSClient++.cpp(1071) Injected Performance Result: &#39;&#39;
+</pre></div>
+</div>
+<p>When you are don you can exit NSClient++ using the exit command:</p>
+<div class="highlight-bat"><div class="highlight"><pre>exit
+</pre></div>
+</div>
+<p>Then don&#8217;t forget to start NSClient++ again:</p>
+<div class="highlight-bat"><div class="highlight"><pre>net start nscp
+</pre></div>
+</div>
+</div>
+<div class="section" id="nagios-configuration">
+<h2>4. Nagios configuration<a class="headerlink" href="#nagios-configuration" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nsclient-002.png" src="../../_images/nagios-active-nsclient-002.png" />
+<p>Nagios comes pre-configured for many of the NSClient checks.
+in windows.cfg you will find many entries along the lines of:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="nx">define</span> <span class="nx">service</span><span class="p">{</span>
+  <span class="nx">use</span>                 <span class="nx">generic</span><span class="o">-</span><span class="nx">service</span>
+  <span class="nx">host_name</span>           <span class="nx">winserver</span>
+  <span class="nx">service_description</span> <span class="nx">NSClient</span><span class="o">++</span> <span class="nx">Version</span>
+  <span class="nx">check_command</span>       <span class="nx">check_nt</span><span class="o">!</span><span class="nx">CLIENTVERSION</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The interesting part here is: <strong>check_nt!CLIENTVERSION</strong> which will run a check against check_nt.
+In commands.cfg the check_nt command is defined like so:</p>
+<div class="highlight-js"><div class="highlight"><pre># &#39;check_nt&#39; command definition
+define command{
+  command_name        check_nt
+  command_line        $USER1$/check_nt -H $HOSTADDRESS$ -p 12489 -v $ARG1$ $ARG2$
+}
+</pre></div>
+</div>
+<p>So you can see most things are already setup for you so it is quite simple to get started.
+The more &#8220;advanced&#8221; checks (which takes parameters) looks like this if you recall the CPULOAD we tried from the command line:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="nx">define</span> <span class="nx">service</span><span class="p">{</span>
+  <span class="nx">use</span>                 <span class="nx">generic</span><span class="o">-</span><span class="nx">service</span>
+  <span class="nx">host_name</span>           <span class="nx">winserver</span>
+  <span class="nx">service_description</span> <span class="nx">CPU</span> <span class="nx">Load</span>
+  <span class="nx">check_command</span>               <span class="nx">check_nt</span><span class="o">!</span><span class="nx">CPULOAD</span><span class="o">!-</span><span class="nx">l</span> <span class="mi">5</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">90</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>the command is now defined as <em>check_nt!CPULOAD!-l 5,80,90</em> which translates directly into:</p>
+<div class="highlight-bat"><div class="highlight"><pre><span class="p">&lt;</span><span class="n">plugin</span> dir&gt;<span class="n">/check_nt</span> -H <span class="p">&lt;</span><span class="n">ip</span> of client&gt; -p <span class="m">12489</span> -v CPULOAD -l <span class="m">5</span><span class="p">,</span><span class="m">80</span><span class="p">,</span><span class="m">90</span>
+</pre></div>
+</div>
+<p>which if you recall is exactly what we used when we tried the command from the command line.
+If you want to add a password the simplest way is to add it in command.cfg (if you want to have the same password on all your clients) like so:</p>
+<div class="highlight-js"><div class="highlight"><pre># &#39;check_nt&#39; command definition
+define command{
+  command_name        check_nt
+  command_line        $USER1$/check_nt -H $HOSTADDRESS$ -p 12489 -s &lt;password&gt; -v $ARG1$ $ARG2$
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="final-words">
+<h2>5. Final words<a class="headerlink" href="#final-words" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/nagios-active-nsclient.png" src="../../_images/nagios-active-nsclient.png" />
+<p>As I stated initially using check_nt is limited and many checks (for instance EventLog) wont work this way. So a good idea is probably to start checking out the <a class="reference internal" href="nrpe.html"><em>NRPE Guide</em></a> as well.</p>
+<p><strong>And remember</strong> if you experience problems don&#8217;t &#8220;debug&#8221; from nagios, run your command from the command line while having nsclient++ running in test mode and you should be fine!</p>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using NSClient++ from nagios with check_nt</a><ul>
+<li><a class="reference internal" href="#nagios-command-line">1. Nagios command line</a></li>
+<li><a class="reference internal" href="#nsclient-configuration">2. NSClient++ configuration</a><ul>
+<li><a class="reference internal" href="#allowed-hosts">allowed hosts</a></li>
+<li><a class="reference internal" href="#trying-it">trying it</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#solving-problems">3. Solving problems</a></li>
+<li><a class="reference internal" href="#nagios-configuration">4. Nagios configuration</a></li>
+<li><a class="reference internal" href="#final-words">5. Final words</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Using NSClient++ from nagios</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nrpe.html"
+                        title="next chapter">Using NSClient++ from nagios with check_nrpe</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/tutorial/nagios/check_nt.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nrpe.html" title="Using NSClient++ from nagios with check_nrpe"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Using NSClient++ from nagios"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >NSClient++ Tutorial</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Using NSClient++ from nagios</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting started with 0.4.x &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../index.html" />
+    <link rel="up" title="NSClient++ Manual" href="index.html" />
+    <link rel="next" title="Getting-Started with NSClient++" href="theory.html" />
+    <link rel="prev" title="About NSClient++" href="about.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <script type="text/javascript" src="../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="theory.html" title="Getting-Started with NSClient++"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="about.html" title="About NSClient++"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">NSClient++ Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started-with-0-4-x">
+<span id="manual-getting-started"></span><h1>Getting started with 0.4.x<a class="headerlink" href="#getting-started-with-0-4-x" title="Permalink to this headline">¶</a></h1>
+<p>This is a hands on guide to getting started with NSClient++.
+We will start with a clean slate and work our way in small easy to follow steps towards a fully functional monitoring solution.</p>
+<p>For the sake of simplicity this will be based on a Windows version.
+If you would like to do this on Linux it &#8220;should&#8221; work much the same apart from some of the system specific checks will not be available for your plattform.</p>
+<div class="section" id="getting-it">
+<h2>Getting it!<a class="headerlink" href="#getting-it" title="Permalink to this headline">¶</a></h2>
+<p>The first thing we want to do is fetching and unzipping it!
+We will not use the installer here since we want to really explain everything and the installer can sometimes hide some things for you.
+&lt;&lt;IMAGE&gt;&gt;
+After you unzip it you should have the following folder structure if you don&#8217;t please don&#8217;t continue instead try to figure out why you do not :)</p>
+<p>Now that we (presumably) have NSClient++ unzipped let start by starting it.
+Since much of what NSClient++ does requires &#8220;elevated privileged&#8221; you should always run NSClient++ in a &#8220;Administrator command prompt&#8221;.
+&lt;&lt;IMAGE&gt;&gt;</p>
+<p>Now change directory to where you unzipped NSClient++ and run nscp without any arguments like so:</p>
+<div class="highlight-bat"><div class="highlight"><pre><span class="k">cd</span> to<span class="n">/your/nsclient++/folder</span>
+nscp
+...
+</pre></div>
+</div>
+<p>Running nscp without arguments will show you the initial help screen.</p>
+</div>
+<div class="section" id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<p>The next step is to explore the various &#8220;modes&#8221;.</p>
+<div class="highlight-bat"><div class="highlight"><pre>nscp --help
+Allowed options:
+
+Common options:
+  --settings arg        Override (temporarily) settings subsystem to use
+  --help                produce help message
+  --debug               <span class="k">Set</span> <span class="nv">log</span> level to debug (and show debug information)
+  --log arg             The log level to use
+  --version             Show version information
+...
+Unit-test Options:
+  -l [ --language ] arg Language tests are written in
+  -a [ --argument ] arg List of arguments (gets -- prefixed automatically)
+  --raw-argument arg    List of arguments (does not get -- prefixed)
+</pre></div>
+</div>
+<p>First argument has to be one of the following: client, help, service, settings, test, unit,
+Or on of the following client aliases: eventlog, lua, nrpe, nsca, nscp, py, python, sys, syslog, wmi,</p>
+<p>As you can see there is a nice little help screen describing most of the options you can use.
+An important thing to understand is that like many other command line tools such as git or subversion the first &#8220;option&#8221; is not an option instead it acts as a &#8220;mode of operation&#8221;.
+In our case we have the following modes:</p>
+<p>||client||Run client side commands||
+||help||Display help screen||
+||service||Control the service as well as (un)install it||
+||settings||Work with the settings subsystem||
+||test||run nsclient++ in the famouse &#8220;test&#8221; mode||
+||unit||Execute unit tests||</p>
+<p>In addition to this we have alias for various &#8220;common&#8221; client modules. They are mearly a glorified way to save yourself some typing for instance {{{nscp sys}}} will yield the same result as saying {{{nscp client &#8211;module CheckSystem}}}.</p>
+<ul class="simple">
+<li>eventlog</li>
+<li>lua</li>
+<li>nrpe</li>
+<li>nsca</li>
+<li>nscp</li>
+<li>py</li>
+<li>python</li>
+<li>sys</li>
+<li>syslog</li>
+<li>wmi</li>
+</ul>
+</div>
+<div class="section" id="getting-setup">
+<h2>Getting setup!<a class="headerlink" href="#getting-setup" title="Permalink to this headline">¶</a></h2>
+<p>Since NSClient++ is an agent or daemon or service or whatever you want to call it. It is generally designed to run by it self without user intervention.
+Thus it requires a lot of configuration to know what to do so next up on our guide is getting to know the configuration and the interface.</p>
+<p>So the first thing we need to decide is where to place our configuration since I like the simplicity of the ini file I tend to opt for an inifile in the &#8220;current folder&#8221;.
+This, though, a rather crappy place to have the configuration and breaks both the Linux and Windows design guidelines but I tend to opt for simplicity.
+The long term plan (read 0.4.4) plan is to some day move the settings file over to where settings files should be stored.
+So the first thing you need to do now is tell NSClient++ this but before we get ahead of our self lets look at how we can manipulate the settings via the nscp command line interface. If you remember from the getting help section above we had a &#8220;settings&#8221; mode of operation. Lets look into that one a bit more.</p>
+<div class="highlight-text"><div class="highlight"><pre>nscp settings --help
+Allowed options (settings):
+
+Common options:
+  --settings arg        Override (temporarily) settings subsystem to use
+  --help                produce help message
+  --debug               Set log level to debug (and show debug information)
+  --log arg             The log level to use
+  --version             Show version information
+
+Settings options:
+  --migrate-to arg      Migrate (copy) settings from current store to target
+                        store
+  --migrate-from arg    Migrate (copy) settings from current store to target
+                        store
+  --generate arg        (re)Generate a commented settings store or similar KEY
+                        can be trac, settings or the target store.
+  --add-defaults        Add all default (if missing) values.
+  --validate            Validate the current configuration (or a given
+                        configuration).
+  --load-all            Load all plugins (currently only used with generate).
+  --path arg            Path of key to work with.
+  --key arg             Key to work with.
+  --set arg             Set a key and path to a given value.
+  --switch arg          Set default context to use (similar to migrate but does
+                        NOT copy values)
+  --show                Set a value given a key and path.
+  --list                Set all keys below the path (or root).
+</pre></div>
+</div>
+<p>In our case what we want is something which goes by the fancy name of &#8220;set default context&#8221;.
+This has the option &#8211;switch and takes a single argument which defines the settings system to &#8220;switch to&#8221;.
+Notice the comment about difference between the various &#8211;migrate-xxx options and switch. Switch will not migrate your current settings.
+Using migrate here would thus copy all settings from whatever settings you are using today to the new one befor updateing the settings to use.</p>
+<div class="highlight-text"><div class="highlight"><pre>d:\source\nscp\build\x64&gt;nscp settings --switch ini://${exe-path}/nscp.ini
+Current settings instance loaded:
+  INI settings: (ini://${exe-path}/nscp.ini, d:/source/nscp/build/x64//nscp.ini)
+</pre></div>
+</div>
+<p>What this does is configure NSClient++ to use the nsclient.ini config file and that the fie is placed in the ${exe-path} folder (which is the same path as the exe file you are launching it from is placed).
+But how does it do this you ask? What does actually change when you run this command?
+And the answer is simply a file called boot.ini is updated. This file describes where all settings files are found (and any configuration the settings file might require). Go ahead try it, delete this file and re-run the above command and it will come back looking the same.</p>
+<p>So now that we actually have a configuration file what can we do with it?
+If you read the theoretical version of the getting-started page you know by now that NSClient++ settings are self-describing.
+The command to for this is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">nscp</span> <span class="n">settings</span> <span class="o">--</span><span class="n">generate</span> <span class="n">ini</span> <span class="o">--</span><span class="n">add</span><span class="o">-</span><span class="n">defaults</span> <span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="nb">all</span>
+</pre></div>
+</div>
+<p>The &#8220;&#8211;add-missing&#8221; will force NSClient++ to add all missing keys to the settings store. The previous name for this option was &#8211;add-defaults which is the same.</p>
+<p>So lets go ahead and run this command and see what our nsclient.ini file looks like.
+If you open up the file you will be pleasantly (or not) surprised it has very few options.
+The reason for this is the modular nature of NSClient++ with a clean install there are no modules configured so we only get configuration options for the &#8220;core program&#8221; which really has very little in the way of configuration.</p>
+</div>
+<div class="section" id="getting-modular">
+<h2>Getting modular<a class="headerlink" href="#getting-modular" title="Permalink to this headline">¶</a></h2>
+<p>Loading modules is the most important aspect of NSClient++ and there is plenty to choose from.
+NSClient++ 0.4.1 has over 30 different modules.
+Modules can be grouped into three generic kinds of modules.</p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>CheckModules</dt>
+<dd><p class="first last">They provide various checkmetrics and commands for checking your system.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Protocol providers (Servers and clients)</dt>
+<dd><p class="first last">They provide the communication protocols you can use when connection NSClient++ to the outside world.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Scripting modules</dt>
+<dd><p class="first last">They provide additional features in the form of scripts and even other modules. I tend to think of them as proxies.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<p>We will start exploring &#8220;check-modules&#8221; here as they are the simplest form of module.
+Now comes a hefty dose of Linux hate. This guide will use the CheckSystem module which is (currently) only available on Windows.
+So how do we load modules?
+The simple way is to use the NSClient++ command line syntax here as well.</p>
+<div class="highlight-bat"><div class="highlight"><pre>nscp settings --activate-module CheckSystem --add-missing
+</pre></div>
+</div>
+<p>You should by now be able to guess what this command will do.
+First it will attempt to load the module if that succeed it will enable the module and add all new keys which the module provides.
+In this case the checksystem module is not very configurable but there were a few new things.
+As always open up the config file and see what was added.</p>
+</div>
+<div class="section" id="getting-your-hands-dirty">
+<h2>Getting your hands dirty<a class="headerlink" href="#getting-your-hands-dirty" title="Permalink to this headline">¶</a></h2>
+<p>So now that we have a module loaded lets move on to actually using the module.
+The best (and most ignored) way to work with NSClient++ is to use the &#8220;test mode&#8221;.
+Test mode provides you with two things.</p>
+<ol class="arabic simple">
+<li>A real-time debug log of what NSClient++ does</li>
+<li>A way to run commands quickly and easily and see the debug log at the same time.</li>
+</ol>
+<p>To start test mode you run the following command:
+nscp test</p>
+<p>This will print some debug log messages and eventually leave you with blinking cursor.</p>
+<div class="highlight-text"><div class="highlight"><pre>d:\source\nscp\build\x64&gt;nscp test
+d vice\logger_impl.cpp:373  Creating logger: console
+d rvice\NSClient++.cpp:382  NSClient++ 0,4,1,37 2012-08-11 x64 Loading settings and logger...
+d ngs_manager_impl.cpp:162  Boot.ini found in: d:/source/nscp/build/x64//boot.ini
+d ngs_manager_impl.cpp:178  Boot order: ini://${exe-path}/nsclient.ini
+d ngs_manager_impl.cpp:181  Activating: ini://${exe-path}/nsclient.ini
+d ngs_manager_impl.cpp:73   Creating instance for: ini://${exe-path}/nsclient.ini
+d mpl/settings_ini.hpp:275  Reading INI settings from: d:/source/nscp/build/x64//nsclient.ini
+d mpl/settings_ini.hpp:241  Loading: d:/source/nscp/build/x64//nsclient.ini from ini://${exe-path}/nsclient.ini
+l rvice\NSClient++.cpp:393  NSClient++ 0,4,1,37 2012-08-11 x64 booting...
+d rvice\NSClient++.cpp:394  Booted settings subsystem...
+e rvice\NSClient++.cpp:483  Warning Not compiled with google breakpad support!
+d rvice\NSClient++.cpp:540  booting::loading plugins
+d rvice\NSClient++.cpp:306  Found: CheckSystem
+d rvice\NSClient++.cpp:840  addPlugin(d:/source/nscp/build/x64//modules/CheckSystem.dll as )
+d rvice\NSClient++.cpp:817  Loading plugin: CheckSystem
+d stem\CheckSystem.cpp:103  Found alternate key for uptime: \2\674
+d stem\CheckSystem.cpp:114  Found alternate key for memory commit limit: \4\30
+d stem\CheckSystem.cpp:125  Found alternate key for memory commit bytes: \4\26
+d stem\CheckSystem.cpp:136  Found alternate key for cpu: \238(_total)\6
+d rvice\NSClient++.cpp:612  NSClient++ - 0,4,1,37 2012-08-11 Started!
+d tem\PDHCollector.cpp:94   Loading counter: cpu = \238(_total)\6
+l ce\simple_client.hpp:29   Service seems to be started (Sockets and such will probably not work)...
+d tem\PDHCollector.cpp:94   Loading counter: memory commit bytes = \4\26
+l ce\simple_client.hpp:32   Enter command to inject or exit to terminate...
+d tem\PDHCollector.cpp:94   Loading counter: memory commit limit = \4\30
+d tem\PDHCollector.cpp:94   Loading counter: uptime = \2\674
+</pre></div>
+</div>
+<p>Now you can enter commands.
+For instance if you start by entering the commands command</p>
+<div class="highlight-text"><div class="highlight"><pre>commands
+l ce\simple_client.hpp:54   Commands:
+l ce\simple_client.hpp:57   | check_cpu: Check that the load of the CPU(s) are within bounds.
+l ce\simple_client.hpp:57   | check_memory: Check free/used memory on the system.
+l ce\simple_client.hpp:57   | check_pdh: Check a PDH counter.
+l ce\simple_client.hpp:57   | check_process: Check the state of one or more of the processes running on the comput
+er.
+l ce\simple_client.hpp:57   | check_registry: Check values in the registry.
+l ce\simple_client.hpp:57   | check_service: Check the state of one or more of the computer services.
+l ce\simple_client.hpp:57   | check_uptime: Check time since last server re-boot.
+l ce\simple_client.hpp:57   | checkcounter: Check a PDH counter.
+l ce\simple_client.hpp:57   | checkcpu: Check that the load of the CPU(s) are within bounds.
+l ce\simple_client.hpp:57   | checkmem: Check free/used memory on the system.
+l ce\simple_client.hpp:57   | checkprocstate: Check the state of one or more of the processes running on the compu
+ter.
+l ce\simple_client.hpp:57   | checkservicestate: Check the state of one or more of the computer services.
+l ce\simple_client.hpp:57   | checksingleregentry: Check values in the registry.
+l ce\simple_client.hpp:57   | checkuptime: Check time since last server re-boot.
+l ce\simple_client.hpp:57   | listcounterinstances: *DEPRECATED* List all instances for a counter.
+</pre></div>
+</div>
+<p>You get a list of all commands you can execute. commands in this context is actual check commands which generaly checks some aspect of you system.
+Lets try out the first one:</p>
+<div class="highlight-text"><div class="highlight"><pre>check_cpu
+d rvice\NSClient++.cpp:933  Injecting: check_cpu...
+d rvice\NSClient++.cpp:958  Result check_cpu: WARNING
+l ce\simple_client.hpp:80   WARNING:ERROR: Usage: check_cpu &lt;threshold&gt; &lt;time1&gt; [&lt;time2&gt;...] (check_cpu MaxWarn=80 time=5m)
+</pre></div>
+</div>
+<p>As you can see this returns a warning and tells us some general information how to use it.
+Now this is more of an exception then a rule but it it the idea hence fort to try to make commands and such &#8220;helpful&#8221;.</p>
+<p>Now lets move on to trying to run the actual suggested commands:</p>
+<div class="highlight-text"><div class="highlight"><pre>check_cpu MaxWarn=80 time=5m
+d rvice\NSClient++.cpp:933  Injecting: check_cpu...
+d rvice\NSClient++.cpp:958  Result check_cpu: OK
+l ce\simple_client.hpp:80   OK:OK CPU Load ok.
+l ce\simple_client.hpp:82    Performance data: &#39;5m&#39;=22%;80;0
+</pre></div>
+</div>
+<p>Now it seems to actually do something.</p>
+<p>So there we have it the system is now being monitored (albeit manually by you but we will resolve that in the next section).</p>
+</div>
+<div class="section" id="getting-connected">
+<h2>Getting Connected<a class="headerlink" href="#getting-connected" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have a sense of how to check our data we shall start connecting our self with the outside world so our monitoring agent can connect and see if we are actually working properly.</p>
+<p><strong>TODO</strong></p>
+</div>
+<div class="section" id="getting-scheduled">
+<h2>Getting scheduled<a class="headerlink" href="#getting-scheduled" title="Permalink to this headline">¶</a></h2>
+<p><strong>TODO</strong></p>
+</div>
+<div class="section" id="getting-to-the-end">
+<h2>Getting to the end<a class="headerlink" href="#getting-to-the-end" title="Permalink to this headline">¶</a></h2>
+<p><strong>TODO</strong></p>
+<p>SO now we have walked through the basics of setting up NSClient++ some of this requires Windows some requires 0.4.1 and some requires manual work.
+Most of this  can be automated and/or configured from the installer but I think it is better to understand what actually happens and I hope this gives a sense of how NSClient++ works and how you can use NSClient++.</p>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting started with 0.4.x</a><ul>
+<li><a class="reference internal" href="#getting-it">Getting it!</a></li>
+<li><a class="reference internal" href="#getting-help">Getting Help</a></li>
+<li><a class="reference internal" href="#getting-setup">Getting setup!</a></li>
+<li><a class="reference internal" href="#getting-modular">Getting modular</a></li>
+<li><a class="reference internal" href="#getting-your-hands-dirty">Getting your hands dirty</a></li>
+<li><a class="reference internal" href="#getting-connected">Getting Connected</a></li>
+<li><a class="reference internal" href="#getting-scheduled">Getting scheduled</a></li>
+<li><a class="reference internal" href="#getting-to-the-end">Getting to the end</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="about.html"
+                        title="previous chapter">About NSClient++</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="theory.html"
+                        title="next chapter">Getting-Started with NSClient++</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../bugs.html">Report a Bug</a></li>
+  <li><a href="../_sources/manual/getting_started.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="theory.html" title="Getting-Started with NSClient++"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="about.html" title="About NSClient++"
+             >previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >NSClient++ Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

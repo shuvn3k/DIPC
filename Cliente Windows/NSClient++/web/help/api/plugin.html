@@ -1,0 +1,2647 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../index.html" />
+    <link rel="up" title="API" href="index.html" />
+    <link rel="next" title="FAQ: Frequently asked questions" href="../faq/index.html" />
+    <link rel="prev" title="API" href="index.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <script type="text/javascript" src="../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../faq/index.html" title="FAQ: Frequently asked questions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="API"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">API</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin">
+<h1>Plugin<a class="headerlink" href="#plugin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="common">
+<h2>Common<a class="headerlink" href="#common" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.Common">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">Common</code><a class="headerlink" href="#Plugin.Common" title="Permalink to this definition">¶</a></dt>
+<dd><p>Common utility types (re-used in various messages below)</p>
+<dl class="attribute">
+<dt id="Plugin.Common.ResultCode">
+<code class="descname">ResultCode</code><a class="headerlink" href="#Plugin.Common.ResultCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>A &#8220;nagios&#8221; status result.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>OK</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>WARNING</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>CRITICAL</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>UNKNOWN</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.DataType">
+<code class="descname">DataType</code><a class="headerlink" href="#Plugin.Common.DataType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of data fields.
+&#64;deprecated in favour of checking which field is available.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>INT</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>STRING</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>FLOAT</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>BOOL</td>
+<td>4</td>
+</tr>
+<tr class="row-even"><td>LIST</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Version">
+<code class="descname">Version</code><a class="headerlink" href="#Plugin.Common.Version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main protocol version used
+&#64;deprecated Makes very little sense and should be removed</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>VERSION_1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.Common.AnyDataType" title="Plugin.Common.AnyDataType"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.AnyDataType</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Common.KeyValue" title="Plugin.Common.KeyValue"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.KeyValue</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Common.Host" title="Plugin.Common.Host"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.Host</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Common.Header" title="Plugin.Common.Header"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.Header</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Common.Attachment" title="Plugin.Common.Attachment"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.Attachment</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Common.PerformanceData" title="Plugin.Common.PerformanceData"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.PerformanceData</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Common.Status" title="Plugin.Common.Status"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.Status</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="anydatatype">
+<h3>AnyDataType<a class="headerlink" href="#anydatatype" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.AnyDataType">
+<em class="property">class </em><code class="descclassname">Plugin.Common.</code><code class="descname">AnyDataType</code><a class="headerlink" href="#Plugin.Common.AnyDataType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data type used to wrap &#8220;any&#8221; primitive type.
+Used whenever the type can change.</p>
+<dl class="attribute">
+<dt id="Plugin.Common.AnyDataType.string_data">
+<code class="descname">string_data</code><a class="headerlink" href="#Plugin.Common.AnyDataType.string_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>String payload</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.AnyDataType.int_data">
+<code class="descname">int_data</code><a class="headerlink" href="#Plugin.Common.AnyDataType.int_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+<p>Numeric integer payload</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.AnyDataType.float_data">
+<code class="descname">float_data</code><a class="headerlink" href="#Plugin.Common.AnyDataType.float_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>double</strong></p>
+<p>Numeric floating point payload</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.AnyDataType.bool_data">
+<code class="descname">bool_data</code><a class="headerlink" href="#Plugin.Common.AnyDataType.bool_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+<p>Boolean (true/false) payload</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.AnyDataType.list_data">
+<code class="descname">list_data</code><a class="headerlink" href="#Plugin.Common.AnyDataType.list_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+<p>A string (multiple lines are separated by list entries
+&#64;todo: remove repeated modifier from this field.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="keyvalue">
+<h3>KeyValue<a class="headerlink" href="#keyvalue" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.KeyValue">
+<em class="property">class </em><code class="descclassname">Plugin.Common.</code><code class="descname">KeyValue</code><a class="headerlink" href="#Plugin.Common.KeyValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key value pair</p>
+<dl class="attribute">
+<dt id="Plugin.Common.KeyValue.key">
+<code class="descname">key</code><a class="headerlink" href="#Plugin.Common.KeyValue.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+<p>The key identifying the value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.KeyValue.value">
+<code class="descname">value</code><a class="headerlink" href="#Plugin.Common.KeyValue.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+<p>The value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.KeyValue.data">
+<code class="descname">data</code><a class="headerlink" href="#Plugin.Common.KeyValue.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+<p>Optional extra fields to store various custom data</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="host">
+<h3>Host<a class="headerlink" href="#host" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.Host">
+<em class="property">class </em><code class="descclassname">Plugin.Common.</code><code class="descname">Host</code><a class="headerlink" href="#Plugin.Common.Host" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field identifying a host entry</p>
+<dl class="attribute">
+<dt id="Plugin.Common.Host.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.Common.Host.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>A unique identifier representing the host in <em>this</em> message</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Host.host">
+<code class="descname">host</code><a class="headerlink" href="#Plugin.Common.Host.host" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>The host name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Host.address">
+<code class="descname">address</code><a class="headerlink" href="#Plugin.Common.Host.address" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>The address (usually the ip)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Host.protocol">
+<code class="descname">protocol</code><a class="headerlink" href="#Plugin.Common.Host.protocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>The protocol used to talk whit this host.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Host.comment">
+<code class="descname">comment</code><a class="headerlink" href="#Plugin.Common.Host.comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>A comment describing the host</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Host.metadata">
+<code class="descname">metadata</code><a class="headerlink" href="#Plugin.Common.Host.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>A key value store with attributes describing this host.
+The content and use of this attributes are application defined.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Host.tags">
+<code class="descname">tags</code><a class="headerlink" href="#Plugin.Common.Host.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+<p>A numer of tags defined for this host (can be used for routing purposes).</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="header">
+<h3>Header<a class="headerlink" href="#header" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.Header">
+<em class="property">class </em><code class="descclassname">Plugin.Common.</code><code class="descname">Header</code><a class="headerlink" href="#Plugin.Common.Header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Header used in all messages.
+Contains basic information about the message.</p>
+<dl class="attribute">
+<dt id="Plugin.Common.Header.version">
+<code class="descname">version</code><a class="headerlink" href="#Plugin.Common.Header.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+<p>Version of message.
+&#64; deprecated Not really useful</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Header.max_supported_version">
+<code class="descname">max_supported_version</code><a class="headerlink" href="#Plugin.Common.Header.max_supported_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>enum</strong></p>
+<p>Maximmu supported version.
+Was planned to be used to negotiate version but was never used.
+&#64;deprecated not used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Header.source_id">
+<code class="descname">source_id</code><a class="headerlink" href="#Plugin.Common.Header.source_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>Source (sending) system.
+This is the system which sends the message (me).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Header.sender_id">
+<code class="descname">sender_id</code><a class="headerlink" href="#Plugin.Common.Header.sender_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>Sender is the original source of the message.
+THis is same as source unless message has been relayed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Header.recipient_id">
+<code class="descname">recipient_id</code><a class="headerlink" href="#Plugin.Common.Header.recipient_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>Recipient is the final destination.
+This is the same as destination_id unless message is to be relayed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Header.destination_id">
+<code class="descname">destination_id</code><a class="headerlink" href="#Plugin.Common.Header.destination_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+<p>Destination (target) system.
+The system which will receive the message.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Header.message_id">
+<code class="descname">message_id</code><a class="headerlink" href="#Plugin.Common.Header.message_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+<p>Message identification.
+Has no meaning apart from identification.
+Set by source system and retained in any processing system.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Header.metadata">
+<code class="descname">metadata</code><a class="headerlink" href="#Plugin.Common.Header.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>Meta data related to the message.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Header.tags">
+<code class="descname">tags</code><a class="headerlink" href="#Plugin.Common.Header.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+<p>A list of tags associated with the message.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Header.hosts">
+<code class="descname">hosts</code><a class="headerlink" href="#Plugin.Common.Header.hosts" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>A list of hosts.
+All recipient/destination ids point to objects in this data set.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="attachment">
+<h3>Attachment<a class="headerlink" href="#attachment" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.Attachment">
+<em class="property">class </em><code class="descclassname">Plugin.Common.</code><code class="descname">Attachment</code><a class="headerlink" href="#Plugin.Common.Attachment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attachment is used to attach information to another request.
+This is usually used to send along additional information not directly relatedt to the request.
+Or send unstructured data which is not supported by the original request.</p>
+<dl class="attribute">
+<dt id="Plugin.Common.Attachment.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.Common.Attachment.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+<p>Identifier of attachment (for reference purpouses)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Attachment.type">
+<code class="descname">type</code><a class="headerlink" href="#Plugin.Common.Attachment.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+<p>The mime type for this attachment.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Attachment.metadata">
+<code class="descname">metadata</code><a class="headerlink" href="#Plugin.Common.Attachment.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>Meta data related to the attachment.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Attachment.tags">
+<code class="descname">tags</code><a class="headerlink" href="#Plugin.Common.Attachment.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+<p>A list of tags associated with the attachment.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Attachment.data">
+<code class="descname">data</code><a class="headerlink" href="#Plugin.Common.Attachment.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+<p>The actual attachment (encoded)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="performancedata">
+<h3>PerformanceData<a class="headerlink" href="#performancedata" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.PerformanceData">
+<em class="property">class </em><code class="descclassname">Plugin.Common.</code><code class="descname">PerformanceData</code><a class="headerlink" href="#Plugin.Common.PerformanceData" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.alias">
+<code class="descname">alias</code><a class="headerlink" href="#Plugin.Common.PerformanceData.alias" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.type">
+<code class="descname">type</code><a class="headerlink" href="#Plugin.Common.PerformanceData.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.int_value">
+<code class="descname">int_value</code><a class="headerlink" href="#Plugin.Common.PerformanceData.int_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.string_value">
+<code class="descname">string_value</code><a class="headerlink" href="#Plugin.Common.PerformanceData.string_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.float_value">
+<code class="descname">float_value</code><a class="headerlink" href="#Plugin.Common.PerformanceData.float_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.bool_value">
+<code class="descname">bool_value</code><a class="headerlink" href="#Plugin.Common.PerformanceData.bool_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.Common.PerformanceData.IntValue" title="Plugin.Common.PerformanceData.IntValue"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.PerformanceData.IntValue</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Common.PerformanceData.StringValue" title="Plugin.Common.PerformanceData.StringValue"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.PerformanceData.StringValue</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Common.PerformanceData.FloatValue" title="Plugin.Common.PerformanceData.FloatValue"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.PerformanceData.FloatValue</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Common.PerformanceData.BoolValue" title="Plugin.Common.PerformanceData.BoolValue"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Common.PerformanceData.BoolValue</span></code></a></li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="intvalue">
+<h3>IntValue<a class="headerlink" href="#intvalue" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.PerformanceData.IntValue">
+<em class="property">class </em><code class="descclassname">Plugin.Common.PerformanceData.</code><code class="descname">IntValue</code><a class="headerlink" href="#Plugin.Common.PerformanceData.IntValue" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.IntValue.value">
+<code class="descname">value</code><a class="headerlink" href="#Plugin.Common.PerformanceData.IntValue.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.IntValue.unit">
+<code class="descname">unit</code><a class="headerlink" href="#Plugin.Common.PerformanceData.IntValue.unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.IntValue.warning">
+<code class="descname">warning</code><a class="headerlink" href="#Plugin.Common.PerformanceData.IntValue.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.IntValue.critical">
+<code class="descname">critical</code><a class="headerlink" href="#Plugin.Common.PerformanceData.IntValue.critical" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.IntValue.minimum">
+<code class="descname">minimum</code><a class="headerlink" href="#Plugin.Common.PerformanceData.IntValue.minimum" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.IntValue.maximum">
+<code class="descname">maximum</code><a class="headerlink" href="#Plugin.Common.PerformanceData.IntValue.maximum" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="stringvalue">
+<h3>StringValue<a class="headerlink" href="#stringvalue" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.PerformanceData.StringValue">
+<em class="property">class </em><code class="descclassname">Plugin.Common.PerformanceData.</code><code class="descname">StringValue</code><a class="headerlink" href="#Plugin.Common.PerformanceData.StringValue" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.StringValue.value">
+<code class="descname">value</code><a class="headerlink" href="#Plugin.Common.PerformanceData.StringValue.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="floatvalue">
+<h3>FloatValue<a class="headerlink" href="#floatvalue" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.PerformanceData.FloatValue">
+<em class="property">class </em><code class="descclassname">Plugin.Common.PerformanceData.</code><code class="descname">FloatValue</code><a class="headerlink" href="#Plugin.Common.PerformanceData.FloatValue" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.FloatValue.value">
+<code class="descname">value</code><a class="headerlink" href="#Plugin.Common.PerformanceData.FloatValue.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>double</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.FloatValue.unit">
+<code class="descname">unit</code><a class="headerlink" href="#Plugin.Common.PerformanceData.FloatValue.unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.FloatValue.warning">
+<code class="descname">warning</code><a class="headerlink" href="#Plugin.Common.PerformanceData.FloatValue.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>double</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.FloatValue.critical">
+<code class="descname">critical</code><a class="headerlink" href="#Plugin.Common.PerformanceData.FloatValue.critical" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>double</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.FloatValue.minimum">
+<code class="descname">minimum</code><a class="headerlink" href="#Plugin.Common.PerformanceData.FloatValue.minimum" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>double</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.FloatValue.maximum">
+<code class="descname">maximum</code><a class="headerlink" href="#Plugin.Common.PerformanceData.FloatValue.maximum" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>double</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="boolvalue">
+<h3>BoolValue<a class="headerlink" href="#boolvalue" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.PerformanceData.BoolValue">
+<em class="property">class </em><code class="descclassname">Plugin.Common.PerformanceData.</code><code class="descname">BoolValue</code><a class="headerlink" href="#Plugin.Common.PerformanceData.BoolValue" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.BoolValue.value">
+<code class="descname">value</code><a class="headerlink" href="#Plugin.Common.PerformanceData.BoolValue.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.BoolValue.unit">
+<code class="descname">unit</code><a class="headerlink" href="#Plugin.Common.PerformanceData.BoolValue.unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.BoolValue.warning">
+<code class="descname">warning</code><a class="headerlink" href="#Plugin.Common.PerformanceData.BoolValue.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.PerformanceData.BoolValue.critical">
+<code class="descname">critical</code><a class="headerlink" href="#Plugin.Common.PerformanceData.BoolValue.critical" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="status">
+<h3>Status<a class="headerlink" href="#status" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Common.Status">
+<em class="property">class </em><code class="descclassname">Plugin.Common.</code><code class="descname">Status</code><a class="headerlink" href="#Plugin.Common.Status" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Common.Status.StatusType">
+<code class="descname">StatusType</code><a class="headerlink" href="#Plugin.Common.Status.StatusType" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>STATUS_OK</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>STATUS_WARNING</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>STATUS_ERROR</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>STATUS_DELAYED</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Status.status">
+<code class="descname">status</code><a class="headerlink" href="#Plugin.Common.Status.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Status.message">
+<code class="descname">message</code><a class="headerlink" href="#Plugin.Common.Status.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Common.Status.data">
+<code class="descname">data</code><a class="headerlink" href="#Plugin.Common.Status.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="queryrequestmessage">
+<h2>QueryRequestMessage<a class="headerlink" href="#queryrequestmessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.QueryRequestMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">QueryRequestMessage</code><a class="headerlink" href="#Plugin.QueryRequestMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query request
+Used for querying the client this is the &#8220;normal&#8221; check_nrpe message request.
+Associated response is <a class="reference internal" href="#Plugin.QueryResponseMessage" title="Plugin.QueryResponseMessage"><code class="xref py py-class docutils literal"><span class="pre">Plugin.QueryResponseMessage</span></code></a></p>
+<dl class="attribute">
+<dt id="Plugin.QueryRequestMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.QueryRequestMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryRequestMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.QueryRequestMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryRequestMessage.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.QueryRequestMessage.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.QueryRequestMessage.Request" title="Plugin.QueryRequestMessage.Request"><code class="xref py py-class docutils literal"><span class="pre">Plugin.QueryRequestMessage.Request</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="request">
+<h3>Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.QueryRequestMessage.Request">
+<em class="property">class </em><code class="descclassname">Plugin.QueryRequestMessage.</code><code class="descname">Request</code><a class="headerlink" href="#Plugin.QueryRequestMessage.Request" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.QueryRequestMessage.Request.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.QueryRequestMessage.Request.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryRequestMessage.Request.target">
+<code class="descname">target</code><a class="headerlink" href="#Plugin.QueryRequestMessage.Request.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryRequestMessage.Request.command">
+<code class="descname">command</code><a class="headerlink" href="#Plugin.QueryRequestMessage.Request.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryRequestMessage.Request.alias">
+<code class="descname">alias</code><a class="headerlink" href="#Plugin.QueryRequestMessage.Request.alias" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryRequestMessage.Request.arguments">
+<code class="descname">arguments</code><a class="headerlink" href="#Plugin.QueryRequestMessage.Request.arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryRequestMessage.Request.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.QueryRequestMessage.Request.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="queryresponsemessage">
+<h2>QueryResponseMessage<a class="headerlink" href="#queryresponsemessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.QueryResponseMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">QueryResponseMessage</code><a class="headerlink" href="#Plugin.QueryResponseMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query response
+Used for querying the client this is the &#8220;normal&#8221; check_nrpe message request.
+Associated request is <a class="reference internal" href="#Plugin.QueryRequestMessage" title="Plugin.QueryRequestMessage"><code class="xref py py-class docutils literal"><span class="pre">Plugin.QueryRequestMessage</span></code></a></p>
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.QueryResponseMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.QueryResponseMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.QueryResponseMessage.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.QueryResponseMessage.Response" title="Plugin.QueryResponseMessage.Response"><code class="xref py py-class docutils literal"><span class="pre">Plugin.QueryResponseMessage.Response</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="response">
+<h3>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.QueryResponseMessage.Response">
+<em class="property">class </em><code class="descclassname">Plugin.QueryResponseMessage.</code><code class="descname">Response</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.source">
+<code class="descname">source</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.command">
+<code class="descname">command</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.alias">
+<code class="descname">alias</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.alias" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.arguments">
+<code class="descname">arguments</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.result">
+<code class="descname">result</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.message">
+<code class="descname">message</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.data">
+<code class="descname">data</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bytes</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.perf">
+<code class="descname">perf</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.perf" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.QueryResponseMessage.Response.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.QueryResponseMessage.Response.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="executerequestmessage">
+<h2>ExecuteRequestMessage<a class="headerlink" href="#executerequestmessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.ExecuteRequestMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">ExecuteRequestMessage</code><a class="headerlink" href="#Plugin.ExecuteRequestMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute command request and response.
+Used for executing commands on clients similar to <a class="reference internal" href="#Plugin.QueryRequestMessage" title="Plugin.QueryRequestMessage"><code class="xref py py-class docutils literal"><span class="pre">Plugin.QueryRequestMessage</span></code></a> but wont return nagios check data
+Associated response is <a class="reference internal" href="#Plugin.ExecuteResponseMessage" title="Plugin.ExecuteResponseMessage"><code class="xref py py-class docutils literal"><span class="pre">Plugin.ExecuteResponseMessage</span></code></a></p>
+<dl class="attribute">
+<dt id="Plugin.ExecuteRequestMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.ExecuteRequestMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteRequestMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.ExecuteRequestMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteRequestMessage.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.ExecuteRequestMessage.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.ExecuteRequestMessage.Request" title="Plugin.ExecuteRequestMessage.Request"><code class="xref py py-class docutils literal"><span class="pre">Plugin.ExecuteRequestMessage.Request</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="id1">
+<h3>Request<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.ExecuteRequestMessage.Request">
+<em class="property">class </em><code class="descclassname">Plugin.ExecuteRequestMessage.</code><code class="descname">Request</code><a class="headerlink" href="#Plugin.ExecuteRequestMessage.Request" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.ExecuteRequestMessage.Request.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.ExecuteRequestMessage.Request.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteRequestMessage.Request.command">
+<code class="descname">command</code><a class="headerlink" href="#Plugin.ExecuteRequestMessage.Request.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteRequestMessage.Request.arguments">
+<code class="descname">arguments</code><a class="headerlink" href="#Plugin.ExecuteRequestMessage.Request.arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteRequestMessage.Request.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.ExecuteRequestMessage.Request.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="executeresponsemessage">
+<h2>ExecuteResponseMessage<a class="headerlink" href="#executeresponsemessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.ExecuteResponseMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">ExecuteResponseMessage</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.ExecuteResponseMessage.Response" title="Plugin.ExecuteResponseMessage.Response"><code class="xref py py-class docutils literal"><span class="pre">Plugin.ExecuteResponseMessage.Response</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="id2">
+<h3>Response<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.ExecuteResponseMessage.Response">
+<em class="property">class </em><code class="descclassname">Plugin.ExecuteResponseMessage.</code><code class="descname">Response</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.Response" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.Response.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.Response.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.Response.command">
+<code class="descname">command</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.Response.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.Response.arguments">
+<code class="descname">arguments</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.Response.arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.Response.result">
+<code class="descname">result</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.Response.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.Response.message">
+<code class="descname">message</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.Response.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.Response.data">
+<code class="descname">data</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.Response.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bytes</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ExecuteResponseMessage.Response.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.ExecuteResponseMessage.Response.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="submitrequestmessage">
+<h2>SubmitRequestMessage<a class="headerlink" href="#submitrequestmessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.SubmitRequestMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">SubmitRequestMessage</code><a class="headerlink" href="#Plugin.SubmitRequestMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit result request message.
+Used for submitting a passive check results.
+The actual payload (Request) is a normal <a class="reference internal" href="#Plugin.QueryResponseMessage.Response" title="Plugin.QueryResponseMessage.Response"><code class="xref py py-class docutils literal"><span class="pre">Plugin.QueryResponseMessage.Response</span></code></a>.
+Associated response is <a class="reference internal" href="#Plugin.SubmitResponseMessage" title="Plugin.SubmitResponseMessage"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SubmitResponseMessage</span></code></a></p>
+<dl class="attribute">
+<dt id="Plugin.SubmitRequestMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.SubmitRequestMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SubmitRequestMessage.channel">
+<code class="descname">channel</code><a class="headerlink" href="#Plugin.SubmitRequestMessage.channel" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SubmitRequestMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.SubmitRequestMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SubmitRequestMessage.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.SubmitRequestMessage.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="submitresponsemessage">
+<h2>SubmitResponseMessage<a class="headerlink" href="#submitresponsemessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.SubmitResponseMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">SubmitResponseMessage</code><a class="headerlink" href="#Plugin.SubmitResponseMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit result response message.
+Response from submitting a passive check results.
+Associated request is <a class="reference internal" href="#Plugin.SubmitRequestMessage" title="Plugin.SubmitRequestMessage"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SubmitRequestMessage</span></code></a></p>
+<dl class="attribute">
+<dt id="Plugin.SubmitResponseMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.SubmitResponseMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SubmitResponseMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.SubmitResponseMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SubmitResponseMessage.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.SubmitResponseMessage.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.SubmitResponseMessage.Response" title="Plugin.SubmitResponseMessage.Response"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SubmitResponseMessage.Response</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="id3">
+<h3>Response<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SubmitResponseMessage.Response">
+<em class="property">class </em><code class="descclassname">Plugin.SubmitResponseMessage.</code><code class="descname">Response</code><a class="headerlink" href="#Plugin.SubmitResponseMessage.Response" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SubmitResponseMessage.Response.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.SubmitResponseMessage.Response.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SubmitResponseMessage.Response.command">
+<code class="descname">command</code><a class="headerlink" href="#Plugin.SubmitResponseMessage.Response.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SubmitResponseMessage.Response.status">
+<code class="descname">status</code><a class="headerlink" href="#Plugin.SubmitResponseMessage.Response.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SubmitResponseMessage.Response.attachments">
+<code class="descname">attachments</code><a class="headerlink" href="#Plugin.SubmitResponseMessage.Response.attachments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+<p>The attachment is used to attach additional free form information.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="registry">
+<h2>Registry<a class="headerlink" href="#registry" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.Registry">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">Registry</code><a class="headerlink" href="#Plugin.Registry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registration is an internal message.
+It is not used to submit checks or query status instead it is used so register modules, plug-ins, command.
+As well as query for them.
+The registry is a central component inside NSClient++ and this is the way to interact with the registry.</p>
+<dl class="attribute">
+<dt id="Plugin.Registry.ItemType">
+<code class="descname">ItemType</code><a class="headerlink" href="#Plugin.Registry.ItemType" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>QUERY</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>COMMAND</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>HANDLER</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>PLUGIN</td>
+<td>4</td>
+</tr>
+<tr class="row-even"><td>QUERY_ALIAS</td>
+<td>5</td>
+</tr>
+<tr class="row-odd"><td>ROUTER</td>
+<td>6</td>
+</tr>
+<tr class="row-even"><td>MODULE</td>
+<td>7</td>
+</tr>
+<tr class="row-odd"><td>SCHEDULE</td>
+<td>8</td>
+</tr>
+<tr class="row-even"><td>ALL</td>
+<td>99</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.Command">
+<code class="descname">Command</code><a class="headerlink" href="#Plugin.Registry.Command" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LOAD</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>UNLOAD</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>RELOAD</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.Registry.Query" title="Plugin.Registry.Query"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Registry.Query</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Registry.Information" title="Plugin.Registry.Information"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Registry.Information</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Registry.KeyWordDescription" title="Plugin.Registry.KeyWordDescription"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Registry.KeyWordDescription</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Registry.ParameterDetail" title="Plugin.Registry.ParameterDetail"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Registry.ParameterDetail</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Registry.ParameterDetails" title="Plugin.Registry.ParameterDetails"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Registry.ParameterDetails</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Registry.Schedule" title="Plugin.Registry.Schedule"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Registry.Schedule</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="query">
+<h3>Query<a class="headerlink" href="#query" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Registry.Query">
+<em class="property">class </em><code class="descclassname">Plugin.Registry.</code><code class="descname">Query</code><a class="headerlink" href="#Plugin.Registry.Query" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Registry.Query.expression">
+<code class="descname">expression</code><a class="headerlink" href="#Plugin.Registry.Query.expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="information">
+<h3>Information<a class="headerlink" href="#information" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Registry.Information">
+<em class="property">class </em><code class="descclassname">Plugin.Registry.</code><code class="descname">Information</code><a class="headerlink" href="#Plugin.Registry.Information" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Registry.Information.title">
+<code class="descname">title</code><a class="headerlink" href="#Plugin.Registry.Information.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.Information.description">
+<code class="descname">description</code><a class="headerlink" href="#Plugin.Registry.Information.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.Information.metadata">
+<code class="descname">metadata</code><a class="headerlink" href="#Plugin.Registry.Information.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.Information.min_version">
+<code class="descname">min_version</code><a class="headerlink" href="#Plugin.Registry.Information.min_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.Information.max_version">
+<code class="descname">max_version</code><a class="headerlink" href="#Plugin.Registry.Information.max_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.Information.advanced">
+<code class="descname">advanced</code><a class="headerlink" href="#Plugin.Registry.Information.advanced" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.Information.plugin">
+<code class="descname">plugin</code><a class="headerlink" href="#Plugin.Registry.Information.plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="keyworddescription">
+<h3>KeyWordDescription<a class="headerlink" href="#keyworddescription" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Registry.KeyWordDescription">
+<em class="property">class </em><code class="descclassname">Plugin.Registry.</code><code class="descname">KeyWordDescription</code><a class="headerlink" href="#Plugin.Registry.KeyWordDescription" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Registry.KeyWordDescription.parameter">
+<code class="descname">parameter</code><a class="headerlink" href="#Plugin.Registry.KeyWordDescription.parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.KeyWordDescription.context">
+<code class="descname">context</code><a class="headerlink" href="#Plugin.Registry.KeyWordDescription.context" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.KeyWordDescription.key">
+<code class="descname">key</code><a class="headerlink" href="#Plugin.Registry.KeyWordDescription.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.KeyWordDescription.short_description">
+<code class="descname">short_description</code><a class="headerlink" href="#Plugin.Registry.KeyWordDescription.short_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.KeyWordDescription.long_description">
+<code class="descname">long_description</code><a class="headerlink" href="#Plugin.Registry.KeyWordDescription.long_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="parameterdetail">
+<h3>ParameterDetail<a class="headerlink" href="#parameterdetail" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Registry.ParameterDetail">
+<em class="property">class </em><code class="descclassname">Plugin.Registry.</code><code class="descname">ParameterDetail</code><a class="headerlink" href="#Plugin.Registry.ParameterDetail" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Registry.ParameterDetail.name">
+<code class="descname">name</code><a class="headerlink" href="#Plugin.Registry.ParameterDetail.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.ParameterDetail.default_value">
+<code class="descname">default_value</code><a class="headerlink" href="#Plugin.Registry.ParameterDetail.default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.ParameterDetail.required">
+<code class="descname">required</code><a class="headerlink" href="#Plugin.Registry.ParameterDetail.required" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.ParameterDetail.repeatable">
+<code class="descname">repeatable</code><a class="headerlink" href="#Plugin.Registry.ParameterDetail.repeatable" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.ParameterDetail.content_type">
+<code class="descname">content_type</code><a class="headerlink" href="#Plugin.Registry.ParameterDetail.content_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.ParameterDetail.short_description">
+<code class="descname">short_description</code><a class="headerlink" href="#Plugin.Registry.ParameterDetail.short_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.ParameterDetail.long_description">
+<code class="descname">long_description</code><a class="headerlink" href="#Plugin.Registry.ParameterDetail.long_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.ParameterDetail.keyword">
+<code class="descname">keyword</code><a class="headerlink" href="#Plugin.Registry.ParameterDetail.keyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="parameterdetails">
+<h3>ParameterDetails<a class="headerlink" href="#parameterdetails" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Registry.ParameterDetails">
+<em class="property">class </em><code class="descclassname">Plugin.Registry.</code><code class="descname">ParameterDetails</code><a class="headerlink" href="#Plugin.Registry.ParameterDetails" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Registry.ParameterDetails.parameter">
+<code class="descname">parameter</code><a class="headerlink" href="#Plugin.Registry.ParameterDetails.parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="schedule">
+<h3>Schedule<a class="headerlink" href="#schedule" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Registry.Schedule">
+<em class="property">class </em><code class="descclassname">Plugin.Registry.</code><code class="descname">Schedule</code><a class="headerlink" href="#Plugin.Registry.Schedule" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Registry.Schedule.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.Registry.Schedule.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.Schedule.cron">
+<code class="descname">cron</code><a class="headerlink" href="#Plugin.Registry.Schedule.cron" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Registry.Schedule.interval">
+<code class="descname">interval</code><a class="headerlink" href="#Plugin.Registry.Schedule.interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="registryrequestmessage">
+<h2>RegistryRequestMessage<a class="headerlink" href="#registryrequestmessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.RegistryRequestMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">RegistryRequestMessage</code><a class="headerlink" href="#Plugin.RegistryRequestMessage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.RegistryRequestMessage.Request" title="Plugin.RegistryRequestMessage.Request"><code class="xref py py-class docutils literal"><span class="pre">Plugin.RegistryRequestMessage.Request</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="id4">
+<h3>Request<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.RegistryRequestMessage.Request">
+<em class="property">class </em><code class="descclassname">Plugin.RegistryRequestMessage.</code><code class="descname">Request</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.registration">
+<code class="descname">registration</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.registration" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.inventory">
+<code class="descname">inventory</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.inventory" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.control">
+<code class="descname">control</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.control" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.RegistryRequestMessage.Request.Registration" title="Plugin.RegistryRequestMessage.Request.Registration"><code class="xref py py-class docutils literal"><span class="pre">Plugin.RegistryRequestMessage.Request.Registration</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.RegistryRequestMessage.Request.Inventory" title="Plugin.RegistryRequestMessage.Request.Inventory"><code class="xref py py-class docutils literal"><span class="pre">Plugin.RegistryRequestMessage.Request.Inventory</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.RegistryRequestMessage.Request.Control" title="Plugin.RegistryRequestMessage.Request.Control"><code class="xref py py-class docutils literal"><span class="pre">Plugin.RegistryRequestMessage.Request.Control</span></code></a></li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="registration">
+<h3>Registration<a class="headerlink" href="#registration" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.RegistryRequestMessage.Request.Registration">
+<em class="property">class </em><code class="descclassname">Plugin.RegistryRequestMessage.Request.</code><code class="descname">Registration</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Registration" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Registration.plugin_id">
+<code class="descname">plugin_id</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Registration.plugin_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Registration.type">
+<code class="descname">type</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Registration.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Registration.name">
+<code class="descname">name</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Registration.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Registration.info">
+<code class="descname">info</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Registration.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Registration.unregister">
+<code class="descname">unregister</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Registration.unregister" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Registration.alias">
+<code class="descname">alias</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Registration.alias" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Registration.schedule">
+<code class="descname">schedule</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Registration.schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="inventory">
+<h3>Inventory<a class="headerlink" href="#inventory" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.RegistryRequestMessage.Request.Inventory">
+<em class="property">class </em><code class="descclassname">Plugin.RegistryRequestMessage.Request.</code><code class="descname">Inventory</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Inventory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Inventory.plugin">
+<code class="descname">plugin</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Inventory.plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Inventory.type">
+<code class="descname">type</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Inventory.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Inventory.name">
+<code class="descname">name</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Inventory.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Inventory.fetch_all">
+<code class="descname">fetch_all</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Inventory.fetch_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Inventory.fetch_information">
+<code class="descname">fetch_information</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Inventory.fetch_information" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="control">
+<h3>Control<a class="headerlink" href="#control" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.RegistryRequestMessage.Request.Control">
+<em class="property">class </em><code class="descclassname">Plugin.RegistryRequestMessage.Request.</code><code class="descname">Control</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Control" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Control.command">
+<code class="descname">command</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Control.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Control.type">
+<code class="descname">type</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Control.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Control.name">
+<code class="descname">name</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Control.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryRequestMessage.Request.Control.alias">
+<code class="descname">alias</code><a class="headerlink" href="#Plugin.RegistryRequestMessage.Request.Control.alias" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="registryresponsemessage">
+<h2>RegistryResponseMessage<a class="headerlink" href="#registryresponsemessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.RegistryResponseMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">RegistryResponseMessage</code><a class="headerlink" href="#Plugin.RegistryResponseMessage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.RegistryResponseMessage.Response" title="Plugin.RegistryResponseMessage.Response"><code class="xref py py-class docutils literal"><span class="pre">Plugin.RegistryResponseMessage.Response</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="id5">
+<h3>Response<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.RegistryResponseMessage.Response">
+<em class="property">class </em><code class="descclassname">Plugin.RegistryResponseMessage.</code><code class="descname">Response</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.result">
+<code class="descname">result</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.registration">
+<code class="descname">registration</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.registration" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.inventory">
+<code class="descname">inventory</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.inventory" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.control">
+<code class="descname">control</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.control" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.RegistryResponseMessage.Response.Registration" title="Plugin.RegistryResponseMessage.Response.Registration"><code class="xref py py-class docutils literal"><span class="pre">Plugin.RegistryResponseMessage.Response.Registration</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.RegistryResponseMessage.Response.Inventory" title="Plugin.RegistryResponseMessage.Response.Inventory"><code class="xref py py-class docutils literal"><span class="pre">Plugin.RegistryResponseMessage.Response.Inventory</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.RegistryResponseMessage.Response.Control" title="Plugin.RegistryResponseMessage.Response.Control"><code class="xref py py-class docutils literal"><span class="pre">Plugin.RegistryResponseMessage.Response.Control</span></code></a></li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="id6">
+<h3>Registration<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.RegistryResponseMessage.Response.Registration">
+<em class="property">class </em><code class="descclassname">Plugin.RegistryResponseMessage.Response.</code><code class="descname">Registration</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Registration" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.Registration.item_id">
+<code class="descname">item_id</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Registration.item_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id7">
+<h3>Inventory<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.RegistryResponseMessage.Response.Inventory">
+<em class="property">class </em><code class="descclassname">Plugin.RegistryResponseMessage.Response.</code><code class="descname">Inventory</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Inventory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.Inventory.plugin">
+<code class="descname">plugin</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Inventory.plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.Inventory.type">
+<code class="descname">type</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Inventory.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.Inventory.name">
+<code class="descname">name</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Inventory.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.Inventory.info">
+<code class="descname">info</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Inventory.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.Inventory.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Inventory.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.RegistryResponseMessage.Response.Inventory.schedule">
+<code class="descname">schedule</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Inventory.schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id8">
+<h3>Control<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.RegistryResponseMessage.Response.Control">
+<em class="property">class </em><code class="descclassname">Plugin.RegistryResponseMessage.Response.</code><code class="descname">Control</code><a class="headerlink" href="#Plugin.RegistryResponseMessage.Response.Control" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="schedulenotificationmessage">
+<h2>ScheduleNotificationMessage<a class="headerlink" href="#schedulenotificationmessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.ScheduleNotificationMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">ScheduleNotificationMessage</code><a class="headerlink" href="#Plugin.ScheduleNotificationMessage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.ScheduleNotificationMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.ScheduleNotificationMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ScheduleNotificationMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.ScheduleNotificationMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.ScheduleNotificationMessage.Request" title="Plugin.ScheduleNotificationMessage.Request"><code class="xref py py-class docutils literal"><span class="pre">Plugin.ScheduleNotificationMessage.Request</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="id9">
+<h3>Request<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.ScheduleNotificationMessage.Request">
+<em class="property">class </em><code class="descclassname">Plugin.ScheduleNotificationMessage.</code><code class="descname">Request</code><a class="headerlink" href="#Plugin.ScheduleNotificationMessage.Request" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.ScheduleNotificationMessage.Request.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.ScheduleNotificationMessage.Request.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ScheduleNotificationMessage.Request.plugin_id">
+<code class="descname">plugin_id</code><a class="headerlink" href="#Plugin.ScheduleNotificationMessage.Request.plugin_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ScheduleNotificationMessage.Request.info">
+<code class="descname">info</code><a class="headerlink" href="#Plugin.ScheduleNotificationMessage.Request.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.ScheduleNotificationMessage.Request.schedule">
+<code class="descname">schedule</code><a class="headerlink" href="#Plugin.ScheduleNotificationMessage.Request.schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.Settings">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">Settings</code><a class="headerlink" href="#Plugin.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Settings is an internal message.
+It is not used to submit checks or query status instead it is used to interact with the settings store.
+The settings is a central component inside NSClient++ and this is the way to interact with it.</p>
+<dl class="attribute">
+<dt id="Plugin.Settings.Command">
+<code class="descname">Command</code><a class="headerlink" href="#Plugin.Settings.Command" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LOAD</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>SAVE</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>RELOAD</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.Settings.Node" title="Plugin.Settings.Node"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Settings.Node</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Settings.Query" title="Plugin.Settings.Query"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Settings.Query</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.Settings.Information" title="Plugin.Settings.Information"><code class="xref py py-class docutils literal"><span class="pre">Plugin.Settings.Information</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="node">
+<h3>Node<a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Settings.Node">
+<em class="property">class </em><code class="descclassname">Plugin.Settings.</code><code class="descname">Node</code><a class="headerlink" href="#Plugin.Settings.Node" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Settings.Node.path">
+<code class="descname">path</code><a class="headerlink" href="#Plugin.Settings.Node.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Settings.Node.key">
+<code class="descname">key</code><a class="headerlink" href="#Plugin.Settings.Node.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id10">
+<h3>Query<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Settings.Query">
+<em class="property">class </em><code class="descclassname">Plugin.Settings.</code><code class="descname">Query</code><a class="headerlink" href="#Plugin.Settings.Query" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Settings.Query.expression">
+<code class="descname">expression</code><a class="headerlink" href="#Plugin.Settings.Query.expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id11">
+<h3>Information<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.Settings.Information">
+<em class="property">class </em><code class="descclassname">Plugin.Settings.</code><code class="descname">Information</code><a class="headerlink" href="#Plugin.Settings.Information" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.Settings.Information.title">
+<code class="descname">title</code><a class="headerlink" href="#Plugin.Settings.Information.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Settings.Information.description">
+<code class="descname">description</code><a class="headerlink" href="#Plugin.Settings.Information.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Settings.Information.default_value">
+<code class="descname">default_value</code><a class="headerlink" href="#Plugin.Settings.Information.default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Settings.Information.min_version">
+<code class="descname">min_version</code><a class="headerlink" href="#Plugin.Settings.Information.min_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Settings.Information.max_version">
+<code class="descname">max_version</code><a class="headerlink" href="#Plugin.Settings.Information.max_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Settings.Information.advanced">
+<code class="descname">advanced</code><a class="headerlink" href="#Plugin.Settings.Information.advanced" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Settings.Information.sample">
+<code class="descname">sample</code><a class="headerlink" href="#Plugin.Settings.Information.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Settings.Information.sample_usage">
+<code class="descname">sample_usage</code><a class="headerlink" href="#Plugin.Settings.Information.sample_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.Settings.Information.plugin">
+<code class="descname">plugin</code><a class="headerlink" href="#Plugin.Settings.Information.plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="settingsrequestmessage">
+<h2>SettingsRequestMessage<a class="headerlink" href="#settingsrequestmessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.SettingsRequestMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">SettingsRequestMessage</code><a class="headerlink" href="#Plugin.SettingsRequestMessage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.SettingsRequestMessage.Request" title="Plugin.SettingsRequestMessage.Request"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsRequestMessage.Request</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="id12">
+<h3>Request<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsRequestMessage.Request">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsRequestMessage.</code><code class="descname">Request</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.plugin_id">
+<code class="descname">plugin_id</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.plugin_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.registration">
+<code class="descname">registration</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.registration" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.query">
+<code class="descname">query</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.update">
+<code class="descname">update</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.inventory">
+<code class="descname">inventory</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.inventory" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.control">
+<code class="descname">control</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.control" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.status">
+<code class="descname">status</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.SettingsRequestMessage.Request.Registration" title="Plugin.SettingsRequestMessage.Request.Registration"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsRequestMessage.Request.Registration</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsRequestMessage.Request.Query" title="Plugin.SettingsRequestMessage.Request.Query"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsRequestMessage.Request.Query</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsRequestMessage.Request.Update" title="Plugin.SettingsRequestMessage.Request.Update"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsRequestMessage.Request.Update</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsRequestMessage.Request.Inventory" title="Plugin.SettingsRequestMessage.Request.Inventory"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsRequestMessage.Request.Inventory</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsRequestMessage.Request.Control" title="Plugin.SettingsRequestMessage.Request.Control"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsRequestMessage.Request.Control</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsRequestMessage.Request.Status" title="Plugin.SettingsRequestMessage.Request.Status"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsRequestMessage.Request.Status</span></code></a></li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="id13">
+<h3>Registration<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsRequestMessage.Request.Registration">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsRequestMessage.Request.</code><code class="descname">Registration</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Registration" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Registration.node">
+<code class="descname">node</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Registration.node" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Registration.info">
+<code class="descname">info</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Registration.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id14">
+<h3>Query<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsRequestMessage.Request.Query">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsRequestMessage.Request.</code><code class="descname">Query</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Query" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Query.node">
+<code class="descname">node</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Query.node" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Query.query">
+<code class="descname">query</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Query.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Query.recursive">
+<code class="descname">recursive</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Query.recursive" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Query.type">
+<code class="descname">type</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Query.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Query.default_value">
+<code class="descname">default_value</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Query.default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="update">
+<h3>Update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsRequestMessage.Request.Update">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsRequestMessage.Request.</code><code class="descname">Update</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Update" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Update.node">
+<code class="descname">node</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Update.node" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Update.value">
+<code class="descname">value</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Update.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id15">
+<h3>Inventory<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsRequestMessage.Request.Inventory">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsRequestMessage.Request.</code><code class="descname">Inventory</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Inventory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Inventory.plugin">
+<code class="descname">plugin</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Inventory.plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Inventory.node">
+<code class="descname">node</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Inventory.node" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Inventory.query">
+<code class="descname">query</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Inventory.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Inventory.recursive_fetch">
+<code class="descname">recursive_fetch</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Inventory.recursive_fetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Inventory.fetch_keys">
+<code class="descname">fetch_keys</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Inventory.fetch_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Inventory.fetch_paths">
+<code class="descname">fetch_paths</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Inventory.fetch_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Inventory.fetch_samples">
+<code class="descname">fetch_samples</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Inventory.fetch_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Inventory.descriptions">
+<code class="descname">descriptions</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Inventory.descriptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id16">
+<h3>Control<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsRequestMessage.Request.Control">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsRequestMessage.Request.</code><code class="descname">Control</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Control" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Control.command">
+<code class="descname">command</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Control.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsRequestMessage.Request.Control.context">
+<code class="descname">context</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Control.context" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id17">
+<h3>Status<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsRequestMessage.Request.Status">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsRequestMessage.Request.</code><code class="descname">Status</code><a class="headerlink" href="#Plugin.SettingsRequestMessage.Request.Status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="settingsresponsemessage">
+<h2>SettingsResponseMessage<a class="headerlink" href="#settingsresponsemessage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.SettingsResponseMessage">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">SettingsResponseMessage</code><a class="headerlink" href="#Plugin.SettingsResponseMessage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.header">
+<code class="descname">header</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.payload">
+<code class="descname">payload</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.SettingsResponseMessage.Response" title="Plugin.SettingsResponseMessage.Response"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsResponseMessage.Response</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="id18">
+<h3>Response<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsResponseMessage.Response">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsResponseMessage.</code><code class="descname">Response</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.id">
+<code class="descname">id</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int64</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.result">
+<code class="descname">result</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.registration">
+<code class="descname">registration</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.registration" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.query">
+<code class="descname">query</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.update">
+<code class="descname">update</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.inventory">
+<code class="descname">inventory</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.inventory" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.control">
+<code class="descname">control</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.control" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.status">
+<code class="descname">status</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.SettingsResponseMessage.Response.Registration" title="Plugin.SettingsResponseMessage.Response.Registration"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsResponseMessage.Response.Registration</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsResponseMessage.Response.Query" title="Plugin.SettingsResponseMessage.Response.Query"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsResponseMessage.Response.Query</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsResponseMessage.Response.Update" title="Plugin.SettingsResponseMessage.Response.Update"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsResponseMessage.Response.Update</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsResponseMessage.Response.Inventory" title="Plugin.SettingsResponseMessage.Response.Inventory"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsResponseMessage.Response.Inventory</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsResponseMessage.Response.Control" title="Plugin.SettingsResponseMessage.Response.Control"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsResponseMessage.Response.Control</span></code></a></li>
+<li><a class="reference internal" href="#Plugin.SettingsResponseMessage.Response.Status" title="Plugin.SettingsResponseMessage.Response.Status"><code class="xref py py-class docutils literal"><span class="pre">Plugin.SettingsResponseMessage.Response.Status</span></code></a></li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="id19">
+<h3>Registration<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsResponseMessage.Response.Registration">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsResponseMessage.Response.</code><code class="descname">Registration</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Registration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="id20">
+<h3>Query<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsResponseMessage.Response.Query">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsResponseMessage.Response.</code><code class="descname">Query</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Query" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.Query.node">
+<code class="descname">node</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Query.node" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.Query.value">
+<code class="descname">value</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Query.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id21">
+<h3>Update<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsResponseMessage.Response.Update">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsResponseMessage.Response.</code><code class="descname">Update</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="id22">
+<h3>Inventory<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsResponseMessage.Response.Inventory">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsResponseMessage.Response.</code><code class="descname">Inventory</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Inventory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.Inventory.node">
+<code class="descname">node</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Inventory.node" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.Inventory.info">
+<code class="descname">info</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Inventory.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.Inventory.value">
+<code class="descname">value</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Inventory.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id23">
+<h3>Control<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsResponseMessage.Response.Control">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsResponseMessage.Response.</code><code class="descname">Control</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Control" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="id24">
+<h3>Status<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.SettingsResponseMessage.Response.Status">
+<em class="property">class </em><code class="descclassname">Plugin.SettingsResponseMessage.Response.</code><code class="descname">Status</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Status" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.Status.context">
+<code class="descname">context</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Status.context" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.Status.type">
+<code class="descname">type</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Status.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.SettingsResponseMessage.Response.Status.has_changed">
+<code class="descname">has_changed</code><a class="headerlink" href="#Plugin.SettingsResponseMessage.Response.Status.has_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>bool</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="logentry">
+<h2>LogEntry<a class="headerlink" href="#logentry" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Plugin.LogEntry">
+<em class="property">class </em><code class="descclassname">Plugin.</code><code class="descname">LogEntry</code><a class="headerlink" href="#Plugin.LogEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>LogEntry is used to log status information.</p>
+<dl class="attribute">
+<dt id="Plugin.LogEntry.entry">
+<code class="descname">entry</code><a class="headerlink" href="#Plugin.LogEntry.entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>repeated</strong> value of type <strong>message</strong></p>
+</dd></dl>
+
+<p><strong>Nested messages</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#Plugin.LogEntry.Entry" title="Plugin.LogEntry.Entry"><code class="xref py py-class docutils literal"><span class="pre">Plugin.LogEntry.Entry</span></code></a></li>
+</ul>
+</dd></dl>
+
+<div class="section" id="entry">
+<h3>Entry<a class="headerlink" href="#entry" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="Plugin.LogEntry.Entry">
+<em class="property">class </em><code class="descclassname">Plugin.LogEntry.</code><code class="descname">Entry</code><a class="headerlink" href="#Plugin.LogEntry.Entry" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="Plugin.LogEntry.Entry.Level">
+<code class="descname">Level</code><a class="headerlink" href="#Plugin.LogEntry.Entry.Level" title="Permalink to this definition">¶</a></dt>
+<dd><table border="1" class="docutils">
+<colgroup>
+<col width="83%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Possible values</th>
+<th class="head">Id</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LOG_DEBUG</td>
+<td>500</td>
+</tr>
+<tr class="row-odd"><td>LOG_INFO</td>
+<td>150</td>
+</tr>
+<tr class="row-even"><td>LOG_WARNING</td>
+<td>50</td>
+</tr>
+<tr class="row-odd"><td>LOG_ERROR</td>
+<td>10</td>
+</tr>
+<tr class="row-even"><td>LOG_CRITICAL</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.LogEntry.Entry.level">
+<code class="descname">level</code><a class="headerlink" href="#Plugin.LogEntry.Entry.level" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>required</strong> value of type <strong>enum</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.LogEntry.Entry.sender">
+<code class="descname">sender</code><a class="headerlink" href="#Plugin.LogEntry.Entry.sender" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.LogEntry.Entry.file">
+<code class="descname">file</code><a class="headerlink" href="#Plugin.LogEntry.Entry.file" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.LogEntry.Entry.line">
+<code class="descname">line</code><a class="headerlink" href="#Plugin.LogEntry.Entry.line" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.LogEntry.Entry.message">
+<code class="descname">message</code><a class="headerlink" href="#Plugin.LogEntry.Entry.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>string</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Plugin.LogEntry.Entry.date">
+<code class="descname">date</code><a class="headerlink" href="#Plugin.LogEntry.Entry.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <strong>optional</strong> value of type <strong>int32</strong></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin</a><ul>
+<li><a class="reference internal" href="#common">Common</a><ul>
+<li><a class="reference internal" href="#anydatatype">AnyDataType</a></li>
+<li><a class="reference internal" href="#keyvalue">KeyValue</a></li>
+<li><a class="reference internal" href="#host">Host</a></li>
+<li><a class="reference internal" href="#header">Header</a></li>
+<li><a class="reference internal" href="#attachment">Attachment</a></li>
+<li><a class="reference internal" href="#performancedata">PerformanceData</a></li>
+<li><a class="reference internal" href="#intvalue">IntValue</a></li>
+<li><a class="reference internal" href="#stringvalue">StringValue</a></li>
+<li><a class="reference internal" href="#floatvalue">FloatValue</a></li>
+<li><a class="reference internal" href="#boolvalue">BoolValue</a></li>
+<li><a class="reference internal" href="#status">Status</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#queryrequestmessage">QueryRequestMessage</a><ul>
+<li><a class="reference internal" href="#request">Request</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#queryresponsemessage">QueryResponseMessage</a><ul>
+<li><a class="reference internal" href="#response">Response</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#executerequestmessage">ExecuteRequestMessage</a><ul>
+<li><a class="reference internal" href="#id1">Request</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#executeresponsemessage">ExecuteResponseMessage</a><ul>
+<li><a class="reference internal" href="#id2">Response</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#submitrequestmessage">SubmitRequestMessage</a></li>
+<li><a class="reference internal" href="#submitresponsemessage">SubmitResponseMessage</a><ul>
+<li><a class="reference internal" href="#id3">Response</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#registry">Registry</a><ul>
+<li><a class="reference internal" href="#query">Query</a></li>
+<li><a class="reference internal" href="#information">Information</a></li>
+<li><a class="reference internal" href="#keyworddescription">KeyWordDescription</a></li>
+<li><a class="reference internal" href="#parameterdetail">ParameterDetail</a></li>
+<li><a class="reference internal" href="#parameterdetails">ParameterDetails</a></li>
+<li><a class="reference internal" href="#schedule">Schedule</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#registryrequestmessage">RegistryRequestMessage</a><ul>
+<li><a class="reference internal" href="#id4">Request</a></li>
+<li><a class="reference internal" href="#registration">Registration</a></li>
+<li><a class="reference internal" href="#inventory">Inventory</a></li>
+<li><a class="reference internal" href="#control">Control</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#registryresponsemessage">RegistryResponseMessage</a><ul>
+<li><a class="reference internal" href="#id5">Response</a></li>
+<li><a class="reference internal" href="#id6">Registration</a></li>
+<li><a class="reference internal" href="#id7">Inventory</a></li>
+<li><a class="reference internal" href="#id8">Control</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#schedulenotificationmessage">ScheduleNotificationMessage</a><ul>
+<li><a class="reference internal" href="#id9">Request</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#settings">Settings</a><ul>
+<li><a class="reference internal" href="#node">Node</a></li>
+<li><a class="reference internal" href="#id10">Query</a></li>
+<li><a class="reference internal" href="#id11">Information</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#settingsrequestmessage">SettingsRequestMessage</a><ul>
+<li><a class="reference internal" href="#id12">Request</a></li>
+<li><a class="reference internal" href="#id13">Registration</a></li>
+<li><a class="reference internal" href="#id14">Query</a></li>
+<li><a class="reference internal" href="#update">Update</a></li>
+<li><a class="reference internal" href="#id15">Inventory</a></li>
+<li><a class="reference internal" href="#id16">Control</a></li>
+<li><a class="reference internal" href="#id17">Status</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#settingsresponsemessage">SettingsResponseMessage</a><ul>
+<li><a class="reference internal" href="#id18">Response</a></li>
+<li><a class="reference internal" href="#id19">Registration</a></li>
+<li><a class="reference internal" href="#id20">Query</a></li>
+<li><a class="reference internal" href="#id21">Update</a></li>
+<li><a class="reference internal" href="#id22">Inventory</a></li>
+<li><a class="reference internal" href="#id23">Control</a></li>
+<li><a class="reference internal" href="#id24">Status</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logentry">LogEntry</a><ul>
+<li><a class="reference internal" href="#entry">Entry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../faq/index.html"
+                        title="next chapter">FAQ: Frequently asked questions</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../bugs.html">Report a Bug</a></li>
+  <li><a href="../_sources/api/plugin.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../faq/index.html" title="FAQ: Frequently asked questions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="API"
+             >previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

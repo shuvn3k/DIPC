@@ -1,0 +1,6 @@
+2017-03-21 17:36:36: error:c:\source\master\modules\NRPEServer\NRPEServer.cpp:123: CA not found: C:\Program Files\NSClient++/security/ca.pem (generating a default CA)
+2017-03-21 17:56:55: error:c:\source\master\include\socket/connection.hpp:251: Seems we cant agree on SSL: no shared cipher
+2017-03-21 17:56:55: error:c:\source\master\include\socket/connection.hpp:252: Please review the insecure options as well as ssl options in settings.
+2017-03-21 17:57:00: error:c:\source\master\include\socket/server.hpp:236: Socket ERROR: Already open
+2017-03-21 17:57:13: error:c:\source\master\include\socket/server.hpp:236: Socket ERROR: Already open
+2017-03-21 18:08:46: error:c:\source\master\include\nrpe/server/protocol.hpp:78: Rejected connection from: 192.168.34.150

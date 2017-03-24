@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SimpleCache — SimpleCache &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Reference Manual" href="../index.html" />
+    <link rel="next" title="SimpleFileWriter — SimpleFileWriter" href="SimpleFileWriter.html" />
+    <link rel="prev" title="Scheduler — Scheduler" href="Scheduler.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="SimpleFileWriter.html" title="SimpleFileWriter — SimpleFileWriter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Scheduler.html" title="Scheduler — Scheduler"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <dl class="module">
+<dt id="SimpleCache">
+<code class="descname">SimpleCache</code><dd></dd>Stores status updates and allows for active checks to retrieve them<a class="headerlink" href="#SimpleCache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="simplecache-simplecache">
+<h1><code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleCache</span></code> &#8212; SimpleCache<a class="headerlink" href="#simplecache-simplecache" title="Permalink to this headline">¶</a></h1>
+<p>Stores status updates and allows for active checks to retrieve them</p>
+<p><strong>Queries (Overview)</strong>:</p>
+<p>A list of all available queries (check commands)</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SimpleCache.check_cache" title="SimpleCache.check_cache"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_cache</span></code></a></td>
+<td>Fetch results from the cache.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Aliases (Overview)</strong>:</p>
+<p>A list of all short hand aliases for queries (check commands)</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>checkcache</td>
+<td>Alias for: <a class="reference internal" href="#SimpleCache.check_cache" title="SimpleCache.check_cache"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_cache</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Commands (Overview)</strong>:</p>
+<p><strong>TODO:</strong> Add a list of all external commands (this is not check commands)</p>
+<p><strong>Configuration (Overview)</strong>:</p>
+<p>Common Keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SimpleCache./settings/cache" title="SimpleCache./settings/cache"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/cache</span></code></a></td>
+<td><a class="reference internal" href="#SimpleCache./settings/cache.channel" title="SimpleCache./settings/cache.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>CHANNEL</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleCache./settings/cache" title="SimpleCache./settings/cache"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/cache</span></code></a></td>
+<td><a class="reference internal" href="#SimpleCache./settings/cache.primary index" title="SimpleCache./settings/cache.primary index"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">primary</span> <span class="pre">index</span></code></a></td>
+<td>PRIMARY CACHE INDEX</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h2>
+<p>A quick reference for all available queries (check commands) in the SimpleCache module.</p>
+<div class="section" id="check-cache">
+<h3><a class="reference internal" href="#SimpleCache.check_cache" title="SimpleCache.check_cache"><code class="xref nscp nscp-query docutils literal"><span class="pre">check_cache</span></code></a><a class="headerlink" href="#check-cache" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="SimpleCache.check_cache">
+<code class="descclassname">SimpleCache</code><code class="descname">check_cache</code><dd></dd>Fetch results from the cache.<a class="headerlink" href="#SimpleCache.check_cache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SimpleCache.check_cache.help" title="SimpleCache.check_cache.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleCache.check_cache.help-pb" title="SimpleCache.check_cache.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SimpleCache.check_cache.show-default" title="SimpleCache.check_cache.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleCache.check_cache.help-short" title="SimpleCache.check_cache.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SimpleCache.check_cache.key" title="SimpleCache.check_cache.key"><code class="xref nscp nscp-option docutils literal"><span class="pre">key</span></code></a></td>
+<td>&nbsp;</td>
+<td>The key (will not be parsed)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleCache.check_cache.host" title="SimpleCache.check_cache.host"><code class="xref nscp nscp-option docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>The host to look for (translates into the key)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SimpleCache.check_cache.command" title="SimpleCache.check_cache.command"><code class="xref nscp nscp-option docutils literal"><span class="pre">command</span></code></a></td>
+<td>&nbsp;</td>
+<td>The command to look for (translates into the key)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleCache.check_cache.channel" title="SimpleCache.check_cache.channel"><code class="xref nscp nscp-option docutils literal"><span class="pre">channel</span></code></a></td>
+<td>&nbsp;</td>
+<td>The channel to look for (translates into the key)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SimpleCache.check_cache.alias" title="SimpleCache.check_cache.alias"><code class="xref nscp nscp-option docutils literal"><span class="pre">alias</span></code></a></td>
+<td>&nbsp;</td>
+<td>The alias to look for (translates into the key)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleCache.check_cache.not-found-msg" title="SimpleCache.check_cache.not-found-msg"><code class="xref nscp nscp-option docutils literal"><span class="pre">not-found-msg</span></code></a></td>
+<td>Entry not found</td>
+<td>The message to display when a message is not found</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SimpleCache.check_cache.not-found-code" title="SimpleCache.check_cache.not-found-code"><code class="xref nscp nscp-option docutils literal"><span class="pre">not-found-code</span></code></a></td>
+<td>unknown</td>
+<td>The return status to return when a message is not found</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="arguments">
+<h4>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="SimpleCache.check_cache.help">
+<code class="descname">help</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.help-pb">
+<code class="descname">help-pb</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.show-default">
+<code class="descname">show-default</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.help-short">
+<code class="descname">help-short</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.key">
+<code class="descname">key</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.key" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The key (will not be parsed)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.host">
+<code class="descname">host</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The host to look for (translates into the key)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.command">
+<code class="descname">command</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.command" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The command to look for (translates into the key)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.channel">
+<code class="descname">channel</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.channel" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The channel to look for (translates into the key)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.alias">
+<code class="descname">alias</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.alias" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The alias to look for (translates into the key)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.not-found-msg">
+<code class="descname">not-found-msg</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.not-found-msg" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The message to display when a message is not found</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SimpleCache.check_cache.not-found-code">
+<code class="descname">not-found-code</code><em class="property"> (SimpleCache, check_cache)</em><a class="headerlink" href="#SimpleCache.check_cache.not-found-code" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The return status to return when a message is not found</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="settings-cache">
+<h3>/ settings/ cache<a class="headerlink" href="#settings-cache" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="SimpleCache./settings/cache">
+<code class="descname">/settings/cache</code><em class="property"> (SimpleCache)</em><a class="headerlink" href="#SimpleCache./settings/cache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>CACHE</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Section for simple cache module (SimpleCache.dll).</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SimpleCache./settings/cache.channel" title="SimpleCache./settings/cache.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>CACHE</td>
+<td>CHANNEL</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleCache./settings/cache.primary index" title="SimpleCache./settings/cache.primary index"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">primary</span> <span class="pre">index</span></code></a></td>
+<td>${alias-or-command}</td>
+<td>PRIMARY CACHE INDEX</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># CACHE
+# Section for simple cache module (SimpleCache.dll).
+[/settings/cache]
+channel=CACHE
+primary index=${alias-or-command}
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="SimpleCache./settings/cache.channel">
+<code class="descname">channel</code><em class="property"> (SimpleCache, /settings/cache)</em><a class="headerlink" href="#SimpleCache./settings/cache.channel" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CHANNEL</strong></p>
+<div class="line-block">
+<div class="line">The channel to listen to.</div>
+</div>
+<p><strong>Path</strong>: /settings/cache</p>
+<p><strong>Key</strong>: channel</p>
+<p><strong>Default value</strong>: CACHE</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleCache</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/cache]
+# CHANNEL
+channel=CACHE
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SimpleCache./settings/cache.primary index">
+<code class="descname">primary index</code><em class="property"> (SimpleCache, /settings/cache)</em><a class="headerlink" href="#SimpleCache./settings/cache.primary index" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PRIMARY CACHE INDEX</strong></p>
+<div class="line-block">
+<div class="line">Set this to the value you want to use as unique key for the cache.</div>
+<div class="line">Can be any arbitrary string as well as include any of the following special keywords:${command} = The command name, ${host} the host, ${channel} the recieving channel, ${alias} the alias for the command, ${alias-or-command} = alias if set otherweise command, ${message} = the message data (no escape), ${result} = The result status (number).</div>
+</div>
+<p><strong>Path</strong>: /settings/cache</p>
+<p><strong>Key</strong>: primary index</p>
+<p><strong>Default value</strong>: ${alias-or-command}</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleCache</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/cache]
+# PRIMARY CACHE INDEX
+primary index=${alias-or-command}
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">SimpleCache</span></code> &#8212; SimpleCache</a><ul>
+<li><a class="reference internal" href="#queries">Queries</a><ul>
+<li><a class="reference internal" href="#check-cache"><code class="docutils literal"><span class="pre">check_cache</span></code></a><ul>
+<li><a class="reference internal" href="#arguments">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#settings-cache">/ settings/ cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Scheduler.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">Scheduler</span></code> &#8212; Scheduler</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="SimpleFileWriter.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">SimpleFileWriter</span></code> &#8212; SimpleFileWriter</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/reference/generic/SimpleCache.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="SimpleFileWriter.html" title="SimpleFileWriter — SimpleFileWriter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Scheduler.html" title="Scheduler — Scheduler"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

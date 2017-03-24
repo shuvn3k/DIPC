@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SimpleFileWriter — SimpleFileWriter &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Reference Manual" href="../index.html" />
+    <link rel="next" title="WEBServer — WEBServer" href="WEBServer.html" />
+    <link rel="prev" title="SimpleCache — SimpleCache" href="SimpleCache.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="WEBServer.html" title="WEBServer — WEBServer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="SimpleCache.html" title="SimpleCache — SimpleCache"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <dl class="module">
+<dt id="SimpleFileWriter">
+<code class="descname">SimpleFileWriter</code><dd></dd>Write status updates to a text file (A bit like the NSCA server does)<a class="headerlink" href="#SimpleFileWriter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="simplefilewriter-simplefilewriter">
+<h1><code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleFileWriter</span></code> &#8212; SimpleFileWriter<a class="headerlink" href="#simplefilewriter-simplefilewriter" title="Permalink to this headline">¶</a></h1>
+<p>Write status updates to a text file (A bit like the NSCA server does)</p>
+<p><strong>Commands (Overview)</strong>:</p>
+<p><strong>TODO:</strong> Add a list of all external commands (this is not check commands)</p>
+<p><strong>Configuration (Overview)</strong>:</p>
+<p>Common Keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file" title="SimpleFileWriter./settings/writers/file"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/writers/file</span></code></a></td>
+<td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.channel" title="SimpleFileWriter./settings/writers/file.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>CHANNEL</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file" title="SimpleFileWriter./settings/writers/file"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/writers/file</span></code></a></td>
+<td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.file" title="SimpleFileWriter./settings/writers/file.file"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">file</span></code></a></td>
+<td>FILE TO WRITE TO</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file" title="SimpleFileWriter./settings/writers/file"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/writers/file</span></code></a></td>
+<td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.host-syntax" title="SimpleFileWriter./settings/writers/file.host-syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host-syntax</span></code></a></td>
+<td>HOST MESSAGE SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file" title="SimpleFileWriter./settings/writers/file"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/writers/file</span></code></a></td>
+<td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.service-syntax" title="SimpleFileWriter./settings/writers/file.service-syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">service-syntax</span></code></a></td>
+<td>SERVICE MESSAGE SYNTAX</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file" title="SimpleFileWriter./settings/writers/file"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/writers/file</span></code></a></td>
+<td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.syntax" title="SimpleFileWriter./settings/writers/file.syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">syntax</span></code></a></td>
+<td>MESSAGE SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file" title="SimpleFileWriter./settings/writers/file"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/writers/file</span></code></a></td>
+<td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.time-syntax" title="SimpleFileWriter./settings/writers/file.time-syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">time-syntax</span></code></a></td>
+<td>TIME SYNTAX</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="settings-writers-file">
+<h2>/ settings/ writers/ file<a class="headerlink" href="#settings-writers-file" title="Permalink to this headline">¶</a></h2>
+<dl class="confpath">
+<dt id="SimpleFileWriter./settings/writers/file">
+<code class="descname">/settings/writers/file</code><em class="property"> (SimpleFileWriter)</em><a class="headerlink" href="#SimpleFileWriter./settings/writers/file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>FILE WRITER</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Section for simple file writer module (SimpleFileWriter.dll).</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.channel" title="SimpleFileWriter./settings/writers/file.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>FILE</td>
+<td>CHANNEL</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.file" title="SimpleFileWriter./settings/writers/file.file"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">file</span></code></a></td>
+<td>output.txt</td>
+<td>FILE TO WRITE TO</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.host-syntax" title="SimpleFileWriter./settings/writers/file.host-syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host-syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>HOST MESSAGE SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.service-syntax" title="SimpleFileWriter./settings/writers/file.service-syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">service-syntax</span></code></a></td>
+<td>&nbsp;</td>
+<td>SERVICE MESSAGE SYNTAX</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.syntax" title="SimpleFileWriter./settings/writers/file.syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">syntax</span></code></a></td>
+<td>${alias-or-command} ${result} ${message}</td>
+<td>MESSAGE SYNTAX</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SimpleFileWriter./settings/writers/file.time-syntax" title="SimpleFileWriter./settings/writers/file.time-syntax"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">time-syntax</span></code></a></td>
+<td>%Y-%m-%d %H:%M:%S</td>
+<td>TIME SYNTAX</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># FILE WRITER
+# Section for simple file writer module (SimpleFileWriter.dll).
+[/settings/writers/file]
+channel=FILE
+file=output.txt
+host-syntax=
+service-syntax=
+syntax=${alias-or-command} ${result} ${message}
+time-syntax=%Y-%m-%d %H:%M:%S
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="SimpleFileWriter./settings/writers/file.channel">
+<code class="descname">channel</code><em class="property"> (SimpleFileWriter, /settings/writers/file)</em><a class="headerlink" href="#SimpleFileWriter./settings/writers/file.channel" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CHANNEL</strong></p>
+<div class="line-block">
+<div class="line">The channel to listen to.</div>
+</div>
+<p><strong>Path</strong>: /settings/writers/file</p>
+<p><strong>Key</strong>: channel</p>
+<p><strong>Default value</strong>: FILE</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleFileWriter</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/writers/file]
+# CHANNEL
+channel=FILE
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SimpleFileWriter./settings/writers/file.file">
+<code class="descname">file</code><em class="property"> (SimpleFileWriter, /settings/writers/file)</em><a class="headerlink" href="#SimpleFileWriter./settings/writers/file.file" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>FILE TO WRITE TO</strong></p>
+<div class="line-block">
+<div class="line">The filename to write output to.</div>
+</div>
+<p><strong>Path</strong>: /settings/writers/file</p>
+<p><strong>Key</strong>: file</p>
+<p><strong>Default value</strong>: output.txt</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleFileWriter</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/writers/file]
+# FILE TO WRITE TO
+file=output.txt
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SimpleFileWriter./settings/writers/file.host-syntax">
+<code class="descname">host-syntax</code><em class="property"> (SimpleFileWriter, /settings/writers/file)</em><a class="headerlink" href="#SimpleFileWriter./settings/writers/file.host-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>HOST MESSAGE SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">The syntax of the message to write to the line.</div>
+<div class="line">Can be any arbitrary string as well as include any of the following special keywords:${command} = The command name, ${host} the host, ${channel} the recieving channel, ${alias} the alias for the command, ${alias-or-command} = alias if set otherweise command, ${message} = the message data (no escape), ${result} or ${result_number} = The result status (number), ${epoch} = seconds since unix epoch, ${time} = time using time-format.</div>
+</div>
+<p><strong>Path</strong>: /settings/writers/file</p>
+<p><strong>Key</strong>: host-syntax</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleFileWriter</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/writers/file]
+# HOST MESSAGE SYNTAX
+host-syntax=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SimpleFileWriter./settings/writers/file.service-syntax">
+<code class="descname">service-syntax</code><em class="property"> (SimpleFileWriter, /settings/writers/file)</em><a class="headerlink" href="#SimpleFileWriter./settings/writers/file.service-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>SERVICE MESSAGE SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">The syntax of the message to write to the line.</div>
+<div class="line">Can be any arbitrary string as well as include any of the following special keywords:${command} = The command name, ${host} the host, ${channel} the recieving channel, ${alias} the alias for the command, ${alias-or-command} = alias if set otherweise command, ${message} = the message data (no escape), ${result} or ${result_number} = The result status (number), ${epoch} = seconds since unix epoch, ${time} = time using time-format.</div>
+</div>
+<p><strong>Path</strong>: /settings/writers/file</p>
+<p><strong>Key</strong>: service-syntax</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleFileWriter</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/writers/file]
+# SERVICE MESSAGE SYNTAX
+service-syntax=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SimpleFileWriter./settings/writers/file.syntax">
+<code class="descname">syntax</code><em class="property"> (SimpleFileWriter, /settings/writers/file)</em><a class="headerlink" href="#SimpleFileWriter./settings/writers/file.syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>MESSAGE SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">The syntax of the message to write to the line.</div>
+<div class="line">Can be any arbitrary string as well as include any of the following special keywords:${command} = The command name, ${host} the host, ${channel} the recieving channel, ${alias} the alias for the command, ${alias-or-command} = alias if set otherweise command, ${message} = the message data (no escape), ${result} or ${result_number} = The result status (number), ${epoch} = seconds since unix epoch, ${time} = time using time-format.</div>
+</div>
+<p><strong>Path</strong>: /settings/writers/file</p>
+<p><strong>Key</strong>: syntax</p>
+<p><strong>Default value</strong>: ${alias-or-command} ${result} ${message}</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleFileWriter</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/writers/file]
+# MESSAGE SYNTAX
+syntax=${alias-or-command} ${result} ${message}
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SimpleFileWriter./settings/writers/file.time-syntax">
+<code class="descname">time-syntax</code><em class="property"> (SimpleFileWriter, /settings/writers/file)</em><a class="headerlink" href="#SimpleFileWriter./settings/writers/file.time-syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TIME SYNTAX</strong></p>
+<div class="line-block">
+<div class="line">The date format using strftime format flags. This is the time of writing the message as messages currently does not have a source time.</div>
+</div>
+<p><strong>Path</strong>: /settings/writers/file</p>
+<p><strong>Key</strong>: time-syntax</p>
+<p><strong>Default value</strong>: %Y-%m-%d %H:%M:%S</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SimpleFileWriter</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/writers/file]
+# TIME SYNTAX
+time-syntax=%Y-%m-%d %H:%M:%S
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">SimpleFileWriter</span></code> &#8212; SimpleFileWriter</a><ul>
+<li><a class="reference internal" href="#settings-writers-file">/ settings/ writers/ file</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="SimpleCache.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">SimpleCache</span></code> &#8212; SimpleCache</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="WEBServer.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">WEBServer</span></code> &#8212; WEBServer</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/reference/generic/SimpleFileWriter.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="WEBServer.html" title="WEBServer — WEBServer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="SimpleCache.html" title="SimpleCache — SimpleCache"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

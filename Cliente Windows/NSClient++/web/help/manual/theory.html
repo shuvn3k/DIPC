@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting-Started with NSClient++ &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../index.html" />
+    <link rel="up" title="NSClient++ Manual" href="index.html" />
+    <link rel="next" title="Settings" href="settings.html" />
+    <link rel="prev" title="Getting started with 0.4.x" href="getting_started.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <script type="text/javascript" src="../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="settings.html" title="Settings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting started with 0.4.x"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">NSClient++ Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started-with-nsclient">
+<h1>Getting-Started with NSClient++<a class="headerlink" href="#getting-started-with-nsclient" title="Permalink to this headline">¶</a></h1>
+<p>Some people say NSClient++ can feel a bit daunting the first time you encounter it.
+This is often due to the number of options you have. NSClient++ was designed to be open-ended meaning not restrict you in favor of allowing you to do what you need in the way you need it.
+Thus if you start with a clean slate you need to understand what options you have and make the correct choices.
+So before you start tinkering with NSClient++ it is important to first decide what you want to achieve.
+With 0.4.0 and soon to be release 1.4.1 there is a multitude of protocols and way you can use NSClient ++.
+The key decisions you have to make are related to (in no particular order):</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Settings</dt>
+<dd><p class="first last">Where do you want to store your settings?</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Protocols</dt>
+<dd><p class="first last">Which protocols do you need</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Commands</dt>
+<dd><p class="first last">Which are right for you?</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>So lets go through some of the the options one by one and try to explain how you can make simple decisions. It is important to understand that the recommendations I make here are general thus there are many reasons not to follow them but if you are new to NSClient++ you probably want to start this way and change later on.</p>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<p>The first thing (at least in order of how you use NSClient++) to understand when it comes to settings is that at its core it is simply a key valus store.
+This means you have values (which you configure) and for each value you have a path and a key much like you have for any other application.</p>
+<p>Another important thing to understand is that it is &#8220;self describing&#8221; this means the application knows all available values what they are what they do.
+So the best way to figure what an option is is to ask NSClient++.</p>
+<p>And finally you need to be aware that you can mix-and-mash this means you are not locked down to using one or even a single kind you can combine them to your hearts content.</p>
+<p>All this freedom can make things complicate but in general most of it is not something you need so the best way to simplify this is simply to ignore it (if you don&#8217;t want it to be complicate don&#8217;t make it complicated).
+Thus I recommend people to use a single ini file located in the root folder of the application directory.
+This makes things simple to understand and simple to edit. Now this is obviously not the way to go if you have complicated setups but we are looking for simplicity here. I the future the settings file will be moved to a &#8220;better folder&#8221; (read local system profile folder) to better follow the Windows/Linux guide lines.</p>
+<p>So the simple example is: a single &#8220;ini-file&#8221; called nsclient.ini which contains all you options and all your settings.</p>
+<p>Now I said it is self describing this means the application can tell you which options you have this is done using the
+{{{nscp settings &#8211;generate}}} command which generates the settings file for you now to make this simple this will only add in the descriptions you lack.
+If you want to add in all keys you are missing you need to add the option &#8211;add-defaults as well so to summaries: Running {{{nscp settings &#8211;generate &#8211;add-defaults}}} will update your config file with all available options (for the modules you have activated).</p>
+</div>
+<div class="section" id="protocols">
+<h2>Protocols<a class="headerlink" href="#protocols" title="Permalink to this headline">¶</a></h2>
+<p>Another thing which can seem daunting at first is sheer number of supported protocols.
+And again this is to allow you to use utilize your current infrastructure (not force you to change to something fancy NSClient++ specific).
+So the simple solution here is simply: Continue using what you use today!</p>
+<p>If you are not using a protocol today and are planning to implement 0.4.1 you might want to consider NSCP as it is the most powerful protocol available but it is also the most unstable (since it is in development).</p>
+<p>A quick comparison of the protocols:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="12%" />
+<col width="15%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong>Protocol</strong></th>
+<th class="head"><strong>Mode</strong></th>
+<th class="head"><strong>Secure</strong></th>
+<th class="head"><strong>Drawbacks</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>NRPE</td>
+<td>Active (polling)</td>
+<td>Somewhat secure</td>
+<td>Default payloads lengths are 1024</td>
+</tr>
+<tr class="row-odd"><td>NSCA</td>
+<td>Passive (pushing)</td>
+<td>Somewhat secure</td>
+<td>Default payloads lengths are 512</td>
+</tr>
+<tr class="row-even"><td>NRDP</td>
+<td>Passive (pushing)</td>
+<td>Somewhat secure</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>NSCP</td>
+<td>Multiple</td>
+<td>Hopefully secure</td>
+<td>NSCLient++ only, and in development. &#8216;&#8217;&#8216;Requires 0.4.1&#8217;&#8216;&#8217;</td>
+</tr>
+<tr class="row-even"><td>check_nt</td>
+<td>Active (polling)</td>
+<td>Not considered secure</td>
+<td>No encryption/authentication as well as very limited</td>
+</tr>
+<tr class="row-odd"><td>check_mk</td>
+<td>Active (polling)</td>
+<td>Not secure</td>
+<td>No encryption, enforces client configuration, slow. &#8216;&#8217;&#8216;Requires 0.4.1&#8217;&#8216;&#8217;</td>
+</tr>
+<tr class="row-even"><td>Graphite</td>
+<td>Graphing</td>
+<td>Not secure</td>
+<td>Only for graphing</td>
+</tr>
+<tr class="row-odd"><td>SMTP</td>
+<td>Passive (pushing)</td>
+<td>Not currently secure</td>
+<td>Mainly a toy</td>
+</tr>
+<tr class="row-even"><td>Syslog</td>
+<td>Passive (logs)</td>
+<td>Not secure</td>
+<td>Mainly for sending logs</td>
+</tr>
+<tr class="row-odd"><td>dNSCP</td>
+<td>Multiple</td>
+<td>Maybe secure</td>
+<td>Distributed massive scalable protocol for high performance scenarios. &#8216;&#8217;&#8216;Requires 0.4.2&#8217;&#8216;&#8217;</td>
+</tr>
+</tbody>
+</table>
+<p>The common protocols (for checks) are NRPE and NSCA.</p>
+<p>But the most important thing to understand is that they all work the same (they are configured the same, and they look the same and they behave the same).
+So once you have setup one it is easy to setup the other and easy to switch.</p>
+</div>
+<div class="section" id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
+<p>The most complicated thing about commands are the various &#8220;types&#8221; of commands which can be used.</p>
+<ol class="arabic simple">
+<li>Internal commands (supplied out the box)</li>
+<li>External scripts (some supplied out of the box)</li>
+<li>Python Scripts (internal)</li>
+<li>Lua scripts (internal)</li>
+<li>.net &#8220;plugins&#8221; (don&#8217;t think there actually are any)</li>
+</ol>
+<p>In general the internal commands are probably the most used after that comes scripts which usually downloads from nagios exchange or some such.
+SO this is not very confusing either really..</p>
+<p>So now that we have the areas we need to decides:
+Where we shall store settings, and unless you really need something else use nsclient.ini
+Which protocol to use, if you don&#8217;t have a clue and are using Nagios you are probably looking for NRPE.
+Finally commands the easy way is to look at the various check commands on the wiki and then move on to nagios exchange.</p>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting-Started with NSClient++</a><ul>
+<li><a class="reference internal" href="#settings">Settings</a></li>
+<li><a class="reference internal" href="#protocols">Protocols</a></li>
+<li><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting_started.html"
+                        title="previous chapter">Getting started with 0.4.x</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="settings.html"
+                        title="next chapter">Settings</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../bugs.html">Report a Bug</a></li>
+  <li><a href="../_sources/manual/theory.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="settings.html" title="Settings"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting started with 0.4.x"
+             >previous</a> |</li>
+        <li><img src="../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >NSClient++ Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>

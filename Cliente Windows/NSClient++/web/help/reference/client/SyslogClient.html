@@ -1,0 +1,1181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SyslogClient — SyslogClient &mdash; NSClient++ 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nscp.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="top" title="NSClient++ 0.5.0 documentation" href="../../index.html" />
+    <link rel="up" title="Reference Manual" href="../index.html" />
+    <link rel="next" title="CauseCrashes — CauseCrashes" href="../misc/CauseCrashes.html" />
+    <link rel="prev" title="SMTPClient — SMTPClient" href="SMTPClient.html" />
+    <link rel="shortcut icon" type="image/png" href="../../_static/py.png" />
+    <script type="text/javascript" src="../../_static/version_switch.js"></script>
+ 
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../misc/CauseCrashes.html" title="CauseCrashes — CauseCrashes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="SMTPClient.html" title="SMTPClient — SMTPClient"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <dl class="module">
+<dt id="SyslogClient">
+<code class="descname">SyslogClient</code><dd></dd>Forward information as syslog messages to a syslog server<a class="headerlink" href="#SyslogClient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="syslogclient-syslogclient">
+<h1><code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code> &#8212; SyslogClient<a class="headerlink" href="#syslogclient-syslogclient" title="Permalink to this headline">¶</a></h1>
+<p>Forward information as syslog messages to a syslog server</p>
+<p><strong>Queries (Overview)</strong>:</p>
+<p>A list of all available queries (check commands)</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog" title="SyslogClient.submit_syslog"><code class="xref nscp nscp-query docutils literal"><span class="pre">submit_syslog</span></code></a></td>
+<td>Submit information to the remote syslog server.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Commands (Overview)</strong>:</p>
+<p><strong>TODO:</strong> Add a list of all external commands (this is not check commands)</p>
+<p><strong>Configuration (Overview)</strong>:</p>
+<p>Common Keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client" title="SyslogClient./settings/syslog/client"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client.channel" title="SyslogClient./settings/syslog/client.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>CHANNEL</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client" title="SyslogClient./settings/syslog/client"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client.hostname" title="SyslogClient./settings/syslog/client.hostname"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">hostname</span></code></a></td>
+<td>HOSTNAME</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default" title="SyslogClient./settings/syslog/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.address" title="SyslogClient./settings/syslog/client/targets/default.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>TARGET ADDRESS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default" title="SyslogClient./settings/syslog/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.retries" title="SyslogClient./settings/syslog/client/targets/default.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>RETRIES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default" title="SyslogClient./settings/syslog/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.timeout" title="SyslogClient./settings/syslog/client/targets/default.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>TIMEOUT</td>
+</tr>
+</tbody>
+</table>
+<p>Advanced keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default" title="SyslogClient./settings/syslog/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.host" title="SyslogClient./settings/syslog/client/targets/default.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>TARGET HOST</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default" title="SyslogClient./settings/syslog/client/targets/default"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/default</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.port" title="SyslogClient./settings/syslog/client/targets/default.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>TARGET PORT</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Sample keys:</p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Path / Section</th>
+<th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample" title="SyslogClient./settings/syslog/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.address" title="SyslogClient./settings/syslog/client/targets/sample.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>TARGET ADDRESS</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample" title="SyslogClient./settings/syslog/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.host" title="SyslogClient./settings/syslog/client/targets/sample.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>TARGET HOST</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample" title="SyslogClient./settings/syslog/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.port" title="SyslogClient./settings/syslog/client/targets/sample.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>TARGET PORT</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample" title="SyslogClient./settings/syslog/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.retries" title="SyslogClient./settings/syslog/client/targets/sample.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>RETRIES</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample" title="SyslogClient./settings/syslog/client/targets/sample"><code class="xref nscp nscp-confpath docutils literal"><span class="pre">/settings/syslog/client/targets/sample</span></code></a></td>
+<td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.timeout" title="SyslogClient./settings/syslog/client/targets/sample.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>TIMEOUT</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="queries">
+<h2>Queries<a class="headerlink" href="#queries" title="Permalink to this headline">¶</a></h2>
+<p>A quick reference for all available queries (check commands) in the SyslogClient module.</p>
+<div class="section" id="submit-syslog">
+<h3><a class="reference internal" href="#SyslogClient.submit_syslog" title="SyslogClient.submit_syslog"><code class="xref nscp nscp-query docutils literal"><span class="pre">submit_syslog</span></code></a><a class="headerlink" href="#submit-syslog" title="Permalink to this headline">¶</a></h3>
+<dl class="query">
+<dt id="SyslogClient.submit_syslog">
+<code class="descclassname">SyslogClient</code><code class="descname">submit_syslog</code><dd></dd>Submit information to the remote syslog server.<a class="headerlink" href="#SyslogClient.submit_syslog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>Usage:</strong></p>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.help" title="SyslogClient.submit_syslog.help"><code class="xref nscp nscp-option docutils literal"><span class="pre">help</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (this screen)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.help-pb" title="SyslogClient.submit_syslog.help-pb"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-pb</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen as a protocol buffer payload</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.show-default" title="SyslogClient.submit_syslog.show-default"><code class="xref nscp nscp-option docutils literal"><span class="pre">show-default</span></code></a></td>
+<td>N/A</td>
+<td>Show default values for a given command</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.help-short" title="SyslogClient.submit_syslog.help-short"><code class="xref nscp nscp-option docutils literal"><span class="pre">help-short</span></code></a></td>
+<td>N/A</td>
+<td>Show help screen (short format).</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.host" title="SyslogClient.submit_syslog.host"><code class="xref nscp nscp-option docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>The host of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.port" title="SyslogClient.submit_syslog.port"><code class="xref nscp nscp-option docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>The port of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.address" title="SyslogClient.submit_syslog.address"><code class="xref nscp nscp-option docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>The address (host:port) of the host running the server</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.timeout" title="SyslogClient.submit_syslog.timeout"><code class="xref nscp nscp-option docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of seconds before connection times out (default=10)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.target" title="SyslogClient.submit_syslog.target"><code class="xref nscp nscp-option docutils literal"><span class="pre">target</span></code></a></td>
+<td>&nbsp;</td>
+<td>Target to use (lookup connection info from config)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.retry" title="SyslogClient.submit_syslog.retry"><code class="xref nscp nscp-option docutils literal"><span class="pre">retry</span></code></a></td>
+<td>&nbsp;</td>
+<td>Number of times ti retry a failed connection attempt (default=2)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.retries" title="SyslogClient.submit_syslog.retries"><code class="xref nscp nscp-option docutils literal"><span class="pre">retries</span></code></a></td>
+<td>&nbsp;</td>
+<td>legacy version of retry</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.source-host" title="SyslogClient.submit_syslog.source-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">source-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.sender-host" title="SyslogClient.submit_syslog.sender-host"><code class="xref nscp nscp-option docutils literal"><span class="pre">sender-host</span></code></a></td>
+<td>&nbsp;</td>
+<td>Source/sender host name (default is auto which means use the name of the actual host)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.command" title="SyslogClient.submit_syslog.command"><code class="xref nscp nscp-option docutils literal"><span class="pre">command</span></code></a></td>
+<td>&nbsp;</td>
+<td>The name of the command that the remote daemon should run</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.alias" title="SyslogClient.submit_syslog.alias"><code class="xref nscp nscp-option docutils literal"><span class="pre">alias</span></code></a></td>
+<td>&nbsp;</td>
+<td>Same as command</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.message" title="SyslogClient.submit_syslog.message"><code class="xref nscp nscp-option docutils literal"><span class="pre">message</span></code></a></td>
+<td>&nbsp;</td>
+<td>Message</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.result" title="SyslogClient.submit_syslog.result"><code class="xref nscp nscp-option docutils literal"><span class="pre">result</span></code></a></td>
+<td>&nbsp;</td>
+<td>Result code either a number or OK, WARN, CRIT, UNKNOWN</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.separator" title="SyslogClient.submit_syslog.separator"><code class="xref nscp nscp-option docutils literal"><span class="pre">separator</span></code></a></td>
+<td>&nbsp;</td>
+<td>Separator to use for the batch command (default is</td>
+<td>)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.batch" title="SyslogClient.submit_syslog.batch"><code class="xref nscp nscp-option docutils literal"><span class="pre">batch</span></code></a></td>
+<td>&nbsp;</td>
+<td>Add multiple records using the separator format is: command</td>
+<td>result</td>
+<td>message</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.path" title="SyslogClient.submit_syslog.path"><code class="xref nscp nscp-option docutils literal"><span class="pre">path</span></code></a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.severity" title="SyslogClient.submit_syslog.severity"><code class="xref nscp nscp-option docutils literal"><span class="pre">severity</span></code></a></td>
+<td>&nbsp;</td>
+<td>Severity of error message</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.unknown-severity" title="SyslogClient.submit_syslog.unknown-severity"><code class="xref nscp nscp-option docutils literal"><span class="pre">unknown-severity</span></code></a></td>
+<td>&nbsp;</td>
+<td>Severity of error message</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.ok-severity" title="SyslogClient.submit_syslog.ok-severity"><code class="xref nscp nscp-option docutils literal"><span class="pre">ok-severity</span></code></a></td>
+<td>&nbsp;</td>
+<td>Severity of error message</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.warning-severity" title="SyslogClient.submit_syslog.warning-severity"><code class="xref nscp nscp-option docutils literal"><span class="pre">warning-severity</span></code></a></td>
+<td>&nbsp;</td>
+<td>Severity of error message</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.critical-severity" title="SyslogClient.submit_syslog.critical-severity"><code class="xref nscp nscp-option docutils literal"><span class="pre">critical-severity</span></code></a></td>
+<td>&nbsp;</td>
+<td>Severity of error message</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.facility" title="SyslogClient.submit_syslog.facility"><code class="xref nscp nscp-option docutils literal"><span class="pre">facility</span></code></a></td>
+<td>&nbsp;</td>
+<td>Facility of error message</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient.submit_syslog.tag template" title="SyslogClient.submit_syslog.tag template"><code class="xref nscp nscp-option docutils literal"><span class="pre">tag</span> <span class="pre">template</span></code></a></td>
+<td>&nbsp;</td>
+<td>Tag template (TODO)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient.submit_syslog.message template" title="SyslogClient.submit_syslog.message template"><code class="xref nscp nscp-option docutils literal"><span class="pre">message</span> <span class="pre">template</span></code></a></td>
+<td>&nbsp;</td>
+<td>Message template (TODO)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="arguments">
+<h4>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h4>
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.help">
+<code class="descname">help</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.help" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (this screen)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.help-pb">
+<code class="descname">help-pb</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.help-pb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen as a protocol buffer payload</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.show-default">
+<code class="descname">show-default</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.show-default" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show default values for a given command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.help-short">
+<code class="descname">help-short</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.help-short" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Show help screen (short format).</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.host">
+<code class="descname">host</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The host of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.port">
+<code class="descname">port</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.port" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The port of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.address">
+<code class="descname">address</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.address" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The address (host:port) of the host running the server</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.timeout">
+<code class="descname">timeout</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of seconds before connection times out (default=10)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.target">
+<code class="descname">target</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.target" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Target to use (lookup connection info from config)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.retry">
+<code class="descname">retry</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.retry" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Number of times ti retry a failed connection attempt (default=2)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.retries">
+<code class="descname">retries</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.retries" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">legacy version of retry</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.source-host">
+<code class="descname">source-host</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.source-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.sender-host">
+<code class="descname">sender-host</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.sender-host" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Source/sender host name (default is auto which means use the name of the actual host)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.command">
+<code class="descname">command</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.command" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">The name of the command that the remote daemon should run</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.alias">
+<code class="descname">alias</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.alias" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Same as command</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.message">
+<code class="descname">message</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.message" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.result">
+<code class="descname">result</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.result" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Result code either a number or OK, WARN, CRIT, UNKNOWN</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.separator">
+<code class="descname">separator</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.separator" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Separator to use for the batch command (default is <a href="#id1"><span class="problematic" id="id2">|</span></a>)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.batch">
+<code class="descname">batch</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.batch" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Add multiple records using the separator format is: command|result|message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.path">
+<code class="descname">path</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.severity">
+<code class="descname">severity</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.severity" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Severity of error message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.unknown-severity">
+<code class="descname">unknown-severity</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.unknown-severity" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Severity of error message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.ok-severity">
+<code class="descname">ok-severity</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.ok-severity" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Severity of error message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.warning-severity">
+<code class="descname">warning-severity</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.warning-severity" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Severity of error message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.critical-severity">
+<code class="descname">critical-severity</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.critical-severity" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Severity of error message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.facility">
+<code class="descname">facility</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.facility" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Facility of error message</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.tag template">
+<code class="descname">tag template</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.tag template" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Tag template (TODO)</div>
+</div>
+</dd></dl>
+
+<dl class="option">
+<dt id="SyslogClient.submit_syslog.message template">
+<code class="descname">message template</code><em class="property"> (SyslogClient, submit_syslog)</em><a class="headerlink" href="#SyslogClient.submit_syslog.message template" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Message template (TODO)</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="settings-syslog-client">
+<h3>/ settings/ syslog/ client<a class="headerlink" href="#settings-syslog-client" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="SyslogClient./settings/syslog/client">
+<code class="descname">/settings/syslog/client</code><em class="property"> (SyslogClient)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>SYSLOG CLIENT SECTION</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Section for SYSLOG passive check module.</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client.channel" title="SyslogClient./settings/syslog/client.channel"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">channel</span></code></a></td>
+<td>syslog</td>
+<td>CHANNEL</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client.hostname" title="SyslogClient./settings/syslog/client.hostname"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">hostname</span></code></a></td>
+<td>auto</td>
+<td>HOSTNAME</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># SYSLOG CLIENT SECTION
+# Section for SYSLOG passive check module.
+[/settings/syslog/client]
+channel=syslog
+hostname=auto
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client.channel">
+<code class="descname">channel</code><em class="property"> (SyslogClient, /settings/syslog/client)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client.channel" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>CHANNEL</strong></p>
+<div class="line-block">
+<div class="line">The channel to listen to.</div>
+</div>
+<p><strong>Path</strong>: /settings/syslog/client</p>
+<p><strong>Key</strong>: channel</p>
+<p><strong>Default value</strong>: syslog</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client]
+# CHANNEL
+channel=syslog
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client.hostname">
+<code class="descname">hostname</code><em class="property"> (SyslogClient, /settings/syslog/client)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client.hostname" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>HOSTNAME</strong></p>
+<div class="line-block">
+<div class="line">The host name of the monitored computer.</div>
+<div class="line">Set this to auto (default) to use the windows name of the computer.</div>
+<div class="line"><br /></div>
+<div class="line">auto  Hostname</div>
+<div class="line">${host}       Hostname</div>
+<div class="line">${host_lc}</div>
+<div class="line">Hostname in lowercase</div>
+<div class="line">${host_uc}    Hostname in uppercase</div>
+<div class="line">${domain}     Domainname</div>
+<div class="line">${domain_lc}  Domainname in lowercase</div>
+<div class="line">${domain_uc}  Domainname in uppercase</div>
+</div>
+<p><strong>Path</strong>: /settings/syslog/client</p>
+<p><strong>Key</strong>: hostname</p>
+<p><strong>Default value</strong>: auto</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client]
+# HOSTNAME
+hostname=auto
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="handlers">
+<h3>…  / handlers<a class="headerlink" href="#handlers" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="SyslogClient./settings/syslog/client/handlers">
+<code class="descname">/settings/syslog/client/handlers</code><em class="property"> (SyslogClient)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/handlers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>CLIENT HANDLER SECTION</strong></p>
+<blockquote>
+<div><p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># CLIENT HANDLER SECTION
+#
+[/settings/syslog/client/handlers]
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="targets">
+<h3>…  / targets<a class="headerlink" href="#targets" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="SyslogClient./settings/syslog/client/targets">
+<code class="descname">/settings/syslog/client/targets</code><em class="property"> (SyslogClient)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>REMOTE TARGET DEFINITIONS</strong></p>
+<blockquote>
+<div><p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># REMOTE TARGET DEFINITIONS
+#
+[/settings/syslog/client/targets]
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="targets-default">
+<h3>…  / targets / default<a class="headerlink" href="#targets-default" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="SyslogClient./settings/syslog/client/targets/default">
+<code class="descname">/settings/syslog/client/targets/default</code><em class="property"> (SyslogClient)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>TARGET</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Target definition for: default</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.address" title="SyslogClient./settings/syslog/client/targets/default.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET ADDRESS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.host" title="SyslogClient./settings/syslog/client/targets/default.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET HOST</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.port" title="SyslogClient./settings/syslog/client/targets/default.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET PORT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.retries" title="SyslogClient./settings/syslog/client/targets/default.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>3</td>
+<td>RETRIES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/default.timeout" title="SyslogClient./settings/syslog/client/targets/default.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>30</td>
+<td>TIMEOUT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># TARGET
+# Target definition for: default
+[/settings/syslog/client/targets/default]
+address=
+host=
+port=
+retries=3
+timeout=30
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/default.address">
+<code class="descname">address</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/default)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/default.address" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET ADDRESS</strong></p>
+<div class="line-block">
+<div class="line">Target host address</div>
+</div>
+<p><strong>Path</strong>: /settings/syslog/client/targets/default</p>
+<p><strong>Key</strong>: address</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/default]
+# TARGET ADDRESS
+address=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/default.host">
+<code class="descname">host</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/default)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/default.host" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET HOST</strong></p>
+<div class="line-block">
+<div class="line">The target server to report results to.</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/syslog/client/targets/default</p>
+<p><strong>Key</strong>: host</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/default]
+# TARGET HOST
+host=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/default.port">
+<code class="descname">port</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/default)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/default.port" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET PORT</strong></p>
+<div class="line-block">
+<div class="line">The target server port</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/syslog/client/targets/default</p>
+<p><strong>Key</strong>: port</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/default]
+# TARGET PORT
+port=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/default.retries">
+<code class="descname">retries</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/default)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/default.retries" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>RETRIES</strong></p>
+<div class="line-block">
+<div class="line">Number of times to retry sending.</div>
+</div>
+<p><strong>Path</strong>: /settings/syslog/client/targets/default</p>
+<p><strong>Key</strong>: retries</p>
+<p><strong>Default value</strong>: 3</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/default]
+# RETRIES
+retries=3
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/default.timeout">
+<code class="descname">timeout</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/default)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/default.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TIMEOUT</strong></p>
+<div class="line-block">
+<div class="line">Timeout when reading/writing packets to/from sockets.</div>
+</div>
+<p><strong>Path</strong>: /settings/syslog/client/targets/default</p>
+<p><strong>Key</strong>: timeout</p>
+<p><strong>Default value</strong>: 30</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/default]
+# TIMEOUT
+timeout=30
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="targets-sample">
+<h3>…  / targets / sample<a class="headerlink" href="#targets-sample" title="Permalink to this headline">¶</a></h3>
+<dl class="confpath">
+<dt id="SyslogClient./settings/syslog/client/targets/sample">
+<code class="descname">/settings/syslog/client/targets/sample</code><em class="property"> (SyslogClient)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/sample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><strong>TARGET</strong></p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Target definition for: sample</div>
+</div>
+<table border="1" class="contentstable docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Default Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.address" title="SyslogClient./settings/syslog/client/targets/sample.address"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">address</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET ADDRESS</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.host" title="SyslogClient./settings/syslog/client/targets/sample.host"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">host</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET HOST</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.port" title="SyslogClient./settings/syslog/client/targets/sample.port"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">port</span></code></a></td>
+<td>&nbsp;</td>
+<td>TARGET PORT</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.retries" title="SyslogClient./settings/syslog/client/targets/sample.retries"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">retries</span></code></a></td>
+<td>3</td>
+<td>RETRIES</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#SyslogClient./settings/syslog/client/targets/sample.timeout" title="SyslogClient./settings/syslog/client/targets/sample.timeout"><code class="xref nscp nscp-confkey docutils literal"><span class="pre">timeout</span></code></a></td>
+<td>30</td>
+<td>TIMEOUT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre># TARGET
+# Target definition for: sample
+[/settings/syslog/client/targets/sample]
+address=
+host=
+port=
+retries=3
+timeout=30
+</pre></div>
+</div>
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/sample.address">
+<code class="descname">address</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/sample)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/sample.address" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET ADDRESS</strong></p>
+<div class="line-block">
+<div class="line">Target host address</div>
+</div>
+<p><strong>Path</strong>: /settings/syslog/client/targets/sample</p>
+<p><strong>Key</strong>: address</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/sample]
+# TARGET ADDRESS
+address=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/sample.host">
+<code class="descname">host</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/sample)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/sample.host" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET HOST</strong></p>
+<div class="line-block">
+<div class="line">The target server to report results to.</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/syslog/client/targets/sample</p>
+<p><strong>Key</strong>: host</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/sample]
+# TARGET HOST
+host=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/sample.port">
+<code class="descname">port</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/sample)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/sample.port" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TARGET PORT</strong></p>
+<div class="line-block">
+<div class="line">The target server port</div>
+</div>
+<p><strong>Advanced</strong> (means it is not commonly used)</p>
+<p><strong>Path</strong>: /settings/syslog/client/targets/sample</p>
+<p><strong>Key</strong>: port</p>
+<p><strong>Default value</strong>:</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/sample]
+# TARGET PORT
+port=
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/sample.retries">
+<code class="descname">retries</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/sample)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/sample.retries" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>RETRIES</strong></p>
+<div class="line-block">
+<div class="line">Number of times to retry sending.</div>
+</div>
+<p><strong>Path</strong>: /settings/syslog/client/targets/sample</p>
+<p><strong>Key</strong>: retries</p>
+<p><strong>Default value</strong>: 3</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/sample]
+# RETRIES
+retries=3
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="confkey">
+<dt id="SyslogClient./settings/syslog/client/targets/sample.timeout">
+<code class="descname">timeout</code><em class="property"> (SyslogClient, /settings/syslog/client/targets/sample)</em><a class="headerlink" href="#SyslogClient./settings/syslog/client/targets/sample.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>TIMEOUT</strong></p>
+<div class="line-block">
+<div class="line">Timeout when reading/writing packets to/from sockets.</div>
+</div>
+<p><strong>Path</strong>: /settings/syslog/client/targets/sample</p>
+<p><strong>Key</strong>: timeout</p>
+<p><strong>Default value</strong>: 30</p>
+<p><strong>Sample key</strong>: This key is provided as a sample to show how to configure objects</p>
+<p><strong>Used by</strong>: <code class="xref nscp nscp-module docutils literal"><span class="pre">SyslogClient</span></code></p>
+<p><strong>Sample</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre>[/settings/syslog/client/targets/sample]
+# TIMEOUT
+timeout=30
+</pre></div>
+</div>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nsclientdocs'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">SyslogClient</span></code> &#8212; SyslogClient</a><ul>
+<li><a class="reference internal" href="#queries">Queries</a><ul>
+<li><a class="reference internal" href="#submit-syslog"><code class="docutils literal"><span class="pre">submit_syslog</span></code></a><ul>
+<li><a class="reference internal" href="#arguments">Arguments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#settings-syslog-client">/ settings/ syslog/ client</a></li>
+<li><a class="reference internal" href="#handlers">…  / handlers</a></li>
+<li><a class="reference internal" href="#targets">…  / targets</a></li>
+<li><a class="reference internal" href="#targets-default">…  / targets / default</a></li>
+<li><a class="reference internal" href="#targets-sample">…  / targets / sample</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="SMTPClient.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">SMTPClient</span></code> &#8212; SMTPClient</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../misc/CauseCrashes.html"
+                        title="next chapter"><code class="docutils literal"><span class="pre">CauseCrashes</span></code> &#8212; CauseCrashes</a></p>
+<h3>This Page</h3>
+<ul class="this-page-menu">
+  <li><a href="../../bugs.html">Report a Bug</a></li>
+  <li><a href="../../_sources/reference/client/SyslogClient.txt"
+         rel="nofollow">Show Source</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../misc/CauseCrashes.html" title="CauseCrashes — CauseCrashes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="SMTPClient.html" title="SMTPClient — SMTPClient"
+             >previous</a> |</li>
+        <li><img src="../../_static/nsclient.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.nsclient.org/">NSClient++</a> &raquo;</li>
+        <li>
+          <span class="version_switcher_placeholder">0.5.0</span>
+        </li>
+        <li><a href="../../index.html">Documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Reference Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    &copy; <a href="../../copyright.html">Copyright</a> 2003-2016, Michael Medin.
+    <br />
+    NSClient++ is a non-profit project.
+    <a href="https://www.nsclient.org/nsclient/sponsor/">Please donate.</a>
+    <br />
+    Last updated on None.
+    <a href="../../bugs.html">Found a bug</a>?
+    <br />
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+
+  </body>
+</html>
