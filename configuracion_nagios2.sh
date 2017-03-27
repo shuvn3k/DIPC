@@ -172,7 +172,7 @@ command[check_cpu]=/usr/local/nagios/libexec/check_cpu -w 70 -c 90
 command[check_uptime]=/usr/local/nagios/libexec/check_uptime
 command[check_disk]=/usr/local/nagios/libexec/check_disk -w $ARG1$ -c $ARG2$ -p /
 
-
+cd /usr/local/nagios/libexec/
 sudo wget https://raw.githubusercontent.com/taha-bindas/openstack_nagios/master/check_cpu
 sudo chmod +x check_cpu
 sudo chown nagios. check_cpu
