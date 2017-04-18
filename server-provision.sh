@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #Instalamos JAVA ultima version
 
 
